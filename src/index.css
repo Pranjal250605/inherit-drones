@@ -1,0 +1,331 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   THEME TOKENS
+   - Components consume these via Tailwind classes like
+     bg-bg, text-fg, text-fg/45, border-fg/10, text-muted, etc.
+   - Each variant block sets the same RGB-triplet vars so opacity
+     modifiers (`/45`) keep working via Tailwind's alpha-value
+     syntax. Adding a third variant later = one new block here +
+     one new entry in src/theme/index.tsx.
+============================================================ */
+
+/* Page-scoped variable: only ever defined on <html>, never redefined by
+   nested data-theme="dark" wrappers (Hero / Header). That lets a child of
+   the Hero reference --page-bg and see the OUTER page bg color — which is
+   what gives the Hero a smooth fade into the light section below it in
+   light mode, while staying byte-for-byte identical in dark mode. */
+:root {
+  --page-bg: 5 7 11;
+}
+:root[data-theme="light"] {
+  --page-bg: 255 255 255;
+}
+:root[data-theme="blueprint"] {
+  --page-bg: 18 32 64;
+}
+
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg:       5   7   11;  /* #05070b ink-950 */
+  --bg-alt:   10  13  20;  /* #0a0d14 ink-900 */
+  --fg:       255 255 255; /* white */
+  --muted:    148 163 184; /* slate-400 */
+  --accent:   249 115 22;  /* orange-500 */
+  --grid-line: 255 255 255;
+  --grid-line-alpha: 0.025;
+  --selection-bg: #67e8f9;
+  --selection-fg: #05070b;
+}
+
+[data-theme="blueprint"] {
+  color-scheme: dark;
+  /* ============================================================
+     BLUEPRINT VARIANT — third theme, named for the cyanotype
+     engineering medium (Prussian-blue paper + white annotations
+     used for technical drawings since 1842).
+
+     Palette is built on color-theory complementarity: deep navy
+     (~210° hue) pairs with the brand orange (~25° hue), which
+     are roughly opposite on the color wheel — maximum visual
+     interest while keeping the orange accent identical to the
+     other two themes (brand never shifts between variants).
+
+     Accessibility: fg/bg contrast ≈14:1 (AAA), muted/bg ≈6:1
+     (AA for body), accent/bg ≈4.5:1 (AA for UI / large text).
+     Grid alpha bumped slightly vs dark — blueprint paper should
+     have visible technical lines as part of the aesthetic.
+  ============================================================ */
+  --bg:       18  32  64;  /* #122040 — deep blueprint navy */
+  --bg-alt:   26  42  78;  /* #1a2a4e — alt sections, one step up */
+  --fg:       234 240 252; /* #eaf0fc — cool light blue-white */
+  --muted:    142 165 207; /* #8ea5cf — medium blue-gray, denser than slate */
+  --accent:   249 115 22;  /* orange-500 — same as dark / light */
+  --grid-line: 200 220 255;/* faint blue-white grid */
+  --grid-line-alpha: 0.05;
+  --selection-bg: #67e8f9;
+  --selection-fg: #05070b;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  /* ============================================================
+     LIGHT VARIANT — designed independently of the dark spec.
+     Reference: Linear / Stripe / Anduril light-mode UI language.
+
+     Surface system: pure white as the "raised" plane (cards), a
+     subtle warm paper for the "page" plane behind it — the inverse
+     of the dark scheme's elevation logic so cards visibly lift.
+
+     Type: slate-900 base; opacity tiers stay readable because
+     slate-900 has enough density that /45 alpha still reads as
+     mid-gray rather than washing out.
+
+     Brand orange is identical to dark (literal orange-400 /
+     orange-500 utilities), so the accent never shifts between
+     themes — only the surface + text colors do.
+  ============================================================ */
+  --bg:       255 255 255; /* #ffffff — card / raised plane */
+  --bg-alt:   244 243 238; /* #f4f3ee — warm engineering paper, page plane */
+  --fg:       15  23  42;  /* slate-900 — body text (not pure black; softer) */
+  --muted:    71  85  105; /* slate-600 — denser for readability on light */
+  --accent:   249 115 22;  /* orange-500 — same as dark */
+  --grid-line: 15 23 42;   /* slate-900 — subtle ink grid */
+  --grid-line-alpha: 0.04;
+  --selection-bg: #67e8f9;
+  --selection-fg: #05070b;
+}
+
+@layer base {
+  html,
+  body {
+    background: rgb(var(--bg));
+    color: rgb(var(--fg));
+  }
+  ::selection {
+    background: var(--selection-bg);
+    color: var(--selection-fg);
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Chamfered (cut) corners — machined hardware feel */
+  .cut-corner {
+    clip-path: polygon(
+      14px 0,
+      100% 0,
+      100% calc(100% - 14px),
+      calc(100% - 14px) 100%,
+      0 100%,
+      0 14px
+    );
+  }
+  .cut-corner-sm {
+    clip-path: polygon(
+      8px 0,
+      100% 0,
+      100% calc(100% - 8px),
+      calc(100% - 8px) 100%,
+      0 100%,
+      0 8px
+    );
+  }
+  .cut-corner-lg {
+    clip-path: polygon(
+      22px 0,
+      100% 0,
+      100% calc(100% - 22px),
+      calc(100% - 22px) 100%,
+      0 100%,
+      0 22px
+    );
+  }
+
+  /* graph paper background */
+  .grid-bg {
+    background-image:
+      linear-gradient(
+        rgb(var(--grid-line) / calc(var(--grid-line-alpha) * 1.6)) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        rgb(var(--grid-line) / calc(var(--grid-line-alpha) * 1.6)) 1px,
+        transparent 1px
+      );
+    background-size: 56px 56px;
+  }
+
+  /* Fine technical grid background */
+  .micro-grid {
+    background-image:
+      linear-gradient(
+        rgb(var(--grid-line) / var(--grid-line-alpha)) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        rgb(var(--grid-line) / var(--grid-line-alpha)) 1px,
+        transparent 1px
+      );
+    background-size: 24px 24px;
+  }
+
+  /* Marching ants border (live signal feel) */
+  .ants {
+    background-image:
+      linear-gradient(90deg, rgb(var(--accent) / 0.6) 50%, transparent 50%),
+      linear-gradient(90deg, rgb(var(--accent) / 0.6) 50%, transparent 50%),
+      linear-gradient(0deg, rgb(var(--accent) / 0.6) 50%, transparent 50%),
+      linear-gradient(0deg, rgb(var(--accent) / 0.6) 50%, transparent 50%);
+    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    background-size: 12px 1px, 12px 1px, 1px 12px, 1px 12px;
+    background-position: 0 0, 0 100%, 0 0, 100% 0;
+    animation: ants 0.8s linear infinite;
+  }
+
+  /* subtle film grain — theme-agnostic */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.9'/></svg>");
+  }
+
+  /* Marquee scroll */
+  .marquee {
+    animation: scrollX 40s linear infinite;
+  }
+
+  /* Radar pulse */
+  .radar-ring {
+    animation: radarPulse 3.2s ease-out infinite;
+  }
+
+  /* Bobbing scroll cue */
+  .bob {
+    animation: bobDown 1.8s ease-in-out infinite;
+  }
+
+  /* Radar sweep */
+  .sweep {
+    animation: sweep 4s linear infinite;
+    transform-origin: center;
+  }
+
+  /* Bracket reveal animation */
+  .group:hover .bracket-l {
+    animation: bracketL 0.35s ease forwards;
+  }
+  .group:hover .bracket-r {
+    animation: bracketR 0.35s ease forwards;
+  }
+
+  /* Pre-animation FOUC guards — GSAP clears these on mount */
+  [data-anim="title-up"],
+  [data-anim-item],
+  [data-anim="sweep"] {
+    opacity: 0;
+  }
+  [data-anim="spine"] {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  [data-hero="tag"],
+  [data-hero="title"] > span,
+  [data-hero="rule"],
+  [data-hero="paragraph"],
+  [data-hero="ctas"] > *,
+  [data-hero="ticker"] > *,
+  [data-hero="hud-left"],
+  [data-hero="hud-right"],
+  [data-hero="scroll"] {
+    opacity: 0;
+  }
+
+  /* JS-disabled / reduced-motion fallback */
+  .no-anim [data-anim="title-up"],
+  .no-anim [data-anim-item],
+  .no-anim [data-anim="sweep"],
+  .no-anim [data-hero] {
+    opacity: 1 !important;
+  }
+  .no-anim [data-anim="spine"] {
+    transform: scaleY(1) !important;
+  }
+}
+
+@keyframes scrollX {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes radarPulse {
+  0%   { transform: scale(0.6); opacity: 0.8; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+@keyframes bobDown {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50%      { transform: translateY(8px); opacity: 1; }
+}
+
+@keyframes sweep {
+  0%   { transform: rotate(0); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes barFill {
+  from { width: 0; }
+}
+
+@keyframes bracketL {
+  from { transform: translateX(6px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes bracketR {
+  from { transform: translateX(-6px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes ants {
+  to {
+    background-position:
+      24px 0,
+      -24px 0,
+      0 24px,
+      0 -24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
