@@ -217,28 +217,6 @@ export function useGsapAnimations(): void {
         });
       });
 
-      /* ===== FOOTER WORDMARK PARALLAX + DEPTH ===== */
-      gsap.utils
-        .toArray<HTMLElement>('[data-anim="wordmark"]')
-        .forEach((el) => {
-          gsap.fromTo(
-            el,
-            { xPercent: 10, scale: 0.94, filter: "blur(6px)" },
-            {
-              xPercent: -10,
-              scale: 1.04,
-              filter: "blur(0px)",
-              ease: "none",
-              scrollTrigger: {
-                trigger: el,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true,
-              },
-            }
-          );
-        });
-
       /* ===== SCROLL PROGRESS BAR =====
          Thin orange line at top of viewport that scales from 0 to 1 as the
          user scrolls the whole page. Driven by scrub:0 for instant tracking. */
