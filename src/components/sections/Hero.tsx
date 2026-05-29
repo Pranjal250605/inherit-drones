@@ -20,6 +20,9 @@ export function Hero() {
         playsInline
         preload="metadata"
         className="absolute inset-0 -z-20 h-full w-full object-cover"
+        style={{
+          filter: "contrast(1.4) saturate(1.55) brightness(1.02)",
+        }}
       >
         <source
           src="https://videos.pexels.com/video-files/4446375/4446375-uhd_3840_2160_25fps.mp4"
@@ -47,8 +50,8 @@ export function Hero() {
         style={{
           background:
             theme === "light"
-              ? "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 45%, rgb(var(--page-bg)) 100%)"
-              : "linear-gradient(to bottom, rgb(var(--bg) / 0.70) 0%, rgb(var(--bg) / 0.30) 50%, rgb(var(--page-bg)) 100%)",
+              ? "linear-gradient(to bottom, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.14) 32%, rgba(0,0,0,0.30) 52%, rgba(0,0,0,0.12) 74%, rgb(var(--page-bg)) 100%)"
+              : "linear-gradient(to bottom, rgb(var(--bg) / 0.58) 0%, rgb(var(--bg) / 0.20) 40%, rgb(var(--bg) / 0.34) 55%, rgb(var(--bg) / 0.18) 75%, rgb(var(--page-bg)) 100%)",
         }}
       />
 
