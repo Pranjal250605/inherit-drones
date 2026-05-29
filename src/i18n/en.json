@@ -13,7 +13,7 @@
       "field": "Field",
       "contact": "Contact"
     },
-    "cta": "Initiate Contact",
+    "cta": "Contact",
     "menu_open": "Open menu",
     "menu_close": "Close menu",
     "menu_toggle": "Toggle navigation"
@@ -27,7 +27,7 @@
     "h1_line2_pre": "Built from ",
     "h1_line2_emph": "Japan.",
     "rule_jp": "未来を支えるドローン",
-    "paragraph": "Commercial drone systems for logistics, infrastructure inspection, and aerial intelligence. Aerospace-grade autonomy, engineered in Hiroshima for the world.",
+    "paragraph": "Autonomous drone systems for logistics, inspection, and survey — engineered in Hiroshima.",
     "cta_primary": "Explore Solutions",
     "cta_secondary": "Technology Brief",
     "ticker": [
@@ -45,6 +45,29 @@
     "scroll": "Scroll"
   },
 
+  "promo": {
+    "items": [
+      {
+        "kind": "DEMO",
+        "kind_jp": "デモ",
+        "tag": "Regular VTOL demonstrations",
+        "title": "IH-04 Hayabusa · monthly open demo",
+        "schedule": "First Saturday · Hiroshima HQ",
+        "cta": "Reserve a seat",
+        "href": "#contact"
+      },
+      {
+        "kind": "EVENT",
+        "kind_jp": "展示",
+        "tag": "Upcoming exhibitions",
+        "title": "Japan Drone 2026 · Makuhari Messe",
+        "schedule": "18 – 20 June 2026 · Booth E-14",
+        "cta": "Add to schedule",
+        "href": "#contact"
+      }
+    ]
+  },
+
   "trust": {
     "label": "/ Authorised Operators",
     "partners": [
@@ -54,30 +77,79 @@
     ]
   },
 
+  "news": {
+    "tag": "BULLETIN / Latest",
+    "h2_pre": "From the ",
+    "h2_emph": "field",
+    "h2_post": " and the ops centre.",
+    "subtitle_jp": "最新情報 · ニュース",
+    "view_all": "All news",
+    "img_label": "IMG",
+    "read_label": "Read",
+    "items": [
+      {
+        "code": "N.04",
+        "date": "2026.05.21",
+        "category": "Press Release",
+        "category_jp": "プレスリリース",
+        "title": "Setouchi inter-island cargo network reaches 4,200 sorties",
+        "excerpt": "28 stations, 99.4% on-time across the Hiroshima–Ehime corridor.",
+        "img": "drone-spraying"
+      },
+      {
+        "code": "N.03",
+        "date": "2026.05.08",
+        "category": "Event",
+        "category_jp": "イベント",
+        "title": "Inherit Co. exhibits at Japan Drone 2026, Makuhari Messe",
+        "excerpt": "Live IH-04 demos at Booth E-14, 18–20 June.",
+        "img": "hiroshima-aerial"
+      },
+      {
+        "code": "N.02",
+        "date": "2026.04.02",
+        "category": "Announcement",
+        "category_jp": "お知らせ",
+        "title": "NAPA Drone Academy welcomes the 2026 spring cohort",
+        "excerpt": "Twenty-two new pilots begin Type-2 BVLOS certification.",
+        "img": "team-napa"
+      },
+      {
+        "code": "N.01",
+        "date": "2026.01.22",
+        "category": "Press Release",
+        "category_jp": "プレスリリース",
+        "title": "BVLOS Level-4 corridor extension approved for Hiroshima Bay",
+        "excerpt": "MLIT approves a 64 km coastal corridor extension.",
+        "img": ""
+      }
+    ]
+  },
+
   "mission": {
     "tag": "01 / Mission",
-    "h2_pre": "Empowering ",
+    "h2_pre": "Aerial infrastructure, from ",
     "h2_emph": "Hiroshima",
-    "h2_post": " and beyond with next-generation aerial infrastructure.",
-    "subtitle_jp": "次世代の空のインフラを、広島から世界へ。",
+    "h2_post": ".",
+    "subtitle_jp": "次世代の空のインフラを、広島から。",
     "pillars": [
       {
         "code": "02.A",
         "title": "Philosophy",
         "jp": "哲学",
-        "body": "Inherited craftsmanship, applied to autonomous flight. Every system tuned with the discipline of Japanese precision manufacturing."
+        "body": "Inherited craftsmanship, applied to autonomous flight."
       },
       {
         "code": "02.B",
         "title": "Mandate",
         "jp": "使命",
-        "body": "Move goods, inspect critical infrastructure, and capture geospatial truth where roads cannot reach and humans should not."
+        "body": "Move goods, inspect infrastructure, map the unreachable."
       },
       {
         "code": "02.C",
         "title": "Horizon",
         "jp": "展望",
-        "body": "By 2030, a continuous aerial network across the Setouchi region — operating beyond visual line of sight, day or night."
+        "body": "A continuous aerial network across Setouchi by 2030."
       }
     ]
   },
@@ -89,18 +161,18 @@
     "h2_line2_post": " one",
     "h2_line3": "autonomous stack.",
     "subtitle_jp": "提供サービス · 自律飛行スタック",
-    "lead": "Each service runs on the same airframe, the same flight controller, and the same ground station. Operate them together — or independently — at industrial scale.",
+    "lead": "One airframe, one ground station. Three services — together or alone.",
     "stat_pillars": "Pillars",
     "stat_active": "Active",
     "card_status": "ACTIVE · NOMINAL",
-    "card_cta": "[ Open Brief ]",
+    "card_cta": "Details",
     "cards": [
       {
         "id": "logistics",
         "code": "S.01",
         "jp": "物流・配送",
         "title": "Logistics & Delivery",
-        "desc": "Beyond-visual-line-of-sight cargo delivery across Setouchi's island chains.",
+        "desc": "BVLOS cargo delivery across the Setouchi islands.",
         "metrics": [["PAYLOAD","8.0 KG"],["RANGE","60 KM"],["WINDOW","≤15 MIN"]],
         "hidden": "ROUTE.SETOUCHI-04 · 28 NODES · 4200 SORTIES"
       },
@@ -109,7 +181,7 @@
         "code": "S.02",
         "jp": "インフラ点検",
         "title": "Infrastructure Inspection",
-        "desc": "Bridges, dams, transmission towers, solar arrays. Millimetre-grade fault detection — no human at altitude.",
+        "desc": "Millimetre-grade fault detection — no human at altitude.",
         "metrics": [["RESOLUTION","0.4 MM"],["SENSORS","RGB+IR+LIDAR"]],
         "hidden": "AUDIT.CHUGOKU-T · 1180 KM · 312 FLAGS"
       },
@@ -118,7 +190,7 @@
         "code": "S.03",
         "jp": "空撮・測量",
         "title": "Aerial Survey & Data",
-        "desc": "Photogrammetric mapping and 3D point clouds. Geospatial datasets delivered within 24 hours.",
+        "desc": "Photogrammetry and 3D point clouds within 24 hours.",
         "metrics": [["ACCURACY","± 2 CM"],["DELIVERY","24 H"]],
         "hidden": "SURVEY.COASTLINE-H · 64 KM · Q4 2026"
       }
@@ -131,12 +203,12 @@
     "h2_emph": "flight log,",
     "h2_line2": "in four phases.",
     "subtitle_jp": "四段階の運用フロー",
-    "cta": "[ Request operational dossier ]",
+    "cta": "Request a dossier",
     "steps": [
-      { "n": "03.01", "title": "Discover", "jp": "発見", "body": "Site survey + airspace audit. We map the volume of air your operation needs and the regulatory path to fly there." },
-      { "n": "03.02", "title": "Engineer", "jp": "設計", "body": "Custom flight profile, sensor selection, and BVLOS routing — verified in our simulation rack before any rotor turns." },
-      { "n": "03.03", "title": "Operate", "jp": "運用", "body": "Certified pilots and remote operators run missions from the Hiroshima ops centre with redundant ground + satellite uplinks." },
-      { "n": "03.04", "title": "Deliver", "jp": "提供", "body": "Geo-tagged data, fault reports, and 3D assets in your hands within 24 hours — through API or dashboard." }
+      { "n": "03.01", "title": "Discover", "jp": "発見", "body": "Site survey and airspace audit." },
+      { "n": "03.02", "title": "Engineer", "jp": "設計", "body": "Flight profile, sensors, and BVLOS routing — simulated first." },
+      { "n": "03.03", "title": "Operate", "jp": "運用", "body": "Certified pilots fly from the Hiroshima ops centre." },
+      { "n": "03.04", "title": "Deliver", "jp": "提供", "body": "Geo-tagged data and reports within 24 hours." }
     ]
   },
 
@@ -147,7 +219,7 @@
     "h2_post": " Hayabusa",
     "h2_line2": "flight platform.",
     "subtitle_jp": "隼 / 第四世代 機体",
-    "lead": "Our fourth-generation airframe. Carbon-fibre monocoque, redundant compute, and a 16-channel sensor bus — built to operate in conditions no off-the-shelf quadcopter can survive.",
+    "lead": "Fourth-generation airframe. Carbon monocoque, redundant compute, 16-channel sensor bus.",
     "specs": [
       { "k": "Max payload", "v": 88, "unit": "KG", "display": "8.8" },
       { "k": "Flight time", "v": 78, "unit": "MIN", "display": "62" },
@@ -177,27 +249,27 @@
     "h2_emph": "field",
     "h2_post": " deployments.",
     "subtitle_jp": "実地配備の記録",
-    "cta": "[ Full case studies ] →",
-    "open": "[ open ]",
+    "cta": "All case studies",
+    "open": "View",
     "rec_label": "REC",
     "img_label": "IMG",
     "cases": [
       {
         "tag": "Logistics", "code": "F.01", "coords": "34.42° N · 132.71° E",
         "title": "Setouchi Inter-Island Cargo Network",
-        "body": "A 28-station drone delivery mesh moving medical supplies and post across the Inland Sea.",
+        "body": "A 28-station delivery mesh across the Inland Sea.",
         "stat_value": "4,200", "stat_label": "Sorties / 99.4% OTD"
       },
       {
         "tag": "Inspection", "code": "F.02", "coords": "34.61° N · 133.94° E",
         "title": "Chugoku Transmission Tower Audit",
-        "body": "AI-assisted thermal + visual inspection across 1,180 km of high-voltage line. Zero crew at altitude.",
+        "body": "AI thermal + visual inspection across 1,180 km of line.",
         "stat_value": "1,180 KM", "stat_label": "Audited · 312 Flags"
       },
       {
         "tag": "Survey", "code": "F.03", "coords": "34.39° N · 132.45° E",
         "title": "Hiroshima Coastal Erosion Mapping",
-        "body": "Photogrammetric reconstruction of 64 km of shoreline at 2 cm accuracy. Quarterly resurvey for the prefectural dashboard.",
+        "body": "64 km of shoreline mapped at 2 cm accuracy.",
         "stat_value": "2 CM", "stat_label": "Resolution · Q4 cadence"
       }
     ]
@@ -214,10 +286,22 @@
     "tag": "07 / Voice",
     "transmission_label": "TRANSMISSION",
     "transmission_date": "2026.03.18 / 14:22 JST",
-    "quote": "Inherit Co. retrofitted our island supply chain in eleven weeks. The drones arrive before our ferries leave the dock — and we don't think about the airspace anymore. It just works.",
+    "quote": "The drones arrive before our ferries leave the dock. We don't think about the airspace anymore — it just works.",
     "author_name": "Yuki Tanabe",
     "author_role": "Dir. Logistics · Setouchi Medical Network",
     "signed": "SIGNED · 2026.03.18"
+  },
+
+  "instagram": {
+    "tag": "FEED / Social",
+    "h2_pre": "From the ",
+    "h2_emph": "lens.",
+    "subtitle_jp": "現場からの写真",
+    "lead": "Hangar, runway, altitude — from our pilots and the NAPA academy.",
+    "handle": "@napa_droneacademy_hiroshima",
+    "follow": "Follow on Instagram",
+    "placeholder_title": "Awaiting feed sync",
+    "placeholder_body": "Add a post shortcode to src/data/instagram.ts to embed this slot."
   },
 
   "faq": {
@@ -226,13 +310,13 @@
     "h2_line2": "asked",
     "h2_emph": "questions.",
     "subtitle_jp": "よくあるご質問",
-    "lead": "Technical, regulatory, and commercial enquiries — replies within one business day, in Japanese or English.",
+    "lead": "Technical, regulatory, and commercial — replies within one business day.",
     "items": [
-      { "q": "Where do you currently operate?", "a": "Primary operations across Hiroshima, Okayama, Ehime, and Yamaguchi prefectures, with deployments by request across the rest of Japan and SE Asia." },
-      { "q": "Are your BVLOS operations approved by MLIT?", "a": "Yes. We hold Level 4 BVLOS authorisation under the 2022 Civil Aeronautics Act revision, with a Type-2 airframe registration and certified remote pilots on staff." },
-      { "q": "How do you handle data sovereignty?", "a": "All raw flight and sensor data is stored and processed on encrypted, Japan-resident infrastructure. Client datasets are isolated and contractually owned by the client." },
-      { "q": "Do you sell the IH-04 platform?", "a": "We do not retail airframes. We deliver flight-as-a-service, including the platform, pilots, ground stations, regulatory cover, and data pipelines." },
-      { "q": "What does engagement look like?", "a": "A scoping call, a paid pilot mission, then an annual operational contract. Most clients are flying production missions within 30 days of signature." }
+      { "q": "Where do you currently operate?", "a": "Hiroshima, Okayama, Ehime, and Yamaguchi — and the rest of Japan by request." },
+      { "q": "Are your BVLOS operations approved by MLIT?", "a": "Yes — Level 4 BVLOS authorisation, Type-2 airframe, certified remote pilots." },
+      { "q": "How do you handle data sovereignty?", "a": "All data stored and processed on encrypted, Japan-resident infrastructure, owned by you." },
+      { "q": "Do you sell the IH-04 platform?", "a": "No. We deliver flight-as-a-service — platform, pilots, ground stations, and data." },
+      { "q": "What does engagement look like?", "a": "A scoping call, a paid pilot mission, then an annual contract. Flying within 30 days." }
     ]
   },
 
@@ -241,7 +325,34 @@
     "h2_line1": "Have a mission?",
     "h2_emph": "We can fly it.",
     "subtitle_jp": "オープンチャンネル · 24時間以内に返信",
-    "lead": "From a single survey flight to a permanent BVLOS corridor — book a 30-minute scoping call with our chief operations officer.",
+    "lead": "From a single survey flight to a permanent BVLOS corridor.",
+    "newsletter": {
+      "code": "CH.A",
+      "title": "Briefing Channel",
+      "title_jp": "ニュースレター",
+      "body": "Quarterly dispatches from the ops centre.",
+      "placeholder": "Work email",
+      "submit": "Subscribe",
+      "success": "Channel acknowledged",
+      "err_email": "Invalid email"
+    },
+    "downloads": {
+      "code": "CH.B",
+      "title": "Field Dossiers",
+      "title_jp": "資料ダウンロード",
+      "body": "Specs, playbooks, and compliance — current as of Q2 2026.",
+      "items": [
+        { "title": "IH-04 Hayabusa · Technical brief", "format": "PDF · 4.2 MB" },
+        { "title": "BVLOS operations dossier",         "format": "PDF · 8.1 MB" },
+        { "title": "Compliance & data sovereignty",    "format": "PDF · 1.8 MB" },
+        { "title": "2025 field record",                "format": "PDF · 6.4 MB" }
+      ]
+    },
+    "brief_col": {
+      "code": "CH.C",
+      "title": "Open a Channel",
+      "title_jp": "ブリーフを送る"
+    },
     "form_header": "FORM.BRIEF.001",
     "form_secure": "SECURE / AES-256",
     "field_name_label": "01",
@@ -259,7 +370,7 @@
       { "id": "Survey", "label": "Survey" }
     ],
     "form_reply": "Reply within 24 h JST",
-    "submit": "[ Transmit Brief ]",
+    "submit": "Send brief",
     "err_name": "Name required",
     "err_email_required": "Email required",
     "err_email_invalid": "Invalid email",
@@ -272,7 +383,7 @@
     "success_body_pre": "Your ",
     "success_body_post": " enquiry has been logged. The chief operations officer will respond within 24 hours JST.",
     "success_ref_prefix": "REF · IH-",
-    "success_again": "[ Send another brief ]",
+    "success_again": "Send another",
     "info": [
       ["EMAIL", "ops@inherit.co.jp"],
       ["TEL", "+81 82 555 0140"],
@@ -285,7 +396,7 @@
     "uptime": "UPTIME 99.98 %",
     "doc": "DOC.IH.LANDING.2026.05",
     "wordmark_sub": "株式会社 インヘリット · ENGINEERED IN HIROSHIMA · BUILT FOR THE SKIES",
-    "description": "株式会社 Inherit Co. — Commercial drone systems engineered in Hiroshima. Operating under MLIT Level-4 BVLOS authorisation since 2023.",
+    "description": "株式会社 Inherit Co. — drone systems engineered in Hiroshima. MLIT Level-4 BVLOS since 2023.",
     "cols": [
       { "h": "Solutions",  "links": ["Logistics & Delivery", "Infrastructure Inspection", "Aerial Survey", "Custom Missions"] },
       { "h": "Technology", "links": ["IH-04 Hayabusa", "Mesh Radio", "Edge AI Stack", "Ground Station"] },

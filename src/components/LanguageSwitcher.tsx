@@ -32,12 +32,12 @@ export function LanguageSwitcher({ className = "", variant = "default" }: Props)
             aria-pressed={active}
             aria-label={l.code === "ja" ? "日本語" : "English"}
             className={
-              "border font-mono uppercase tracking-[0.22em] transition " +
+              "border font-mono uppercase tracking-[0.2em] transition " +
               sizeClasses +
               " " +
               (active
-                ? "border-orange-400/60 bg-orange-500/10 text-orange-400"
-                : "border-fg/15 text-fg/50 hover:border-fg/30 hover:text-fg/80")
+                ? "border-orange-500 text-orange-500"
+                : "border-current text-current opacity-50 hover:opacity-90")
             }
           >
             {t[l.key]}

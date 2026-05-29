@@ -1,8 +1,7 @@
 import type { ReactNode, SVGProps } from "react";
 
 /* ============================================================
-   Atoms / Primitives
-   Industrial / instrumentation design system
+   Shared UI atoms (Fujitaka redesign)
 ============================================================ */
 
 type WithChildren = { children: ReactNode; className?: string };
@@ -11,7 +10,7 @@ export function Mono({ children, className = "" }: WithChildren) {
   return (
     <span
       className={
-        "font-mono text-[10.5px] uppercase tracking-[0.22em] text-fg/45 " +
+        "font-mono text-[10.5px] font-medium uppercase tracking-[0.22em] text-fg/55 " +
         className
       }
     >
@@ -20,96 +19,40 @@ export function Mono({ children, className = "" }: WithChildren) {
   );
 }
 
-export function JpAnno({ children, className = "" }: WithChildren) {
+/** Fujitaka signature: four orange forward-slash ticks "////" used as a
+    section eyebrow. Punchy, brand-colored, sits above the heading. */
+export function TickMark({ className = "h-3" }: { className?: string }) {
   return (
-    <span
-      className={
-        "font-jp text-[10.5px] tracking-[0.08em] text-fg/35 " + className
-      }
+    <svg
+      viewBox="0 0 40 12"
+      className={"w-auto text-orange-500 " + className}
+      fill="currentColor"
+      aria-hidden="true"
     >
-      {children}
-    </span>
-  );
-}
-
-type DotProps = { active?: boolean; className?: string };
-export function Dot({ active = true, className = "" }: DotProps) {
-  return (
-    <span
-      className={
-        "inline-block h-1.5 w-1.5 " +
-        (active ? "bg-orange-500" : "bg-fg/30") +
-        " " +
-        className
-      }
-    />
-  );
-}
-
-type BracketLProps = { className?: string };
-export function BracketL({ className = "h-2 w-2" }: BracketLProps) {
-  return (
-    <svg viewBox="0 0 8 8" fill="none" className={className}>
-      <path d="M0 0H4M0 0V4" stroke="currentColor" strokeWidth="1" />
+      <path d="M3 12 9 0h3.4L9.4 12zM11 12 17 0h3.4l-3 12zM19 12 25 0h3.4l-3 12zM27 12 33 0h3.4l-3 12z" />
     </svg>
   );
 }
 
-type TagProps = {
-  children: ReactNode;
+/** Filled circular arrow button — the corner CTA on Fujitaka cards. */
+export function RoundArrow({
+  className = "",
+  size = "h-10 w-10",
+}: {
   className?: string;
-  live?: boolean;
-};
-
-export function Tag({ children, className = "", live = false }: TagProps) {
+  size?: string;
+}) {
   return (
     <span
       className={
-        "relative inline-flex items-center gap-2 whitespace-nowrap border border-fg/15 bg-fg/[0.03] px-2.5 py-1 " +
-        "font-mono text-[10px] uppercase tracking-[0.22em] text-fg/60 " +
+        "grid shrink-0 place-items-center rounded-full bg-orange-500 text-white transition group-hover:bg-orange-400 " +
+        size +
+        " " +
         className
       }
     >
-      <BracketL className="absolute -left-[3px] -top-[3px] h-1.5 w-1.5 text-fg/40" />
-      <BracketL className="absolute -bottom-[3px] -right-[3px] h-1.5 w-1.5 rotate-180 text-fg/40" />
-      {live && <Dot />}
-      {children}
+      <ArrowRight className="h-4 w-4" />
     </span>
-  );
-}
-
-type CornerBracketsProps = {
-  size?: number;
-  color?: string;
-  inset?: number;
-};
-export function CornerBrackets({
-  size = 10,
-  color = "rgba(255,255,255,0.25)",
-  inset = 0,
-}: CornerBracketsProps) {
-  const positions = [
-    "top-0 left-0",
-    "top-0 right-0 rotate-90",
-    "bottom-0 left-0 -rotate-90",
-    "bottom-0 right-0 rotate-180",
-  ];
-  return (
-    <div className="pointer-events-none absolute inset-0">
-      {positions.map((p, i) => (
-        <svg
-          key={i}
-          className={"absolute " + p}
-          width={size}
-          height={size}
-          viewBox="0 0 12 12"
-          fill="none"
-          style={{ margin: inset, color }}
-        >
-          <path d="M0 0H6M0 0V6" stroke="currentColor" strokeWidth="1" />
-        </svg>
-      ))}
-    </div>
   );
 }
 
@@ -177,7 +120,8 @@ type SectionFrameProps = {
   className?: string;
 };
 
-/** Section wrapper with corner + markers and a top sweep line that animates in. */
+/** Plain section wrapper. (The old instrumentation frame — corner markers +
+    orange sweep line — was removed in the Fujitaka redesign.) */
 export function SectionFrame({
   id,
   children,
@@ -185,40 +129,33 @@ export function SectionFrame({
 }: SectionFrameProps) {
   return (
     <section id={id} className={"relative " + className}>
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px overflow-hidden">
-        <div
-          data-anim="sweep"
-          className="h-full w-full bg-gradient-to-r from-transparent via-orange-500/80 to-transparent"
-        />
-      </div>
-      <div className="pointer-events-none absolute left-3 top-3 text-fg/15 md:left-6 md:top-6">
-        <Plus />
-      </div>
-      <div className="pointer-events-none absolute right-3 top-3 text-fg/15 md:right-6 md:top-6">
-        <Plus />
-      </div>
-      <div className="pointer-events-none absolute bottom-3 left-3 text-fg/15 md:bottom-6 md:left-6">
-        <Plus />
-      </div>
-      <div className="pointer-events-none absolute bottom-3 right-3 text-fg/15 md:bottom-6 md:right-6">
-        <Plus />
-      </div>
       {children}
     </section>
   );
 }
 
-/** Hover-revealed monospace bracket title wrapper */
-export function BracketTitle({ children, className = "" }: WithChildren) {
+/** Fujitaka-style eyebrow: the orange "////" tick motif followed by a bold,
+    high-contrast label. Accepts a "NN / Label" string; the number renders as a
+    small orange index, the label as a punchy tracked small-cap. */
+export function SectionLabel({
+  children,
+  className = "",
+}: {
+  children: string;
+  className?: string;
+}) {
+  const parts = children.split(" / ");
+  const num = parts.length === 2 ? parts[0] : null;
+  const label = parts.length === 2 ? parts[1] : children;
   return (
-    <span className={"group/bt relative inline-flex items-center " + className}>
-      <span className="bracket-l mr-2 inline-block font-mono text-orange-400/80 opacity-0 transition group-hover/bt:opacity-100">
-        [
+    <div className={"flex items-center gap-3 " + className}>
+      <TickMark />
+      <span className="text-[12px] font-bold uppercase tracking-[0.2em] text-fg/80">
+        {num && (
+          <span className="mr-2 font-mono text-orange-500">{num}</span>
+        )}
+        {label}
       </span>
-      {children}
-      <span className="bracket-r ml-2 inline-block font-mono text-orange-400/80 opacity-0 transition group-hover/bt:opacity-100">
-        ]
-      </span>
-    </span>
+    </div>
   );
 }

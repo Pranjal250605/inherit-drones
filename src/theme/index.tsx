@@ -18,8 +18,10 @@ import {
 
 export type Theme = "dark" | "light" | "blueprint";
 
-const STORAGE_KEY = "inherit.theme";
-const THEMES: Theme[] = ["dark", "light", "blueprint"];
+/* Bumped from "inherit.theme" to drop pre-Fujitaka stored preferences, so the
+   new light default takes effect for returning visitors. */
+const STORAGE_KEY = "inherit.theme.v2";
+const THEMES: Theme[] = ["light", "dark", "blueprint"];
 
 type ThemeContextValue = {
   theme: Theme;
@@ -34,17 +36,15 @@ function isTheme(value: unknown): value is Theme {
 }
 
 function detectInitialTheme(): Theme {
-  if (typeof window === "undefined") return "dark";
+  if (typeof window === "undefined") return "light";
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY);
     if (isTheme(stored)) return stored;
   } catch {
     // localStorage may be unavailable
   }
-  const prefersLight = window.matchMedia?.(
-    "(prefers-color-scheme: light)"
-  ).matches;
-  return prefersLight ? "light" : "dark";
+  // Fujitaka-style clean light look is the default for everyone.
+  return "light";
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {

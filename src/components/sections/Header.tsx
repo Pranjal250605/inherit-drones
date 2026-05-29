@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { ArrowRight, Dot } from "../primitives";
 import { LanguageSwitcher } from "../LanguageSwitcher";
 import { ThemeSwitcher } from "../ThemeSwitcher";
 import { useT } from "../../i18n";
@@ -7,32 +6,16 @@ import { useT } from "../../i18n";
 export function Header() {
   const { t } = useT();
   const [scrolled, setScrolled] = useState(false);
-  const [time, setTime] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-
-    const tick = () => {
-      const d = new Date();
-      const z = (n: number) => String(n).padStart(2, "0");
-      setTime(
-        `${z(d.getUTCHours())}:${z(d.getUTCMinutes())}:${z(d.getUTCSeconds())} UTC`
-      );
-    };
-    tick();
-    const t = window.setInterval(tick, 1000);
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.clearInterval(t);
-    };
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const nav: Array<{ label: string; href: string; active?: boolean }> = [
-    { label: t.header.nav.home, href: "#top", active: true },
+  const nav: Array<{ label: string; href: string }> = [
     { label: t.header.nav.technology, href: "#technology" },
     { label: t.header.nav.solutions, href: "#solutions" },
     { label: t.header.nav.operations, href: "#process" },
@@ -42,108 +25,88 @@ export function Header() {
 
   return (
     <header
-      data-theme="dark"
       className={
-        "fixed inset-x-0 top-0 z-50 text-fg transition-all duration-500 " +
-        (scrolled
-          ? "border-b border-fg/5 bg-bg/80 backdrop-blur-xl"
-          : "bg-transparent")
+        "fixed inset-x-0 top-0 z-50 transition-colors duration-300 " +
+        (scrolled || mobileOpen
+          ? "border-b border-fg/10 bg-bg/85 text-fg backdrop-blur-xl"
+          : "border-b border-transparent bg-transparent text-white")
       }
     >
-      <div className="hidden border-b border-fg/5 md:block">
-        <div className="mx-auto flex h-7 max-w-[1500px] items-center justify-between px-6 font-mono text-[10px] uppercase tracking-[0.22em] text-fg/40 lg:px-10">
-          <span className="flex items-center gap-2">
-            <Dot /> {t.header.status}
+      <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-6 lg:h-20 lg:px-12">
+        <a href="#top" className="flex items-center gap-2.5 whitespace-nowrap">
+          <span className="relative grid h-7 w-7 place-items-center rounded-md bg-orange-500">
+            <span className="h-2 w-2 rounded-[2px] bg-white" />
           </span>
-          <div className="flex items-center gap-4">
-            <ThemeSwitcher variant="compact" />
-            <LanguageSwitcher variant="compact" />
-            <span aria-live="off" className="ml-2">{time}</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="mx-auto flex h-14 max-w-[1500px] items-center justify-between px-6 lg:h-16 lg:px-10">
-        <a href="#top" className="flex items-center gap-3 whitespace-nowrap">
-          <span className="relative grid h-7 w-7 place-items-center border border-fg/20 bg-fg/[0.04]">
-            <span className="absolute inset-1 border border-orange-500/70" />
-            <span className="absolute h-1 w-1 bg-orange-500" />
-          </span>
-          <span className="flex items-baseline gap-2">
-            <span className="text-[14px] font-medium tracking-[0.02em] text-fg">
-              INHERIT
-            </span>
-            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-fg/40">
-              / CO.
-            </span>
+          <span className="text-[16px] font-bold tracking-[0.02em]">
+            INHERIT
           </span>
         </a>
 
-        <nav className="hidden items-center gap-7 md:flex">
+        <nav className="hidden items-center gap-9 md:flex">
           {nav.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className={
-                "font-mono text-[10.5px] uppercase tracking-[0.22em] transition " +
-                (item.active ? "text-fg" : "text-fg/45 hover:text-fg")
-              }
+              className="text-[13px] font-semibold tracking-[0.02em] opacity-75 transition hover:text-orange-500 hover:opacity-100"
             >
               {item.label}
             </a>
           ))}
         </nav>
 
-        <a
-          href="#contact"
-          className="hidden md:inline-flex group relative items-center gap-3 whitespace-nowrap bg-orange-500 px-4 py-2 font-mono text-[10.5px] uppercase tracking-[0.22em] text-bg transition hover:bg-orange-400 cut-corner-sm"
-        >
-          {t.header.cta}
-          <ArrowRight className="h-3 w-3" />
-        </a>
+        <div className="hidden items-center gap-4 md:flex">
+          <LanguageSwitcher variant="compact" />
+          <ThemeSwitcher variant="compact" />
+          <a
+            href="#contact"
+            className="ml-1 inline-flex items-center rounded-full bg-orange-500 px-5 py-2 text-[12px] font-bold tracking-[0.03em] text-white transition hover:bg-orange-400"
+          >
+            {t.header.cta}
+          </a>
+        </div>
 
         <button
           type="button"
           aria-label={mobileOpen ? t.header.menu_close : t.header.menu_open}
           aria-expanded={mobileOpen}
           onClick={() => setMobileOpen((v) => !v)}
-          className="grid h-9 w-9 place-items-center border border-fg/15 bg-fg/[0.04] md:hidden"
+          className="grid h-9 w-9 place-items-center md:hidden"
         >
           <span className="sr-only">{t.header.menu_toggle}</span>
-          <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5">
             {mobileOpen ? (
-              <path d="M6 6l12 12M18 6L6 18" strokeLinecap="square" />
+              <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
             ) : (
-              <path d="M3 7h18M3 12h18M3 17h18" strokeLinecap="square" />
+              <path d="M3 7h18M3 12h18M3 17h18" strokeLinecap="round" />
             )}
           </svg>
         </button>
       </div>
 
       {mobileOpen && (
-        <div className="border-t border-fg/10 bg-bg/95 backdrop-blur-xl md:hidden">
-          <nav className="mx-auto flex max-w-[1500px] flex-col gap-1 px-6 py-4">
+        <div className="border-t border-fg/10 bg-bg text-fg md:hidden">
+          <nav className="mx-auto flex max-w-[1400px] flex-col px-6 py-2">
             {nav.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
-                className="border-b border-fg/5 py-3 font-mono text-[11px] uppercase tracking-[0.22em] text-fg/70 hover:text-orange-400"
+                className="border-b border-fg/10 py-4 text-sm font-medium tracking-[0.04em] text-fg/80 transition hover:text-orange-500"
               >
                 {item.label}
               </a>
             ))}
-            <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3 pb-2">
               <a
                 href="#contact"
                 onClick={() => setMobileOpen(false)}
-                className="inline-flex items-center gap-3 bg-orange-500 px-4 py-2 font-mono text-[10.5px] uppercase tracking-[0.22em] text-bg cut-corner-sm"
+                className="inline-flex items-center rounded-full bg-orange-500 px-5 py-2 text-[12px] font-bold tracking-[0.03em] text-white"
               >
-                {t.header.cta} <ArrowRight className="h-3 w-3" />
+                {t.header.cta}
               </a>
-              <div className="flex items-center gap-2">
-                <ThemeSwitcher />
+              <div className="flex items-center gap-3 text-fg">
                 <LanguageSwitcher />
+                <ThemeSwitcher />
               </div>
             </div>
           </nav>

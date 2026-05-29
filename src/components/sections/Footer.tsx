@@ -1,4 +1,3 @@
-import { Dot, Mono } from "../primitives";
 import { LanguageSwitcher } from "../LanguageSwitcher";
 import { ThemeSwitcher } from "../ThemeSwitcher";
 import { useT } from "../../i18n";
@@ -7,53 +6,30 @@ export function Footer() {
   const { t } = useT();
 
   return (
-    <footer className="relative bg-bg pt-16">
-      <div className="mx-auto max-w-[1500px] px-6 lg:px-10">
-        <div className="flex items-center justify-between border-t border-fg/10 py-4 font-mono text-[10px] uppercase tracking-[0.22em] text-fg/40">
-          <div className="flex items-center gap-6">
-            <span className="flex items-center gap-2">
-              <Dot /> {t.footer.status}
-            </span>
-            <span className="hidden md:inline">{t.footer.uptime}</span>
-          </div>
-          <div className="hidden md:block">{t.footer.doc}</div>
-        </div>
-
-        <div className="border-t border-fg/10 pb-10 pt-10">
-          <div
-            data-anim="wordmark"
-            className="font-display text-6xl font-light leading-none tracking-[-0.03em] text-fg/[0.08] md:text-7xl lg:text-8xl whitespace-nowrap"
-          >
-            INHERIT&nbsp;/&nbsp;CO.
-          </div>
-          <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-fg/30">
-            {t.footer.wordmark_sub}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-8 border-t border-fg/10 pt-12 md:grid-cols-6">
-          <div className="col-span-2">
-            <div className="flex items-center gap-3">
-              <span className="relative grid h-7 w-7 place-items-center border border-fg/20 bg-fg/[0.04]">
-                <span className="absolute inset-1 border border-orange-400/70" />
-                <span className="absolute h-1 w-1 bg-orange-500" />
+    <footer className="relative bg-[#161513] pt-24 text-white md:pt-32">
+      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+        <div className="grid grid-cols-2 gap-y-12 gap-x-8 border-t border-white/10 pt-16 md:grid-cols-6">
+          <div className="col-span-2 md:col-span-2">
+            <div className="flex items-center gap-2.5">
+              <span className="grid h-7 w-7 place-items-center rounded-md bg-orange-500">
+                <span className="h-2 w-2 rounded-[2px] bg-white" />
               </span>
-              <span className="text-sm font-medium tracking-[0.02em]">
+              <span className="font-display text-lg font-bold tracking-[0.02em] text-white">
                 INHERIT / CO.
               </span>
             </div>
-            <p className="mt-5 max-w-xs text-pretty text-sm leading-relaxed text-muted">
+            <p className="mt-5 max-w-xs text-pretty text-[15px] leading-relaxed text-white/55">
               {t.footer.description}
             </p>
-            <div className="mt-6 flex flex-wrap items-center gap-4">
+            <div className="mt-8 flex flex-wrap items-center gap-6">
               <div>
-                <div className="mb-2 font-mono text-[9px] uppercase tracking-[0.22em] text-fg/40">
+                <div className="mb-2 text-[11px] font-bold uppercase tracking-[0.18em] text-white/45">
                   Theme
                 </div>
                 <ThemeSwitcher />
               </div>
               <div>
-                <div className="mb-2 font-mono text-[9px] uppercase tracking-[0.22em] text-fg/40">
+                <div className="mb-2 text-[11px] font-bold uppercase tracking-[0.18em] text-white/45">
                   Language
                 </div>
                 <LanguageSwitcher />
@@ -63,13 +39,15 @@ export function Footer() {
 
           {t.footer.cols.map((c) => (
             <div key={c.h}>
-              <Mono>{c.h}</Mono>
-              <ul className="mt-4 space-y-2.5">
+              <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-orange-400">
+                {c.h}
+              </div>
+              <ul className="mt-5 space-y-3">
                 {c.links.map((l) => (
                   <li key={l}>
                     <a
                       href="#"
-                      className="text-sm text-fg/70 transition hover:text-orange-400"
+                      className="text-[15px] text-white/65 transition hover:text-orange-400"
                     >
                       {l}
                     </a>
@@ -80,43 +58,37 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-14 border-t border-fg/10 pt-12">
-          <div className="flex items-baseline justify-between">
-            <div className="flex items-center gap-3">
-              <Mono>{t.footer.sns.h}</Mono>
-              <span className="font-jp text-[10.5px] tracking-[0.08em] text-fg/35">
-                {t.footer.sns.tag_jp}
-              </span>
-            </div>
-            <span className="hidden font-mono text-[10px] uppercase tracking-[0.22em] text-fg/30 md:inline">
-              {t.footer.sns.brands.length.toString().padStart(2, "0")} / CHANNELS
+        <div className="mt-20 border-t border-white/10 pt-16">
+          <div className="flex items-baseline gap-3">
+            <h3 className="text-[11px] font-bold uppercase tracking-[0.18em] text-orange-400">
+              {t.footer.sns.h}
+            </h3>
+            <span className="font-jp text-[12px] tracking-[0.08em] text-white/40">
+              {t.footer.sns.tag_jp}
             </span>
           </div>
-          <div className="mt-6 grid grid-cols-1 gap-px bg-fg/10 sm:grid-cols-2">
+          <div className="mt-8 grid grid-cols-1 gap-x-12 gap-y-10 sm:grid-cols-2">
             {t.footer.sns.brands.map((brand) => (
-              <div key={brand.name} className="relative bg-bg p-5">
-                <div className="flex items-center gap-2">
-                  <Dot />
-                  <span className="text-sm font-medium tracking-[0.02em]">
-                    {brand.name}
-                  </span>
+              <div key={brand.name}>
+                <div className="text-[15px] font-bold tracking-[0.01em] text-white">
+                  {brand.name}
                 </div>
-                <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.22em] text-fg/35">
+                <div className="mt-1 text-[12px] uppercase tracking-[0.2em] text-white/40">
                   {brand.subtitle}
                 </div>
-                <ul className="mt-5 space-y-2.5">
+                <ul className="mt-5 space-y-3">
                   {brand.links.map((l) => (
                     <li key={l.label}>
                       <a
                         href={l.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group inline-flex items-center gap-3 text-sm text-fg/70 transition hover:text-orange-400"
+                        className="group inline-flex items-center gap-2 text-[15px] text-white/65 transition hover:text-orange-400"
                       >
-                        <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-fg/40 transition group-hover:text-orange-400/70">
+                        {l.label}
+                        <span className="text-white/30 transition group-hover:translate-x-1 group-hover:text-orange-400">
                           →
                         </span>
-                        {l.label}
                       </a>
                     </li>
                   ))}
@@ -126,13 +98,13 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-fg/10 py-6 md:flex-row md:items-center">
-          <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-fg/40">
+        <div className="mt-20 flex flex-col items-start justify-between gap-4 border-t border-white/10 py-8 md:flex-row md:items-center">
+          <div className="text-[12px] tracking-[0.02em] text-white/45">
             © {new Date().getFullYear()} {t.footer.copyright_suffix}
           </div>
-          <div className="flex items-center gap-6 font-mono text-[10px] uppercase tracking-[0.22em] text-fg/40">
+          <div className="flex items-center gap-6 text-[12px] text-white/45">
             {t.footer.legal.map((label) => (
-              <a key={label} href="#" className="hover:text-fg">
+              <a key={label} href="#" className="transition hover:text-white">
                 {label}
               </a>
             ))}

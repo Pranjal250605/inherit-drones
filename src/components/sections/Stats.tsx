@@ -1,38 +1,41 @@
-import { Mono, Plus } from "../primitives";
+import { SectionFrame } from "../primitives";
 import { useT } from "../../i18n";
 
 export function Stats() {
   const { t } = useT();
 
   return (
-    <section className="relative overflow-hidden border-y border-fg/10 bg-bg-alt">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(249,115,22,.04),transparent_60%)]" />
-      <div className="relative mx-auto grid max-w-[1500px] grid-cols-2 gap-px bg-fg/10 md:grid-cols-4">
-        {t.stats.map((it) => (
-          <div
-            key={it.code}
-            className="group relative bg-bg-alt px-6 py-10 transition hover:bg-bg lg:px-10 lg:py-12"
-          >
-            <div className="flex items-center justify-between">
-              <Mono>{it.code}</Mono>
-              <Plus className="h-3 w-3 text-fg/20" />
-            </div>
+    <SectionFrame
+      id="metrics"
+      className="diag-top relative overflow-hidden bg-gradient-to-br from-[#F15A29] via-[#EC6A1E] to-[#E08410] py-28 text-white [--diag:3.5rem] md:py-36"
+    >
+      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+        <div
+          data-anim="stagger"
+          className="grid grid-cols-1 gap-y-14 sm:grid-cols-2 lg:grid-cols-4"
+        >
+          {t.stats.map((it) => (
             <div
-              data-count={it.n}
-              data-suffix={it.suf}
-              data-decimals={it.decimal ? "1" : "0"}
-              data-thousands={it.thousands ? "true" : "false"}
-              className="mt-6 font-display text-4xl font-light leading-none tracking-[-0.02em] text-fg md:text-5xl"
+              key={it.code}
+              data-anim-item
+              className="border-t border-white/30 pt-8 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0 lg:first:border-l-0 lg:first:pl-0"
             >
-              0{it.suf}
+              <div
+                data-count={it.n}
+                data-suffix={it.suf}
+                data-decimals={it.decimal ? "1" : "0"}
+                data-thousands={it.thousands ? "true" : "false"}
+                className="font-display text-6xl font-bold leading-none tracking-[-0.03em] text-white md:text-7xl"
+              >
+                0{it.suf}
+              </div>
+              <div className="mt-6 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-white/85">
+                {it.label}
+              </div>
             </div>
-            <div className="mt-4 font-mono text-[10px] uppercase tracking-[0.22em] text-fg/50">
-              {it.label}
-            </div>
-            <div className="absolute bottom-0 left-0 h-px w-0 bg-orange-500 transition-all duration-500 group-hover:w-full" />
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </section>
+    </SectionFrame>
   );
 }

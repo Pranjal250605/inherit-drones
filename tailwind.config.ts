@@ -5,9 +5,13 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Inter Tight"', "system-ui", "sans-serif"],
-        display: ['"Inter Tight"', "system-ui", "sans-serif"],
-        mono: ['"JetBrains Mono"', "ui-monospace", "monospace"],
+        /* Fujitaka type system: Lexend Deca (Latin) + Noto Sans JP (Japanese).
+           `mono` is intentionally repointed to Lexend Deca so the existing
+           uppercase tracked "eyebrow" labels read as clean corporate small-caps
+           rather than instrumentation monospace. */
+        sans: ['"Lexend Deca"', "system-ui", "sans-serif"],
+        display: ['"Lexend Deca"', "system-ui", "sans-serif"],
+        mono: ['"Lexend Deca"', "system-ui", "sans-serif"],
         jp: ['"Noto Sans JP"', "system-ui", "sans-serif"],
       },
       colors: {

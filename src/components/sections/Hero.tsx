@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowRight, Dot, JpAnno, Tag } from "../primitives";
+import { ArrowDown, ArrowRight } from "../primitives";
 import { useT } from "../../i18n";
 import { useTheme } from "../../theme";
 
@@ -12,12 +12,6 @@ export function Hero() {
       data-theme="dark"
       className="relative isolate min-h-[100svh] overflow-hidden grain bg-bg text-fg"
     >
-      {/*
-        Primary: Pexels #4446375 "Flying Drone in Cloudy Sky" by Grisha Grishkoff (4K).
-        Visible drone in frame against a cinematic cloudscape — the look you'd recognise
-        from edify.jp's hero, but with the drone the brief calls for.
-        Fallback chain: 1080p of same → edify's cloudscape → drone-eye above clouds.
-      */}
       <video
         data-hero="video"
         autoPlay
@@ -45,135 +39,88 @@ export function Hero() {
         />
       </video>
 
-      {/* Top-to-bottom fade darkens the video and bleeds into whatever the
-          outer page bg is (--page-bg). Active for the dark + blueprint themes
-          where the page below is itself dark; skipped in light mode so the
-          cloudy video isn't masked by an overlay that fades to white. */}
-      {theme !== "light" && (
-        <div
-          className="absolute inset-0 -z-10"
-          style={{
-            background:
-              "linear-gradient(to bottom, rgb(var(--bg) / 0.70) 0%, rgb(var(--bg) / 0.30) 50%, rgb(var(--page-bg)) 100%)",
-          }}
-        />
-      )}
-
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-gradient-to-r from-transparent via-fg/20 to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-px bg-gradient-to-r from-transparent via-fg/20 to-transparent" />
-
+      {/* Darken the video and bleed into the page background below. In light mode
+          the page is white, so the hero fades cleanly from the dark video into
+          the white site. */}
       <div
-        data-hero="hud-left"
-        className="pointer-events-none absolute left-4 top-28 z-10 hidden font-mono text-[10px] uppercase tracking-[0.22em] text-fg/45 md:left-10 lg:block"
-      >
-        <div className="flex items-center gap-2">
-          <Dot /> {t.hero.hud_left_label}
-        </div>
-        <div className="mt-2 grid gap-1">
-          <div>{t.hero.hud_left_coords}</div>
-          <div>{t.hero.hud_left_alt}</div>
-        </div>
-      </div>
-
-      <div
-        data-hero="hud-right"
-        className="pointer-events-none absolute right-4 top-28 z-10 hidden text-right font-mono text-[10px] uppercase tracking-[0.22em] text-fg/45 md:right-10 lg:block"
-      >
-        <div>{t.hero.hud_right_unit}</div>
-        <div className="mt-2 grid gap-1">
-          <div>{t.hero.hud_right_auth}</div>
-          <div className="text-orange-400/80">{t.hero.hud_right_status}</div>
-        </div>
-      </div>
+        className="absolute inset-0 -z-10"
+        style={{
+          background:
+            theme === "light"
+              ? "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 45%, rgb(var(--page-bg)) 100%)"
+              : "linear-gradient(to bottom, rgb(var(--bg) / 0.70) 0%, rgb(var(--bg) / 0.30) 50%, rgb(var(--page-bg)) 100%)",
+        }}
+      />
 
       <div
         data-hero="content"
-        className="relative z-10 mx-auto flex min-h-[100svh] max-w-[1500px] flex-col items-center justify-center px-6 pt-28 text-center lg:px-10"
+        className="relative z-10 mx-auto flex min-h-[100svh] max-w-[1400px] flex-col items-center justify-center px-6 text-center lg:px-12"
       >
-        <div data-hero="tag">
-          <Tag live className="mb-8">
-            <JpAnno>{t.hero.tag_brand}</JpAnno>
-            <span className="text-fg/25">·</span>
-            <span>{t.hero.tag_country}</span>
-          </Tag>
+        <div
+          data-hero="tag"
+          className="mb-8 font-jp text-[12px] tracking-[0.3em] text-white/70"
+        >
+          {t.hero.tag_brand} · {t.hero.tag_country}
         </div>
 
         <h1
           data-hero="title"
-          className="mx-auto max-w-4xl font-display text-5xl font-light leading-[1.1] tracking-[-0.025em] text-balance md:text-6xl"
+          className="mx-auto max-w-5xl font-display text-4xl font-bold leading-[1.05] tracking-[-0.03em] text-balance sm:text-5xl md:text-7xl"
         >
           <span className="block">
             {t.hero.h1_line1_pre}
-            <span className="italic font-light text-orange-400">
-              {t.hero.h1_line1_emph}
-            </span>
+            <span className="text-orange-400">{t.hero.h1_line1_emph}</span>
           </span>
           <span className="block">
             {t.hero.h1_line2_pre}
-            <span className="italic font-light">{t.hero.h1_line2_emph}</span>
+            {t.hero.h1_line2_emph}
           </span>
         </h1>
 
         <div
           data-hero="rule"
-          className="mt-4 flex items-center justify-center gap-3 font-mono text-[10px] uppercase tracking-[0.28em] text-fg/35"
+          className="mt-6 flex items-center justify-center gap-3 font-jp text-[11px] tracking-[0.25em] text-white/45"
         >
-          <span className="h-px w-8 bg-fg/20" />
-          <span>{t.hero.rule_jp}</span>
-          <span className="h-px w-8 bg-fg/20" />
+          {t.hero.rule_jp}
         </div>
 
         <p
           data-hero="paragraph"
-          className="mx-auto mt-8 max-w-lg text-pretty text-sm leading-relaxed text-muted md:text-base"
+          className="mx-auto mt-8 max-w-md text-pretty text-[15px] leading-relaxed text-white/75 md:text-base"
         >
           {t.hero.paragraph}
         </p>
 
         <div
           data-hero="ctas"
-          className="mt-12 flex flex-col items-center gap-3 sm:flex-row"
+          className="mt-12 flex flex-col items-center gap-4 sm:flex-row"
         >
           <a
             href="#solutions"
-            className="group inline-flex items-center gap-3 whitespace-nowrap bg-fg px-5 py-3 font-mono text-[10.5px] uppercase tracking-[0.22em] text-bg transition hover:bg-orange-400 cut-corner-sm"
+            className="inline-flex items-center gap-2.5 whitespace-nowrap rounded-full bg-orange-500 px-7 py-3.5 text-[13px] font-bold tracking-[0.03em] text-white shadow-lg shadow-orange-500/25 transition hover:bg-orange-400"
           >
-            <span className="text-orange-500 group-hover:text-bg">[</span>
             {t.hero.cta_primary}
-            <span className="text-orange-500 group-hover:text-bg">]</span>
-            <ArrowRight className="h-3 w-3" />
+            <ArrowRight className="h-3.5 w-3.5" />
           </a>
           <a
             href="#technology"
-            className="inline-flex items-center gap-2 whitespace-nowrap border border-fg/20 bg-fg/[0.04] px-5 py-3 font-mono text-[10.5px] uppercase tracking-[0.22em] text-fg backdrop-blur-md transition hover:border-orange-400/60 hover:text-orange-400"
+            className="group inline-flex items-center gap-2.5 whitespace-nowrap px-2 py-3 text-[13px] font-medium tracking-[0.04em] text-white/80 transition hover:text-white"
           >
             {t.hero.cta_secondary}
-            <ArrowRight className="h-3 w-3" />
+            <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
           </a>
-        </div>
-
-        <div
-          data-hero="ticker"
-          className="mt-16 grid grid-cols-2 gap-x-10 gap-y-3 font-mono text-[10px] uppercase tracking-[0.22em] text-fg/35 md:grid-cols-4"
-        >
-          {t.hero.ticker.map((item) => (
-            <div key={item.k} className="text-left">
-              <div className="text-fg/60">{item.k}</div>
-              <div>{item.v}</div>
-            </div>
-          ))}
         </div>
       </div>
 
       <a
         data-hero="scroll"
         href="#mission"
-        className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 text-center"
+        className="absolute bottom-7 left-1/2 z-10 -translate-x-1/2 text-center"
       >
-        <div className="font-mono text-[10px] uppercase tracking-[0.4em] text-fg/40">
+        <div className="font-jp text-[10px] tracking-[0.35em] text-white/40">
           {t.hero.scroll}
         </div>
-        <ArrowDown className="bob mx-auto mt-2 h-4 w-4 text-fg/70" />
+        <ArrowDown className="bob mx-auto mt-2 h-4 w-4 text-white/70" />
       </a>
     </section>
   );

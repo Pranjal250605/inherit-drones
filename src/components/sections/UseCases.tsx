@@ -1,160 +1,117 @@
-import {
-  BracketTitle,
-  CornerBrackets,
-  Dot,
-  Mono,
-  SectionFrame,
-  Tag,
-} from "../primitives";
+import { ArrowRight, SectionFrame, SectionLabel } from "../primitives";
 import { useT, type Dict } from "../../i18n";
 import droneSpraying from "../../assets/drone-spraying.jpg";
 import hiroshimaAerial from "../../assets/hiroshima-aerial.jpg";
 
 type CaseStudy = Dict["field"]["cases"][number];
 
+const IMAGES: Record<number, string> = {
+  0: droneSpraying,
+  2: hiroshimaAerial,
+};
+
 export function UseCases() {
   const { t } = useT();
   const cases = t.field.cases;
-  const first = cases[0];
-  const second = cases[1];
-  const third = cases[2];
 
   return (
-    <SectionFrame id="field" className="bg-bg py-24 md:py-32">
-      <div className="mx-auto max-w-[1500px] px-6 lg:px-10">
-        <header className="flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between">
-          <div>
-            <Tag>{t.field.tag}</Tag>
+    <SectionFrame id="field" className="overflow-hidden bg-bg py-24 md:py-32">
+      <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12">
+        <header className="flex flex-col items-start gap-8 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-3xl">
+            <SectionLabel>{t.field.tag}</SectionLabel>
             <h2
               data-anim="title-up"
-              className="mt-8 font-display text-3xl font-light leading-[1.15] tracking-[-0.015em] md:text-4xl"
+              className="mt-6 font-display text-4xl font-bold leading-[1.04] tracking-[-0.03em] text-fg md:text-6xl"
             >
               {t.field.h2_pre}
-              <span className="italic text-orange-400">{t.field.h2_emph}</span>
+              {t.field.h2_emph}
               {t.field.h2_post}
             </h2>
-            <div className="mt-5 font-jp text-[11px] tracking-[0.05em] text-fg/30">
+            <div className="mt-5 font-jp text-[12px] tracking-[0.08em] text-fg/50">
               {t.field.subtitle_jp}
             </div>
           </div>
           <a
             href="#contact"
-            className="whitespace-nowrap font-mono text-[10.5px] uppercase tracking-[0.22em] text-fg/60 hover:text-orange-400"
+            className="group inline-flex items-center gap-3 whitespace-nowrap text-[12px] font-bold uppercase tracking-[0.18em] text-fg/80 transition-colors hover:text-orange-500"
           >
             {t.field.cta}
+            <span className="grid h-8 w-8 place-items-center rounded-full bg-orange-500 text-white transition group-hover:bg-orange-400">
+              <ArrowRight className="h-3.5 w-3.5" />
+            </span>
           </a>
         </header>
 
-        <div data-anim="card-stagger" className="mt-14 grid grid-cols-12 gap-6">
-          {first && (
-            <div data-anim-item className="col-span-12 md:col-span-7">
-              <FieldCard c={first} large imgSrc={droneSpraying} imgLabel={t.field.img_label} recLabel={t.field.rec_label} openLabel={t.field.open} />
+        <div data-anim="card-stagger" className="mt-16 flex flex-col gap-20 md:mt-20">
+          {cases.map((c, i) => (
+            <div key={c.code} data-anim-item>
+              <FieldCase c={c} imgSrc={IMAGES[i]} flip={i % 2 === 1} lead={i === 0} />
             </div>
-          )}
-          <div data-anim-item className="col-span-12 flex flex-col gap-6 md:col-span-5">
-            {second && (
-              <FieldCard c={second} imgLabel={t.field.img_label} recLabel={t.field.rec_label} openLabel={t.field.open} />
-            )}
-            {third && (
-              <FieldCard c={third} imgSrc={hiroshimaAerial} imgLabel={t.field.img_label} recLabel={t.field.rec_label} openLabel={t.field.open} />
-            )}
-          </div>
+          ))}
         </div>
       </div>
     </SectionFrame>
   );
 }
 
-function FieldCard({
+function FieldCase({
   c,
-  large = false,
-  className = "",
   imgSrc,
-  imgLabel,
-  recLabel,
-  openLabel,
+  flip = false,
+  lead = false,
 }: {
   c: CaseStudy;
-  large?: boolean;
-  className?: string;
   imgSrc?: string;
-  imgLabel: string;
-  recLabel: string;
-  openLabel: string;
+  flip?: boolean;
+  lead?: boolean;
 }) {
   return (
-    <article
-      className={
-        "group relative overflow-hidden border border-fg/10 bg-gradient-to-b from-fg/[0.03] to-transparent p-8 transition hover:border-orange-400/50 " +
-        className
-      }
-    >
-      <CornerBrackets />
-
-      <div
-        data-anim="img-reveal"
+    <article className="grid grid-cols-1 items-center gap-10 md:grid-cols-12 md:gap-16">
+      <figure
         className={
-          "relative overflow-hidden border border-fg/10 bg-[radial-gradient(circle_at_30%_30%,rgba(249,115,22,0.10),transparent_60%)] " +
-          (large ? "aspect-[16/9]" : "aspect-[16/8]")
+          "md:col-span-7 " + (flip ? "md:order-2" : "md:order-1")
         }
       >
-        {imgSrc ? (
-          <>
+        <div className="relative aspect-[16/9] overflow-hidden rounded-2xl shadow-md">
+          {imgSrc ? (
             <img
+              data-anim={lead ? "parallax" : undefined}
+              data-speed={lead ? "0.12" : undefined}
               src={imgSrc}
               alt={c.title}
-              className="absolute inset-0 h-full w-full object-cover"
+              className="absolute inset-0 h-[120%] w-full -translate-y-[10%] scale-105 object-cover"
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/0 to-black/45" />
-          </>
-        ) : (
-          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.04)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.04)_50%,rgba(255,255,255,0.04)_75%,transparent_75%)] bg-[length:14px_14px]" />
-        )}
-        <div className="absolute left-3 top-3 font-mono text-[10px] uppercase tracking-[0.22em] text-fg/70 mix-blend-difference">
-          {imgLabel} / {c.code} · {c.tag.toUpperCase()}
+          ) : (
+            <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(0,0,0,0.04)_25%,transparent_25%,transparent_50%,rgba(0,0,0,0.04)_50%,rgba(0,0,0,0.04)_75%,transparent_75%)] bg-[length:16px_16px]" />
+          )}
         </div>
-        <div className="absolute bottom-3 right-3 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-orange-400">
-          <Dot /> {recLabel}
-        </div>
-        <div className="absolute bottom-3 left-3 font-mono text-[10px] uppercase tracking-[0.22em] text-fg/70 mix-blend-difference">
-          {c.coords}
-        </div>
-      </div>
+      </figure>
 
-      <div className="mt-6 flex items-center gap-3">
-        <Mono className="text-orange-400/80">{c.code}</Mono>
-        <span className="h-px flex-1 bg-fg/10" />
-        <Mono>{c.tag}</Mono>
-      </div>
-
-      <h3
+      <div
         className={
-          "mt-4 font-display font-light leading-[1.15] tracking-[-0.01em] " +
-          (large ? "text-2xl" : "text-xl")
+          "md:col-span-5 " + (flip ? "md:order-1" : "md:order-2")
         }
       >
-        <BracketTitle>{c.title}</BracketTitle>
-      </h3>
-      <p className="mt-4 text-pretty text-sm leading-loose text-muted">{c.body}</p>
+        <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-orange-500">
+          {c.tag}
+        </div>
+        <h3 className="mt-4 font-display text-2xl font-bold leading-[1.08] tracking-[-0.02em] text-fg md:text-3xl">
+          {c.title}
+        </h3>
+        <p className="mt-5 max-w-md text-pretty text-[15px] leading-relaxed text-muted md:text-base">
+          {c.body}
+        </p>
 
-      <div className="mt-6 flex items-end justify-between border-t border-fg/10 pt-5">
-        <div>
-          <div
-            className={
-              "font-mono font-light leading-none text-fg " +
-              (large ? "text-3xl" : "text-2xl")
-            }
-          >
+        <div className="mt-8 border-t-2 border-orange-500/70 pt-6">
+          <div className="font-display text-3xl font-bold leading-none tracking-[-0.02em] text-fg md:text-4xl">
             {c.stat_value}
           </div>
-          <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.22em] text-fg/40">
+          <div className="mt-3 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-fg/55">
             {c.stat_label}
           </div>
         </div>
-        <span className="whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.22em] text-fg/40 group-hover:text-orange-500">
-          {openLabel} →
-        </span>
       </div>
     </article>
   );

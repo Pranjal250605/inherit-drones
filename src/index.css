@@ -88,12 +88,15 @@
      orange-500 utilities), so the accent never shifts between
      themes — only the surface + text colors do.
   ============================================================ */
+  /* Fujitaka palette: white raised plane, warm-paper page plane, near-black
+     charcoal text (neutral, not slate-blue), warm muted gray. Accent stays the
+     Inherit orange — close to Fujitaka's amber, kept for brand identity. */
   --bg:       255 255 255; /* #ffffff — card / raised plane */
-  --bg-alt:   244 243 238; /* #f4f3ee — warm engineering paper, page plane */
-  --fg:       15  23  42;  /* slate-900 — body text (not pure black; softer) */
-  --muted:    71  85  105; /* slate-600 — denser for readability on light */
-  --accent:   249 115 22;  /* orange-500 — same as dark */
-  --grid-line: 15 23 42;   /* slate-900 — subtle ink grid */
+  --bg-alt:   247 244 239; /* #f7f4ef — bright warm paper, page plane */
+  --fg:       23  23  23;  /* #171717 — dense charcoal body text */
+  --muted:    92  88  82;  /* #5c5852 — warm muted gray, denser for punch */
+  --accent:   249 115 22;  /* orange-500 — brand accent */
+  --grid-line: 26 26 26;   /* charcoal — subtle ink grid */
   --grid-line-alpha: 0.04;
   --selection-bg: #67e8f9;
   --selection-fg: #05070b;
@@ -125,6 +128,31 @@
   }
   .text-pretty {
     text-wrap: pretty;
+  }
+
+  /* Fujitaka diagonal band — slanted top + bottom edge on full-bleed panels.
+     Content inside needs vertical padding ≥ --diag so it never clips. */
+  .diag-band {
+    clip-path: polygon(
+      0 var(--diag, 3rem),
+      100% 0,
+      100% calc(100% - var(--diag, 3rem)),
+      0 100%
+    );
+  }
+  /* Slanted top edge only (section flows up into a diagonal). */
+  .diag-top {
+    clip-path: polygon(0 var(--diag, 3rem), 100% 0, 100% 100%, 0 100%);
+  }
+
+  /* Soft card lift on hover — the bright, tactile Fujitaka card feel. */
+  .card-lift {
+    transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1),
+      box-shadow 0.4s cubic-bezier(0.22, 0.61, 0.36, 1),
+      border-color 0.3s;
+  }
+  .card-lift:hover {
+    transform: translateY(-5px);
   }
 
   /* Chamfered (cut) corners — machined hardware feel */
@@ -252,6 +280,20 @@
     transform: scaleY(0);
     transform-origin: top;
   }
+  /* Masked reveal: clipped from the bottom until GSAP retracts the mask */
+  [data-anim="reveal"] {
+    clip-path: inset(100% 0 0 0);
+  }
+  /* Word reveal: each word sits below its mask line until lifted in */
+  [data-word] {
+    display: inline-block;
+    transform: translateY(110%);
+  }
+  [data-anim="words"] [data-word-wrap] {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+  }
   [data-hero="tag"],
   [data-hero="title"] > span,
   [data-hero="rule"],
@@ -273,6 +315,12 @@
   }
   .no-anim [data-anim="spine"] {
     transform: scaleY(1) !important;
+  }
+  .no-anim [data-anim="reveal"] {
+    clip-path: none !important;
+  }
+  .no-anim [data-word] {
+    transform: none !important;
   }
 }
 

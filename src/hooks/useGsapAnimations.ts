@@ -124,14 +124,14 @@ export function useGsapAnimations(): void {
         .forEach((el) => {
           gsap.fromTo(
             el,
-            { y: 36, filter: "blur(8px)" },
+            { y: 44, filter: "blur(10px)" },
             {
               opacity: 1,
               y: 0,
               filter: "blur(0px)",
-              duration: 1.1,
-              ease: "power3.out",
-              scrollTrigger: { trigger: el, start: "top 85%" },
+              duration: 1.4,
+              ease: "power4.out",
+              scrollTrigger: { trigger: el, start: "top 86%" },
             }
           );
         });
@@ -300,23 +300,80 @@ export function useGsapAnimations(): void {
         .forEach((parent) => {
           const items = parent.querySelectorAll<HTMLElement>("[data-anim-item]");
           if (!items.length) return;
-          parent.style.perspective = "1400px";
+          parent.style.perspective = "1600px";
           gsap.fromTo(
             items,
-            { y: 60, rotateX: 12, rotateY: -6, filter: "blur(4px)" },
+            { y: 56, rotateX: 7, rotateY: -3, filter: "blur(5px)" },
             {
               opacity: 1,
               y: 0,
               rotateX: 0,
               rotateY: 0,
               filter: "blur(0px)",
-              duration: 1.1,
-              ease: "power3.out",
-              stagger: 0.12,
-              scrollTrigger: { trigger: parent, start: "top 80%" },
+              duration: 1.3,
+              ease: "power4.out",
+              stagger: 0.14,
+              scrollTrigger: { trigger: parent, start: "top 82%" },
             }
           );
         });
+
+      /* ===== PARALLAX (scrubbed, subtle vertical drift) =====
+         Put on an oversized element (e.g. an <img> with scale-110) inside an
+         overflow-hidden wrapper. data-speed tunes intensity (default 0.12). */
+      gsap.utils.toArray<HTMLElement>('[data-anim="parallax"]').forEach((el) => {
+        const speed = parseFloat(el.dataset.speed || "0.12");
+        gsap.fromTo(
+          el,
+          { yPercent: -speed * 100 },
+          {
+            yPercent: speed * 100,
+            ease: "none",
+            scrollTrigger: {
+              trigger: el,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      });
+
+      /* ===== MASKED REVEAL (clip-path wipe upward) =====
+         For large media / display type. Content is clipped from the bottom,
+         then the mask retracts as the element scrolls into view. */
+      gsap.utils.toArray<HTMLElement>('[data-anim="reveal"]').forEach((el) => {
+        gsap.fromTo(
+          el,
+          { clipPath: "inset(100% 0 0 0)", y: 28 },
+          {
+            clipPath: "inset(0% 0 0 0)",
+            y: 0,
+            duration: 1.3,
+            ease: "power4.out",
+            scrollTrigger: { trigger: el, start: "top 88%" },
+          }
+        );
+      });
+
+      /* ===== WORD-BY-WORD HEADLINE REVEAL =====
+         Splits a heading's [data-word] spans and lifts them in sequence —
+         a refined, Fujitaka-style display reveal. */
+      gsap.utils.toArray<HTMLElement>('[data-anim="words"]').forEach((el) => {
+        const words = el.querySelectorAll<HTMLElement>("[data-word]");
+        if (!words.length) return;
+        gsap.fromTo(
+          words,
+          { yPercent: 110 },
+          {
+            yPercent: 0,
+            duration: 1.0,
+            ease: "power4.out",
+            stagger: 0.08,
+            scrollTrigger: { trigger: el, start: "top 85%" },
+          }
+        );
+      });
 
       /* ===== HEADER SCROLL-VELOCITY KICK =====
          When the user scrolls fast, the logo lockup gets a quick skewY pulse

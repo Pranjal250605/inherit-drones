@@ -2,6 +2,8 @@ import { useGsapAnimations } from "./hooks/useGsapAnimations";
 import { Header } from "./components/sections/Header";
 import { Hero } from "./components/sections/Hero";
 import { TrustStrip } from "./components/sections/TrustStrip";
+import { Promo } from "./components/sections/Promo";
+import { News } from "./components/sections/News";
 import { Mission } from "./components/sections/Mission";
 import { Solutions } from "./components/sections/Solutions";
 import { Process } from "./components/sections/Process";
@@ -9,6 +11,7 @@ import { Technology } from "./components/sections/Technology";
 import { UseCases } from "./components/sections/UseCases";
 import { Stats } from "./components/sections/Stats";
 import { Testimonial } from "./components/sections/Testimonial";
+import { Instagram } from "./components/sections/Instagram";
 import { FAQ } from "./components/sections/FAQ";
 import { Contact } from "./components/sections/Contact";
 import { Footer } from "./components/sections/Footer";
@@ -28,7 +31,9 @@ export default function App() {
       <Header />
       <main>
         <Hero />
+        <Promo />
         <TrustStrip />
+        <News />
         <Mission />
         <Solutions />
         <Process />
@@ -36,6 +41,7 @@ export default function App() {
         <UseCases />
         <Stats />
         <Testimonial />
+        <Instagram />
         <FAQ />
         <Contact />
       </main>
