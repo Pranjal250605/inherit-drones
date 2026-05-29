@@ -33,7 +33,14 @@ const ICONS: ReactNode[] = [
   </svg>,
 ];
 
-const TONES = ["bg-[#F15A29]", "bg-[#E08410]"];
+type Tone = { base: string; flood: string; arrow: string };
+
+/* Fujitaka product-card palette: a bright base that floods to a deeper shade
+   on hover, with the corner arrow flipping to white + base-colored glyph. */
+const TONES: Tone[] = [
+  { base: "bg-[#FF6133]", flood: "bg-[#FF3717]", arrow: "group-hover:text-[#FF3717]" },
+  { base: "bg-[#DE8500]", flood: "bg-[#D36F00]", arrow: "group-hover:text-[#D36F00]" },
+];
 
 export function Promo() {
   const { t } = useT();
@@ -64,41 +71,58 @@ function PromoBanner({
 }: {
   item: PromoItem;
   icon: ReactNode;
-  tone: string;
+  tone: Tone;
 }) {
   return (
     <a
       href={item.href}
       className={
-        "group card-lift relative flex min-h-[210px] flex-col justify-between overflow-hidden rounded-2xl p-8 text-white shadow-xl shadow-black/10 hover:shadow-2xl md:p-10 " +
-        tone
+        "group relative flex min-h-[220px] flex-col overflow-hidden rounded-2xl text-white shadow-xl shadow-black/10 transition-shadow duration-500 hover:shadow-2xl " +
+        tone.base
       }
     >
-      <div className="flex items-center justify-between">
-        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-white/40 p-2.5 text-white">
-          {icon}
-        </span>
-        <span className="text-[10.5px] font-bold uppercase tracking-[0.22em] text-white/80">
-          {item.kind}
-        </span>
-      </div>
+      {/* Ink-flood: a circle anchored behind the corner arrow that scales up to
+          wash the whole card in the deeper shade — Fujitaka's signature hover. */}
+      <span
+        aria-hidden="true"
+        className={
+          "pointer-events-none absolute bottom-7 right-7 h-16 w-16 scale-0 rounded-full transition-transform duration-[650ms] ease-[cubic-bezier(.4,0,.2,1)] group-hover:scale-[26] " +
+          tone.flood
+        }
+      />
 
-      <div className="mt-8">
-        <h3 className="font-display text-2xl font-bold leading-[1.15] tracking-[-0.01em] md:text-3xl">
-          {item.title}
-        </h3>
-        <div className="mt-3 text-[13px] font-medium tracking-[0.02em] text-white/85">
-          {item.schedule}
+      <div className="relative z-10 flex flex-1 flex-col justify-between p-8 md:p-10">
+        <div className="flex items-center justify-between">
+          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-white/40 p-2.5 text-white transition-transform duration-500 group-hover:scale-110">
+            {icon}
+          </span>
+          <span className="text-[10.5px] font-bold uppercase tracking-[0.22em] text-white/80">
+            {item.kind}
+          </span>
         </div>
-      </div>
 
-      <div className="mt-6 flex items-center justify-between">
-        <span className="text-[13px] font-semibold tracking-[0.02em]">
-          {item.cta}
-        </span>
-        <span className="grid h-10 w-10 place-items-center rounded-full bg-white/15 transition group-hover:bg-white/25">
-          <ArrowRight className="h-4 w-4" />
-        </span>
+        <div className="mt-8">
+          <h3 className="font-display text-2xl font-bold leading-[1.15] tracking-[-0.01em] md:text-3xl">
+            {item.title}
+          </h3>
+          <div className="mt-3 text-[13px] font-medium tracking-[0.02em] text-white/85">
+            {item.schedule}
+          </div>
+        </div>
+
+        <div className="mt-6 flex items-center justify-between">
+          <span className="text-[13px] font-semibold tracking-[0.02em]">
+            {item.cta}
+          </span>
+          <span className="grid h-11 w-11 place-items-center rounded-full bg-white/15 text-white transition-colors duration-500 group-hover:bg-white">
+            <ArrowRight
+              className={
+                "h-4 w-4 transition-transform duration-500 group-hover:translate-x-0.5 " +
+                tone.arrow
+              }
+            />
+          </span>
+        </div>
       </div>
     </a>
   );
