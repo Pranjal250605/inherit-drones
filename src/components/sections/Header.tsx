@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { LanguageSwitcher } from "../LanguageSwitcher";
-import { ThemeSwitcher } from "../ThemeSwitcher";
 import { useT } from "../../i18n";
 
 export function Header() {
@@ -54,12 +52,10 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-4 md:flex">
-          <LanguageSwitcher variant="compact" />
-          <ThemeSwitcher variant="compact" />
+        <div className="hidden items-center md:flex">
           <a
             href="#contact"
-            className="ml-1 inline-flex items-center rounded-full bg-orange-500 px-5 py-2 text-[12px] font-bold tracking-[0.03em] text-white transition hover:bg-orange-400"
+            className="inline-flex items-center rounded-full bg-orange-500 px-5 py-2 text-[12px] font-bold tracking-[0.03em] text-white transition hover:bg-orange-400"
           >
             {t.header.cta}
           </a>
@@ -96,7 +92,7 @@ export function Header() {
                 {item.label}
               </a>
             ))}
-            <div className="mt-4 flex flex-wrap items-center justify-between gap-3 pb-2">
+            <div className="mt-4 pb-2">
               <a
                 href="#contact"
                 onClick={() => setMobileOpen(false)}
@@ -104,10 +100,6 @@ export function Header() {
               >
                 {t.header.cta}
               </a>
-              <div className="flex items-center gap-3 text-fg">
-                <LanguageSwitcher />
-                <ThemeSwitcher />
-              </div>
             </div>
           </nav>
         </div>

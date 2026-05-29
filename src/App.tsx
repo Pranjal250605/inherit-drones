@@ -15,6 +15,7 @@ import { Instagram } from "./components/sections/Instagram";
 import { FAQ } from "./components/sections/FAQ";
 import { Contact } from "./components/sections/Contact";
 import { Footer } from "./components/sections/Footer";
+import { SettingsDock } from "./components/SettingsDock";
 
 export default function App() {
   useGsapAnimations();
@@ -46,6 +47,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <SettingsDock />
     </div>
   );
 }
