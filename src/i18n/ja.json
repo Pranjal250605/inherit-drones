@@ -162,6 +162,8 @@
     "h2_line3": "自律スタック。",
     "subtitle_jp": "提供サービス · 自律飛行スタック",
     "lead": "ひとつの機体、ひとつの地上局。三つのサービスを、連携しても単独でも。",
+    "center_a": "INHERIT",
+    "center_b": "スタック",
     "stat_pillars": "柱",
     "stat_active": "稼働",
     "card_status": "稼働中 · 正常",
@@ -172,6 +174,7 @@
         "code": "S.01",
         "jp": "Logistics",
         "title": "物流・配送",
+        "short": "物流",
         "desc": "瀬戸内の島々をまたぐ、目視外（BVLOS）貨物配送。",
         "metrics": [["積載量","8.0 KG"],["航続","60 KM"],["所要","≤15 分"]],
         "hidden": "ROUTE.SETOUCHI-04 · 28 拠点 · 4200 飛行"
@@ -181,6 +184,7 @@
         "code": "S.02",
         "jp": "Inspection",
         "title": "インフラ点検",
+        "short": "点検",
         "desc": "ミリ単位の異常検知 — 高所に人を上げません。",
         "metrics": [["解像度","0.4 MM"],["センサー","RGB+IR+LIDAR"]],
         "hidden": "AUDIT.CHUGOKU-T · 1180 KM · 312 検出"
@@ -190,6 +194,7 @@
         "code": "S.03",
         "jp": "Survey",
         "title": "空撮・測量",
+        "short": "測量",
         "desc": "写真測量と3D点群を、24時間以内に。",
         "metrics": [["精度","± 2 CM"],["納期","24 時間"]],
         "hidden": "SURVEY.COASTLINE-H · 64 KM · Q4 2026"

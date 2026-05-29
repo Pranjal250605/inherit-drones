@@ -162,6 +162,8 @@
     "h2_line3": "autonomous stack.",
     "subtitle_jp": "提供サービス · 自律飛行スタック",
     "lead": "One airframe, one ground station. Three services — together or alone.",
+    "center_a": "INHERIT",
+    "center_b": "Stack",
     "stat_pillars": "Pillars",
     "stat_active": "Active",
     "card_status": "ACTIVE · NOMINAL",
@@ -172,6 +174,7 @@
         "code": "S.01",
         "jp": "物流・配送",
         "title": "Logistics & Delivery",
+        "short": "Logistics",
         "desc": "BVLOS cargo delivery across the Setouchi islands.",
         "metrics": [["PAYLOAD","8.0 KG"],["RANGE","60 KM"],["WINDOW","≤15 MIN"]],
         "hidden": "ROUTE.SETOUCHI-04 · 28 NODES · 4200 SORTIES"
@@ -181,6 +184,7 @@
         "code": "S.02",
         "jp": "インフラ点検",
         "title": "Infrastructure Inspection",
+        "short": "Inspection",
         "desc": "Millimetre-grade fault detection — no human at altitude.",
         "metrics": [["RESOLUTION","0.4 MM"],["SENSORS","RGB+IR+LIDAR"]],
         "hidden": "AUDIT.CHUGOKU-T · 1180 KM · 312 FLAGS"
@@ -190,6 +194,7 @@
         "code": "S.03",
         "jp": "空撮・測量",
         "title": "Aerial Survey & Data",
+        "short": "Survey",
         "desc": "Photogrammetry and 3D point clouds within 24 hours.",
         "metrics": [["ACCURACY","± 2 CM"],["DELIVERY","24 H"]],
         "hidden": "SURVEY.COASTLINE-H · 64 KM · Q4 2026"

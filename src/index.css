@@ -144,6 +144,10 @@
   .diag-top {
     clip-path: polygon(0 var(--diag, 3rem), 100% 0, 100% 100%, 0 100%);
   }
+  /* Slanted bottom edge only (section tapers into a diagonal below). */
+  .diag-bottom {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--diag, 3rem)), 0 100%);
+  }
 
   /* Soft card lift on hover — the bright, tactile Fujitaka card feel. */
   .card-lift {

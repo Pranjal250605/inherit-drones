@@ -21,11 +21,17 @@ export function Mono({ children, className = "" }: WithChildren) {
 
 /** Fujitaka signature: four orange forward-slash ticks "////" used as a
     section eyebrow. Punchy, brand-colored, sits above the heading. */
-export function TickMark({ className = "h-3" }: { className?: string }) {
+export function TickMark({
+  className = "h-3",
+  colorClass = "text-orange-500",
+}: {
+  className?: string;
+  colorClass?: string;
+}) {
   return (
     <svg
       viewBox="0 0 40 12"
-      className={"w-auto text-orange-500 " + className}
+      className={"w-auto " + colorClass + " " + className}
       fill="currentColor"
       aria-hidden="true"
     >

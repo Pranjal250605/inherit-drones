@@ -1,86 +1,147 @@
 import type { ReactNode } from "react";
-import { RoundArrow, SectionFrame, SectionLabel } from "../primitives";
+import { ArrowRight, SectionFrame, TickMark } from "../primitives";
 import { useT, type Dict } from "../../i18n";
 
 type SolutionCardData = Dict["solutions"]["cards"][number];
 
-const ICONS: ReactNode[] = [
-  <svg
-    key="logistics"
-    viewBox="0 0 48 48"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1"
-    className="h-full w-full"
-  >
-    <path d="M8 18l16-8 16 8-16 8L8 18z" />
-    <path d="M8 18v12l16 8 16-8V18" />
-    <path d="M24 26v12" />
-    <path d="M16 14l16 8" />
+/* Node positions on the ring (centres, as % of the square container).
+   Equilateral triangle: apex at top, base across the bottom. */
+const NODE_POS = [
+  { top: "13%", left: "50%" },
+  { top: "68.5%", left: "18%" },
+  { top: "68.5%", left: "82%" },
+];
+
+const LINK_ICONS: ReactNode[] = [
+  // technology
+  <svg key="t" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.25" className="h-full w-full">
+    <rect x="10" y="10" width="12" height="12" rx="1" />
+    <path d="M13 6v4M19 6v4M13 22v4M19 22v4M6 13h4M6 19h4M22 13h4M22 19h4" />
   </svg>,
-  <svg
-    key="inspect"
-    viewBox="0 0 48 48"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1"
-    className="h-full w-full"
-  >
-    <circle cx="24" cy="24" r="10" />
-    <circle cx="24" cy="24" r="3" />
-    <path d="M24 4v6M24 38v6M4 24h6M38 24h6" />
-    <path d="M10 10l4 4M34 34l4 4M38 10l-4 4M14 34l-4 4" />
+  // operations
+  <svg key="o" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.25" className="h-full w-full">
+    <circle cx="7" cy="16" r="3" />
+    <circle cx="25" cy="8" r="3" />
+    <circle cx="25" cy="24" r="3" />
+    <path d="M10 15l12-6M10 17l12 6" />
   </svg>,
-  <svg
-    key="survey"
-    viewBox="0 0 48 48"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1"
-    className="h-full w-full"
-  >
-    <path d="M4 38l12-14 8 8 12-16 8 10" />
-    <path d="M4 38h40" />
-    <circle cx="36" cy="14" r="2" />
+  // field
+  <svg key="f" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.25" className="h-full w-full">
+    <path d="M16 28s9-8.5 9-15a9 9 0 10-18 0c0 6.5 9 15 9 15z" />
+    <circle cx="16" cy="13" r="3" />
+  </svg>,
+  // contact
+  <svg key="c" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.25" className="h-full w-full">
+    <rect x="5" y="8" width="22" height="16" rx="1.5" />
+    <path d="M6 9l10 8 10-8" />
   </svg>,
 ];
 
 export function Solutions() {
   const { t } = useT();
-  const cards = t.solutions.cards;
+  const s = t.solutions;
+  const cards = s.cards;
+  const links = [
+    { label: t.header.nav.technology, href: "#technology" },
+    { label: t.header.nav.operations, href: "#process" },
+    { label: t.header.nav.field, href: "#field" },
+    { label: t.header.nav.contact, href: "#contact" },
+  ];
 
   return (
-    <SectionFrame id="solutions" className="bg-bg-alt py-24 md:py-32">
+    <SectionFrame
+      id="solutions"
+      className="diag-bottom relative overflow-hidden bg-gradient-to-br from-[#F2861A] via-[#E9810F] to-[#DB780C] py-24 text-white [--diag:3.5rem] md:py-32"
+    >
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-        <div className="grid grid-cols-12 gap-10 lg:gap-16">
-          <div className="col-span-12 lg:col-span-5">
-            <div className="lg:sticky lg:top-32">
-              <SectionLabel>{t.solutions.tag}</SectionLabel>
-              <h2
-                data-anim="title-up"
-                className="mt-6 font-display text-4xl font-bold leading-[1.04] tracking-[-0.03em] md:text-6xl"
-              >
-                {t.solutions.h2_line1} {t.solutions.h2_emph}
-                {t.solutions.h2_line2_post} {t.solutions.h2_line3}
-              </h2>
-              <div className="mt-5 font-jp text-[12px] tracking-[0.08em] text-fg/50">
-                {t.solutions.subtitle_jp}
-              </div>
-              <p className="mt-8 max-w-sm text-pretty text-[15px] leading-relaxed text-muted">
-                {t.solutions.lead}
-              </p>
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
+          {/* LEFT — heading + numbered cards */}
+          <div>
+            <div className="flex items-center gap-3">
+              <TickMark colorClass="text-white" />
+              <span className="text-[12px] font-bold uppercase tracking-[0.22em] text-white/90">
+                {s.tag.includes(" / ") ? s.tag.split(" / ")[1] : s.tag}
+              </span>
             </div>
-          </div>
 
-          <div className="col-span-12 lg:col-span-7">
-            <div data-anim="stagger" className="flex flex-col">
+            <h2
+              data-anim="title-up"
+              className="mt-6 max-w-xl font-display text-4xl font-bold leading-[1.04] tracking-[-0.03em] md:text-6xl"
+            >
+              {s.h2_line1} {s.h2_emph}
+              {s.h2_line2_post} {s.h2_line3}
+            </h2>
+            <p className="mt-6 max-w-md text-pretty text-[15px] leading-relaxed text-white/85">
+              {s.lead}
+            </p>
+
+            <div data-anim="stagger" className="mt-10 flex flex-col gap-4">
               {cards.map((c, i) => (
                 <div key={c.id} data-anim-item>
-                  <SolutionCard card={c} icon={ICONS[i]} />
+                  <SolutionCard card={c} index={i} cta={s.card_cta} />
                 </div>
               ))}
             </div>
           </div>
+
+          {/* RIGHT — circular node diagram */}
+          <div data-anim="stagger" className="relative mx-auto aspect-square w-full max-w-[460px]">
+            {/* ring */}
+            <div className="absolute left-1/2 top-1/2 h-[74%] w-[74%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/45" />
+            {/* centre label */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center leading-none">
+              <div className="font-display text-xl font-bold tracking-[0.02em] md:text-2xl">
+                {s.center_a}
+              </div>
+              <div className="mt-1 font-display text-2xl font-bold tracking-[-0.01em] md:text-3xl">
+                {s.center_b}
+              </div>
+            </div>
+            {/* nodes */}
+            {cards.map((c, i) => (
+              <div
+                key={c.id}
+                data-anim-item
+                className="absolute -translate-x-1/2 -translate-y-1/2"
+                style={{ top: NODE_POS[i]?.top, left: NODE_POS[i]?.left }}
+              >
+                <div className="grid h-28 w-28 place-items-center rounded-full bg-[#FBF7F0] text-center shadow-lg shadow-black/10 md:h-32 md:w-32">
+                  <div>
+                    <div className="font-mono text-[11px] font-bold text-orange-500">
+                      {String(i + 1).padStart(2, "0")}
+                    </div>
+                    <div className="mt-1 px-2 font-display text-sm font-bold leading-tight text-fg md:text-base">
+                      {c.short}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* bottom icon-link row */}
+        <div className="mt-16 grid grid-cols-2 border-t border-white/20 sm:grid-cols-4 md:mt-20">
+          {links.map((l, i) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className={
+                "group flex flex-col items-center gap-3 px-4 py-8 text-center transition-colors " +
+                (i % 2 === 1 ? "border-l border-white/20 " : "") +
+                (i >= 2 ? "border-t border-white/20 sm:border-t-0 " : "") +
+                "sm:border-l sm:first:border-l-0"
+              }
+            >
+              <span className="h-9 w-9 text-white/90 transition-transform duration-300 group-hover:scale-110">
+                {LINK_ICONS[i]}
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-[13px] font-bold tracking-[0.04em]">
+                {l.label}
+                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+              </span>
+            </a>
+          ))}
         </div>
       </div>
     </SectionFrame>
@@ -89,40 +150,42 @@ export function Solutions() {
 
 function SolutionCard({
   card,
-  icon,
+  index,
+  cta,
 }: {
   card: SolutionCardData;
-  icon: ReactNode;
+  index: number;
+  cta: string;
 }) {
   return (
     <a
       href="#contact"
-      className="group block border-t-2 border-fg/10 py-10 transition-colors hover:border-orange-500"
+      className="card-lift group block rounded-xl bg-[#FBF7F0] p-5 text-fg shadow-md shadow-black/5 hover:shadow-xl md:p-6"
     >
-      <div className="flex items-start gap-6">
-        <div className="mt-1 h-10 w-10 shrink-0 text-orange-500 transition md:h-12 md:w-12">
-          {icon}
-        </div>
-        <div className="min-w-0 flex-1">
-          <h3 className="font-display text-2xl font-bold leading-[1.08] tracking-[-0.02em] transition group-hover:text-orange-500 md:text-3xl">
-            {card.title}
-          </h3>
-          <p className="mt-3 max-w-md text-pretty text-[15px] leading-relaxed text-muted">
-            {card.desc}
-          </p>
-
-          <div className="mt-6 flex flex-wrap items-center gap-x-10 gap-y-3">
-            {card.metrics.map(([k, v]) => (
-              <div key={k} className="flex items-baseline gap-2">
-                <span className="font-display text-lg font-bold text-fg">{v}</span>
-                <span className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-fg/50">
-                  {k}
-                </span>
-              </div>
-            ))}
-            <RoundArrow className="ml-auto" size="h-9 w-9" />
-          </div>
-        </div>
+      <div className="flex items-baseline gap-3">
+        <span className="font-mono text-sm font-bold text-orange-500">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <h3 className="font-display text-lg font-bold leading-tight tracking-[-0.01em] transition-colors group-hover:text-orange-500 md:text-xl">
+          {card.title}
+        </h3>
+      </div>
+      <p className="mt-2 text-[13.5px] leading-relaxed text-fg/70">
+        {card.desc}
+      </p>
+      <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-1.5">
+        {card.metrics.map(([k, v]) => (
+          <span key={k} className="inline-flex items-baseline gap-1.5">
+            <span className="font-mono text-[12px] font-bold text-fg">{v}</span>
+            <span className="font-mono text-[9.5px] font-medium uppercase tracking-[0.16em] text-fg/45">
+              {k}
+            </span>
+          </span>
+        ))}
+        <span className="ml-auto inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-[0.16em] text-orange-500 opacity-0 transition-opacity group-hover:opacity-100">
+          {cta}
+          <ArrowRight className="h-3 w-3" />
+        </span>
       </div>
     </a>
   );
