@@ -50,8 +50,8 @@ export function Hero() {
         style={{
           background:
             theme === "light"
-              ? "linear-gradient(to bottom, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.14) 32%, rgba(0,0,0,0.30) 52%, rgba(0,0,0,0.12) 74%, rgb(var(--page-bg)) 100%)"
-              : "linear-gradient(to bottom, rgb(var(--bg) / 0.58) 0%, rgb(var(--bg) / 0.20) 40%, rgb(var(--bg) / 0.34) 55%, rgb(var(--bg) / 0.18) 75%, rgb(var(--page-bg)) 100%)",
+              ? "linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.22) 55%, rgb(var(--page-bg)) 100%)"
+              : "linear-gradient(to bottom, rgb(var(--bg) / 0.6) 0%, rgb(var(--bg) / 0.28) 55%, rgb(var(--page-bg)) 100%)",
         }}
       />
 
