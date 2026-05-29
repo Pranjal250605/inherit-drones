@@ -10,7 +10,7 @@ export function Hero() {
     <section
       id="top"
       data-theme="dark"
-      className="relative isolate min-h-[100svh] overflow-hidden grain bg-bg text-fg"
+      className="relative isolate min-h-[100svh] overflow-hidden bg-bg text-fg"
     >
       <video
         data-hero="video"
@@ -97,7 +97,7 @@ export function Hero() {
         >
           <a
             href="#solutions"
-            className="inline-flex items-center gap-2.5 whitespace-nowrap rounded-full bg-orange-500 px-7 py-3.5 text-[13px] font-bold tracking-[0.03em] text-white shadow-lg shadow-orange-500/25 transition hover:bg-orange-400"
+            className="inline-flex items-center gap-2.5 whitespace-nowrap rounded-full bg-orange-500 px-7 py-3.5 text-[13px] font-bold tracking-[0.03em] text-white transition hover:bg-orange-400"
           >
             {t.hero.cta_primary}
             <ArrowRight className="h-3.5 w-3.5" />

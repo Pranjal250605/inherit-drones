@@ -21,16 +21,15 @@ export function useGsapAnimations(): void {
       heroTl
         .fromTo(
           '[data-hero="tag"]',
-          { y: 16, filter: "blur(6px)" },
-          { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.7 }
+          { y: 16 },
+          { opacity: 1, y: 0, duration: 0.7 }
         )
         .fromTo(
           '[data-hero="title"] > span',
-          { y: 50, filter: "blur(10px)" },
+          { y: 50 },
           {
             opacity: 1,
             y: 0,
-            filter: "blur(0px)",
             duration: 1.1,
             stagger: 0.14,
           },
@@ -118,17 +117,16 @@ export function useGsapAnimations(): void {
         );
       });
 
-      /* ===== TITLE REVEALS (blur + slide up) ===== */
+      /* ===== TITLE REVEALS (slide up) ===== */
       gsap.utils
         .toArray<HTMLElement>('[data-anim="title-up"]')
         .forEach((el) => {
           gsap.fromTo(
             el,
-            { y: 44, filter: "blur(10px)" },
+            { y: 44 },
             {
               opacity: 1,
               y: 0,
-              filter: "blur(0px)",
               duration: 1.4,
               ease: "power4.out",
               scrollTrigger: { trigger: el, start: "top 86%" },
@@ -143,11 +141,10 @@ export function useGsapAnimations(): void {
           const items = parent.querySelectorAll<HTMLElement>("[data-anim-item]");
           gsap.fromTo(
             items,
-            { y: 28, filter: "blur(6px)" },
+            { y: 28 },
             {
               opacity: 1,
               y: 0,
-              filter: "blur(0px)",
               duration: 0.9,
               ease: "power2.out",
               stagger: 0.1,
@@ -303,13 +300,12 @@ export function useGsapAnimations(): void {
           parent.style.perspective = "1600px";
           gsap.fromTo(
             items,
-            { y: 56, rotateX: 7, rotateY: -3, filter: "blur(5px)" },
+            { y: 56, rotateX: 7, rotateY: -3 },
             {
               opacity: 1,
               y: 0,
               rotateX: 0,
               rotateY: 0,
-              filter: "blur(0px)",
               duration: 1.3,
               ease: "power4.out",
               stagger: 0.14,
