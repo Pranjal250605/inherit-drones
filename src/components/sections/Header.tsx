@@ -27,7 +27,7 @@ export function Header() {
         "fixed inset-x-0 top-0 z-50 transition-colors duration-300 " +
         (scrolled || mobileOpen
           ? "backdrop-blur-xl bg-bg/80 border-b border-fg/10 text-fg shadow-sm"
-          : "border-b border-transparent bg-transparent text-white")
+          : "border-b border-transparent bg-transparent text-white [text-shadow:0_1px_10px_rgb(0_0_0/0.45)]")
       }
     >
       <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-6 lg:h-20 lg:px-12">
@@ -45,7 +45,7 @@ export function Header() {
             <a
               key={item.href}
               href={item.href}
-              className="text-[13px] font-semibold tracking-[0.02em] opacity-75 transition hover:text-orange-500 hover:opacity-100"
+              className="text-[14.5px] font-semibold tracking-[0.02em] opacity-95 transition hover:text-orange-500 hover:opacity-100"
             >
               {item.label}
             </a>
@@ -55,7 +55,7 @@ export function Header() {
         <div className="hidden items-center md:flex">
           <a
             href="#contact"
-            className="inline-flex items-center rounded-full bg-orange-500 px-5 py-2 text-[12px] font-bold tracking-[0.03em] text-white transition hover:bg-orange-400"
+            className="inline-flex items-center rounded-full bg-orange-500 px-5 py-2.5 text-[13px] font-bold tracking-[0.03em] text-white transition hover:bg-orange-400"
           >
             {t.header.cta}
           </a>
