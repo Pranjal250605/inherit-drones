@@ -114,7 +114,87 @@
   }
 }
 
+/* ============================================================
+   LENIS smooth-scroll support (see src/hooks/useLenis.ts)
+============================================================ */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+@layer base {
+  body {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01", "cv01";
+  }
+}
+
 @layer utilities {
+  /* ---- Glassmorphism ---------------------------------------------------
+     Frosted panels that adapt to the active theme (tokens), plus a white
+     variant for use over the orange brand panels. */
+  .glass {
+    background: rgb(var(--bg) / 0.55);
+    backdrop-filter: blur(18px) saturate(1.5);
+    -webkit-backdrop-filter: blur(18px) saturate(1.5);
+    border: 1px solid rgb(var(--fg) / 0.1);
+    box-shadow: inset 0 1px 0 rgb(var(--fg) / 0.08),
+      0 24px 60px -28px rgb(0 0 0 / 0.4);
+  }
+  .glass-white {
+    background: rgb(255 255 255 / 0.14);
+    backdrop-filter: blur(16px) saturate(1.3);
+    -webkit-backdrop-filter: blur(16px) saturate(1.3);
+    border: 1px solid rgb(255 255 255 / 0.28);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.35),
+      0 24px 50px -24px rgb(0 0 0 / 0.35);
+  }
+  .glass-dark {
+    background: rgb(8 10 16 / 0.45);
+    backdrop-filter: blur(18px) saturate(1.4);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    border: 1px solid rgb(255 255 255 / 0.12);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12),
+      0 24px 60px -28px rgb(0 0 0 / 0.55);
+  }
+
+  /* ---- Film grain ------------------------------------------------------
+     Fixed, full-viewport fractal-noise overlay for tactile depth. Rendered
+     by a <div class="grain"> in App. Soft-light keeps it invisible-but-felt. */
+  .grain {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.5;
+    mix-blend-mode: soft-light;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 140px 140px;
+  }
+
+  /* ---- Atmospheric glow blob ------------------------------------------ */
+  .glow {
+    background: radial-gradient(
+      circle at center,
+      rgb(var(--accent) / 0.22),
+      transparent 68%
+    );
+    filter: blur(48px);
+  }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }

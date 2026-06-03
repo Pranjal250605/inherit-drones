@@ -11,7 +11,10 @@ export function TrustStrip() {
           {t.trust.label}
         </span>
         <div className="relative flex-1 overflow-hidden">
-          <div className="marquee flex w-max items-center gap-12">
+          <div
+            data-marquee
+            className="flex w-max items-center gap-12 will-change-transform"
+          >
             {[...partners, ...partners].map((x, i) => (
               <span
                 key={i}

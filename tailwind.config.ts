@@ -5,13 +5,16 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        /* Fujitaka type system: Lexend Deca (Latin) + Noto Sans JP (Japanese).
-           `mono` is intentionally repointed to Lexend Deca so the existing
-           uppercase tracked "eyebrow" labels read as clean corporate small-caps
-           rather than instrumentation monospace. */
-        sans: ['"Lexend Deca"', "system-ui", "sans-serif"],
-        display: ['"Lexend Deca"', "system-ui", "sans-serif"],
-        mono: ['"Lexend Deca"', "system-ui", "sans-serif"],
+        /* Distinctive type system (2024 editorial-grotesk pairing):
+           - display: Bricolage Grotesque — characterful optical-size grotesk for
+             headlines; gives the page personality so it doesn't read "generic".
+           - sans: Hanken Grotesk — clean, warm humanist body text.
+           - mono: Space Mono — true instrumentation monospace for the technical
+             eyebrow/label motif (engineering character, not generic small-caps).
+           - jp: Noto Sans JP. */
+        sans: ['"Hanken Grotesk"', "system-ui", "sans-serif"],
+        display: ['"Bricolage Grotesque"', "system-ui", "sans-serif"],
+        mono: ['"Space Mono"', "ui-monospace", "monospace"],
         jp: ['"Noto Sans JP"', "system-ui", "sans-serif"],
       },
       colors: {

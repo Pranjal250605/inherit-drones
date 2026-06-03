@@ -371,6 +371,30 @@ export function useGsapAnimations(): void {
         );
       });
 
+      /* ===== SCROLL-VELOCITY REACTIVE MARQUEE =====
+         The partner strip loops continuously, but speeds up in proportion to
+         scroll velocity and eases back to its base speed when scrolling stops —
+         a small "alive" detail that signals hand-built motion, not a static CSS
+         loop. Driven via GSAP timeScale so it composes with Lenis. */
+      const marquee = document.querySelector<HTMLElement>("[data-marquee]");
+      if (marquee) {
+        const loop = gsap.to(marquee, {
+          xPercent: -50,
+          duration: 32,
+          ease: "none",
+          repeat: -1,
+        });
+        let settle = 0;
+        ScrollTrigger.create({
+          onUpdate: (self) => {
+            const v = Math.abs(self.getVelocity());
+            loop.timeScale(gsap.utils.clamp(1, 6, 1 + v / 220));
+            window.clearTimeout(settle);
+            settle = window.setTimeout(() => loop.timeScale(1), 180);
+          },
+        });
+      }
+
       /* ===== HEADER SCROLL-VELOCITY KICK =====
          When the user scrolls fast, the logo lockup gets a quick skewY pulse
          then settles — gives the page a tactile, "physics is real" feel

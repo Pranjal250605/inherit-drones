@@ -26,7 +26,7 @@ export function Header() {
       className={
         "fixed inset-x-0 top-0 z-50 transition-colors duration-300 " +
         (scrolled || mobileOpen
-          ? "border-b border-fg/10 bg-bg/95 text-fg"
+          ? "glass text-fg"
           : "border-b border-transparent bg-transparent text-white")
       }
     >

@@ -105,12 +105,12 @@ export function Solutions() {
                 className="absolute -translate-x-1/2 -translate-y-1/2"
                 style={{ top: NODE_POS[i]?.top, left: NODE_POS[i]?.left }}
               >
-                <div className="grid h-28 w-28 place-items-center rounded-full bg-[#FBF7F0] text-center shadow-lg shadow-black/10 md:h-32 md:w-32">
+                <div className="glass-dark grid h-28 w-28 place-items-center rounded-full text-center transition-transform duration-300 hover:scale-105 md:h-32 md:w-32">
                   <div>
-                    <div className="font-mono text-[11px] font-bold text-orange-500">
+                    <div className="font-mono text-[11px] font-bold text-orange-300">
                       {String(i + 1).padStart(2, "0")}
                     </div>
-                    <div className="mt-1 px-2 font-display text-sm font-bold leading-tight text-fg md:text-base">
+                    <div className="mt-1 px-2 font-display text-sm font-bold leading-tight text-white md:text-base">
                       {c.short}
                     </div>
                   </div>
@@ -160,29 +160,29 @@ function SolutionCard({
   return (
     <a
       href="#contact"
-      className="card-lift group block rounded-xl bg-[#FBF7F0] p-5 text-fg shadow-md shadow-black/5 hover:shadow-xl md:p-6"
+      className="card-lift glass-dark group block rounded-xl p-5 text-white md:p-6"
     >
       <div className="flex items-baseline gap-3">
-        <span className="font-mono text-sm font-bold text-orange-500">
+        <span className="font-mono text-sm font-bold text-orange-300">
           {String(index + 1).padStart(2, "0")}
         </span>
-        <h3 className="font-display text-lg font-bold leading-tight tracking-[-0.01em] transition-colors group-hover:text-orange-500 md:text-xl">
+        <h3 className="font-display text-lg font-bold leading-tight tracking-[-0.01em] transition-colors group-hover:text-orange-300 md:text-xl">
           {card.title}
         </h3>
       </div>
-      <p className="mt-2 text-[13.5px] leading-relaxed text-fg/70">
+      <p className="mt-2 text-[13.5px] leading-relaxed text-white/70">
         {card.desc}
       </p>
       <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-1.5">
         {card.metrics.map(([k, v]) => (
           <span key={k} className="inline-flex items-baseline gap-1.5">
-            <span className="font-mono text-[12px] font-bold text-fg">{v}</span>
-            <span className="font-mono text-[9.5px] font-medium uppercase tracking-[0.16em] text-fg/45">
+            <span className="font-mono text-[12px] font-bold text-white">{v}</span>
+            <span className="font-mono text-[9.5px] font-medium uppercase tracking-[0.16em] text-white/50">
               {k}
             </span>
           </span>
         ))}
-        <span className="ml-auto inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-[0.16em] text-orange-500 opacity-0 transition-opacity group-hover:opacity-100">
+        <span className="ml-auto inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-[0.16em] text-orange-300 opacity-0 transition-opacity group-hover:opacity-100">
           {cta}
           <ArrowRight className="h-3 w-3" />
         </span>

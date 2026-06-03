@@ -1,4 +1,5 @@
 import { useGsapAnimations } from "./hooks/useGsapAnimations";
+import { useLenis } from "./hooks/useLenis";
 import { Header } from "./components/sections/Header";
 import { Hero } from "./components/sections/Hero";
 import { TrustStrip } from "./components/sections/TrustStrip";
@@ -26,6 +27,7 @@ export default function App() {
   // a no-op when the tactical tree is mounted (none of their target attributes
   // are present), so it is safe to always call the hook.
   useGsapAnimations();
+  useLenis();
 
   if (experience === "tactical") {
     return (
@@ -38,6 +40,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-bg text-fg">
+      {/* Film-grain texture over the whole page — felt, not seen. */}
+      <div className="grain" aria-hidden="true" />
       {/* Top-of-viewport scroll progress bar — scales horizontally from 0 to 1
           across the page's full scroll range. Sits above the Header (z-[60]). */}
       <div
