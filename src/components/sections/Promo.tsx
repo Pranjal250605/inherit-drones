@@ -74,22 +74,37 @@ function PromoBanner({
   tone: Tone;
 }) {
   return (
-    <a
-      href={item.href}
-      className={
-        "group relative flex min-h-[220px] flex-col overflow-hidden rounded-2xl text-white shadow-xl shadow-black/10 transition-shadow duration-500 hover:shadow-2xl " +
-        tone.base
-      }
-    >
-      {/* Ink-flood: a circle anchored behind the corner arrow that scales up to
-          wash the whole card in the deeper shade — Fujitaka's signature hover. */}
-      <span
-        aria-hidden="true"
+    <div className="group/wrapper relative">
+      {/* Persona-style dynamic offset shadow */}
+      <div
         className={
-          "pointer-events-none absolute bottom-7 right-7 h-16 w-16 scale-0 rounded-full transition-transform duration-[650ms] ease-[cubic-bezier(.4,0,.2,1)] group-hover:scale-[26] " +
+          "absolute inset-0 -z-10 translate-x-[6px] translate-y-[6px] transition-transform duration-500 group-hover/wrapper:translate-x-[10px] group-hover/wrapper:translate-y-[10px] " +
           tone.flood
         }
+        style={{
+          clipPath: "polygon(0 0, calc(100% - 32px) 0, 100% 32px, 100% 100%, 32px 100%, 0 calc(100% - 32px))",
+        }}
       />
+      
+      <a
+        href={item.href}
+        className={
+          "group relative flex min-h-[220px] flex-col overflow-hidden text-white transition-transform duration-500 group-hover/wrapper:-translate-y-1 group-hover/wrapper:-translate-x-1 " +
+          tone.base
+        }
+        style={{
+          clipPath: "polygon(0 0, calc(100% - 32px) 0, 100% 32px, 100% 100%, 32px 100%, 0 calc(100% - 32px))",
+        }}
+      >
+        {/* Ink-flood: a circle anchored behind the corner arrow that scales up to
+            wash the whole card in the deeper shade — Fujitaka's signature hover. */}
+        <span
+          aria-hidden="true"
+          className={
+            "pointer-events-none absolute bottom-7 right-7 h-16 w-16 scale-0 rounded-full transition-transform duration-[650ms] ease-[cubic-bezier(.4,0,.2,1)] group-hover:scale-[26] " +
+            tone.flood
+          }
+        />
 
       <div className="relative z-10 flex flex-1 flex-col justify-between p-8 md:p-10">
         <div className="flex items-center justify-between">
@@ -125,5 +140,6 @@ function PromoBanner({
         </div>
       </div>
     </a>
+    </div>
   );
 }

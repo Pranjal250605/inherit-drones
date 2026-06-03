@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { useT } from "../../i18n";
 import { Mono, TacButton, GhostButton, ArrowRight } from "./primitives";
 
@@ -7,6 +8,13 @@ import { Mono, TacButton, GhostButton, ArrowRight } from "./primitives";
    This is the CANONICAL reference for the variant's calm, sparse tone. */
 export function TacticalHero() {
   const { t } = useT();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.55;
+    }
+  }, []);
 
   return (
     <section
@@ -14,6 +22,7 @@ export function TacticalHero() {
       className="relative isolate flex min-h-[100svh] flex-col justify-end overflow-hidden pb-28"
     >
       <video
+        ref={videoRef}
         autoPlay
         loop
         muted
@@ -23,11 +32,7 @@ export function TacticalHero() {
         style={{ filter: "contrast(1.15) saturate(1.05) brightness(0.7)" }}
       >
         <source
-          src="https://videos.pexels.com/video-files/4446375/4446375-uhd_3840_2160_25fps.mp4"
-          type="video/mp4"
-        />
-        <source
-          src="https://videos.pexels.com/video-files/4446375/4446375-hd_1920_1080_25fps.mp4"
+          src="https://videos.pexels.com/video-files/9165100/9165100-hd_1920_1080_30fps.mp4"
           type="video/mp4"
         />
       </video>

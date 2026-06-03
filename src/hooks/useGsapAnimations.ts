@@ -183,6 +183,10 @@ export function useGsapAnimations(): void {
           return v.toFixed(decimals);
         };
         const obj = { v: 0 };
+        // Motion is enabled here (the hook returns early under reduced motion),
+        // so reset to 0 now; the JSX already renders the real value as the
+        // reduced-motion / no-JS fallback, and we count up from 0 on enter.
+        el.textContent = fmt(0) + suffix;
         ScrollTrigger.create({
           trigger: el,
           start: "top 85%",

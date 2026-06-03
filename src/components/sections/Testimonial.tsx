@@ -5,20 +5,33 @@ export function Testimonial() {
   const { t } = useT();
 
   return (
-    <SectionFrame id="voice" className="bg-bg py-24 md:py-32">
-      <div className="mx-auto max-w-[1100px] px-6 lg:px-12">
+    <SectionFrame
+      id="voice"
+      className="section-fade-top relative overflow-hidden bg-bg py-24 md:py-32"
+    >
+      {/* oversized drifting quote mark — depth + asymmetry */}
+      <span
+        aria-hidden="true"
+        data-anim="parallax"
+        data-speed="0.28"
+        className="pointer-events-none absolute -top-16 right-2 select-none font-display text-[14rem] font-bold leading-none text-orange-500/10 md:right-16 md:text-[22rem]"
+      >
+        ”
+      </span>
+
+      <div className="relative mx-auto max-w-[1100px] px-6 lg:px-12">
         <SectionLabel>{t.testimonial.tag}</SectionLabel>
 
         <blockquote
           data-anim="title-up"
-          className="mt-10 max-w-4xl text-balance font-display text-2xl font-semibold leading-snug tracking-[-0.015em] text-fg md:text-4xl"
+          className="mt-10 max-w-4xl text-balance font-display text-2xl font-semibold leading-snug tracking-[-0.015em] text-fg md:pr-16 md:text-4xl"
         >
           <span className="text-orange-500">“</span>
           {t.testimonial.quote}
           <span className="text-orange-500">”</span>
         </blockquote>
 
-        <div className="mt-12">
+        <div className="mt-12 md:ml-16">
           <div className="font-display text-base font-bold text-fg">
             {t.testimonial.author_name}
           </div>

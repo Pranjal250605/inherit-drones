@@ -7,8 +7,18 @@ export function FAQ() {
   const [open, setOpen] = useState<number>(0);
 
   return (
-    <SectionFrame id="faq" className="bg-bg-alt py-24 md:py-32">
-      <div className="mx-auto grid max-w-[1400px] grid-cols-12 gap-x-16 gap-y-12 px-6 lg:px-12">
+    <SectionFrame id="faq" className="relative overflow-hidden bg-bg-alt py-24 md:py-32">
+      {/* oversized drifting index — depth + asymmetry */}
+      <span
+        aria-hidden="true"
+        data-anim="parallax"
+        data-speed="0.26"
+        className="pointer-events-none absolute -top-12 left-0 select-none font-display text-[10rem] font-bold leading-none text-fg/[0.04] md:text-[15rem]"
+      >
+        08
+      </span>
+
+      <div className="relative mx-auto grid max-w-[1400px] grid-cols-12 gap-x-16 gap-y-12 px-6 lg:px-12">
         <div className="col-span-12 lg:col-span-5">
           <div className="lg:sticky lg:top-32">
             <SectionLabel>{t.faq.tag}</SectionLabel>

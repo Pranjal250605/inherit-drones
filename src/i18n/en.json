@@ -93,7 +93,7 @@
         "category": "Press Release",
         "category_jp": "プレスリリース",
         "title": "Setouchi inter-island cargo network reaches 4,200 sorties",
-        "excerpt": "28 stations, 99.4% on-time across the Hiroshima–Ehime corridor.",
+        "excerpt": "The network now spans 28 automated stations across the Hiroshima–Ehime corridor, achieving a 99.4% on-time delivery rate. Cargo volumes have grown 340% year-on-year, validating the viability of persistent autonomous logistics in maritime archipelagos.",
         "img": "drone-spraying"
       },
       {
@@ -102,7 +102,7 @@
         "category": "Event",
         "category_jp": "イベント",
         "title": "Inherit Co. exhibits at Japan Drone 2026, Makuhari Messe",
-        "excerpt": "Live IH-04 demos at Booth E-14, 18–20 June.",
+        "excerpt": "Visit Booth E-14 for live IH-04 Hayabusa flight demonstrations, sensor payload workshops, and a first look at the 2027 logistics roadmap. Pre-registered attendees receive priority access to one-on-one briefings with our engineering team.",
         "img": "hiroshima-aerial"
       },
       {
@@ -111,7 +111,7 @@
         "category": "Announcement",
         "category_jp": "お知らせ",
         "title": "NAPA Drone Academy welcomes the 2026 spring cohort",
-        "excerpt": "Twenty-two new pilots begin Type-2 BVLOS certification.",
+        "excerpt": "Twenty-two new pilots begin the rigorous Type-2 BVLOS certification programme at the Hiroshima campus. The 12-week curriculum covers autonomous waypoint navigation, sensor integration, and emergency procedures across all weather conditions.",
         "img": "team-napa"
       },
       {
@@ -120,8 +120,8 @@
         "category": "Press Release",
         "category_jp": "プレスリリース",
         "title": "BVLOS Level-4 corridor extension approved for Hiroshima Bay",
-        "excerpt": "MLIT approves a 64 km coastal corridor extension.",
-        "img": ""
+        "excerpt": "MLIT has approved a 64 km coastal corridor extension over Hiroshima Bay, enabling uninterrupted BVLOS operations between the mainland and six outer islands. This marks the longest single-operator BVLOS route approved in Japan.",
+        "img": "bvlos-corridor"
       }
     ]
   },
@@ -231,7 +231,10 @@
       { "k": "Wind tolerance", "v": 70, "unit": "M/S", "display": "15" },
       { "k": "Operating ceiling", "v": 60, "unit": "M AGL", "display": "150" },
       { "k": "Cruise velocity", "v": 82, "unit": "M/S", "display": "22" },
-      { "k": "IP rating", "v": 92, "unit": "", "display": "IP55" }
+      { "k": "IP rating", "v": 92, "unit": "", "display": "IP55" },
+      { "k": "Max takeoff weight", "v": 75, "unit": "KG", "display": "25" },
+      { "k": "Rotor span", "v": 65, "unit": "M", "display": "1.8" },
+      { "k": "Range (BVLOS)", "v": 85, "unit": "KM", "display": "60" }
     ],
     "chips": ["Carbon Monocoque", "Dual-IMU", "RTK GNSS", "Mesh Radio", "Edge AI", "Hot-swap battery"],
     "hud_name_top": "IH-04 · HAYABUSA",

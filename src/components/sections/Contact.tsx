@@ -46,7 +46,7 @@ export function Contact() {
 
         <div
           data-anim="card-stagger"
-          className="mt-12 grid grid-cols-1 gap-6 md:mt-16 md:grid-cols-3"
+          className="mt-12 grid grid-cols-1 items-start gap-6 md:mt-16 md:grid-cols-3"
         >
           <div
             data-anim-item

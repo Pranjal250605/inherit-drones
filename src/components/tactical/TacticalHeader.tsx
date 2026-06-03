@@ -15,9 +15,9 @@ export function TacticalHeader() {
   }, []);
 
   const nav = [
-    { label: t.header.nav.technology, href: "#technology" },
     { label: t.header.nav.solutions, href: "#solutions" },
     { label: t.header.nav.operations, href: "#process" },
+    { label: t.header.nav.technology, href: "#technology" },
     { label: t.header.nav.field, href: "#field" },
     { label: t.header.nav.contact, href: "#contact" },
   ];

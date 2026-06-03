@@ -21,7 +21,7 @@
   --page-bg: 5 7 11;
 }
 :root[data-theme="light"] {
-  --page-bg: 255 255 255;
+  --page-bg: 252 252 252;
 }
 :root[data-theme="blueprint"] {
   --page-bg: 18 32 64;
@@ -115,6 +115,27 @@
 }
 
 /* ============================================================
+   GLOBAL TEXTURES & OVERLAYS
+============================================================ */
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  background-repeat: repeat;
+  opacity: 0.05;
+  mix-blend-mode: soft-light;
+  will-change: transform;
+}
+
+[data-theme="light"] .grain {
+  opacity: 0.06;
+}
+
+/* ============================================================
    LENIS smooth-scroll support (see src/hooks/useLenis.ts)
 ============================================================ */
 html.lenis,
@@ -171,19 +192,7 @@ html.lenis body {
       0 24px 60px -28px rgb(0 0 0 / 0.55);
   }
 
-  /* ---- Film grain ------------------------------------------------------
-     Fixed, full-viewport fractal-noise overlay for tactile depth. Rendered
-     by a <div class="grain"> in App. Soft-light keeps it invisible-but-felt. */
-  .grain {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0.5;
-    mix-blend-mode: soft-light;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 140px 140px;
-  }
+  /* (film grain is defined once, unlayered, in GLOBAL TEXTURES above) */
 
   /* ---- Atmospheric glow blob ------------------------------------------ */
   .glow {
@@ -208,6 +217,93 @@ html.lenis body {
   }
   .text-pretty {
     text-wrap: pretty;
+  }
+
+  /* ---- Subtle background textures ------------------------------------
+     Minimalistic, low-opacity patterns that add depth without competing
+     with content. All use --fg token so they adapt to dark/light/blueprint. */
+
+  /* Topographic contour lines — evokes aerial mapping & survey */
+  .topo-bg {
+    position: relative;
+  }
+  .topo-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cpath d='M200 50c80 0 150 70 150 150s-70 150-150 150S50 280 50 200 120 50 200 50z' fill='none' stroke='%23888' stroke-width='0.5'/%3E%3Cpath d='M200 90c60 0 110 50 110 110s-50 110-110 110S90 260 90 200s50-110 110-110z' fill='none' stroke='%23888' stroke-width='0.5'/%3E%3Cpath d='M200 130c40 0 70 30 70 70s-30 70-70 70-70-30-70-70 30-70 70-70z' fill='none' stroke='%23888' stroke-width='0.5'/%3E%3Cpath d='M200 165c20 0 35 15 35 35s-15 35-35 35-35-15-35-35 15-35 35-35z' fill='none' stroke='%23888' stroke-width='0.5'/%3E%3C/svg%3E");
+    background-size: 400px 400px;
+  }
+
+  /* Dot matrix pattern — fine engineered dot grid */
+  .dot-grid-bg {
+    position: relative;
+  }
+  .dot-grid-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: radial-gradient(
+      circle,
+      rgb(var(--fg)) 0.5px,
+      transparent 0.5px
+    );
+    background-size: 20px 20px;
+  }
+
+  /* Engineering cross-hatch — diagonal parallel lines */
+  .hatch-bg {
+    position: relative;
+  }
+  .hatch-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.025;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgb(var(--fg)) 10px,
+      rgb(var(--fg)) 10.5px
+    );
+  }
+
+  /* Gradient fade divider — soft transition between sections */
+  .section-fade-top::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgb(var(--bg) / 0.6),
+      transparent
+    );
+    z-index: 1;
+  }
+  .section-fade-bottom::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      rgb(var(--bg) / 0.6),
+      transparent
+    );
+    z-index: 1;
   }
 
   /* Fujitaka diagonal band — slanted top + bottom edge on full-bleed panels.

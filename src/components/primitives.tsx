@@ -165,3 +165,48 @@ export function SectionLabel({
     </div>
   );
 }
+
+/* ============================================================
+   ParallaxImage — the page-wide image treatment.
+   The PARALLAX lives on an oversized inner layer (GSAP owns its
+   transform via [data-anim="parallax"]) while any hover-zoom lives
+   on the <img> (CSS transform), so the two never collide. The layer
+   is 150% tall, offset -25%, giving enough slack for the drift to
+   stay fully covered. Size/aspect comes from `className` on the frame.
+============================================================ */
+export function ParallaxImage({
+  src,
+  alt,
+  speed = 0.16,
+  className = "",
+  overlay = true,
+  eager = false,
+}: {
+  src: string;
+  alt: string;
+  speed?: number;
+  className?: string;
+  overlay?: boolean;
+  eager?: boolean;
+}) {
+  return (
+    <div className={"group relative overflow-hidden " + className}>
+      <div
+        data-anim="parallax"
+        data-speed={String(speed)}
+        className="absolute inset-x-0 -top-[25%] h-[150%] will-change-transform"
+      >
+        <img
+          src={src}
+          alt={alt}
+          loading={eager ? "eager" : "lazy"}
+          decoding="async"
+          className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
+        />
+      </div>
+      {overlay && (
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+      )}
+    </div>
+  );
+}

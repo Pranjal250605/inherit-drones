@@ -11,11 +11,11 @@ export default {
            - sans: Hanken Grotesk — clean, warm humanist body text.
            - mono: Space Mono — true instrumentation monospace for the technical
              eyebrow/label motif (engineering character, not generic small-caps).
-           - jp: Noto Sans JP. */
+           - jp: Zen Kaku Gothic New. */
         sans: ['"Hanken Grotesk"', "system-ui", "sans-serif"],
         display: ['"Bricolage Grotesque"', "system-ui", "sans-serif"],
         mono: ['"Space Mono"', "ui-monospace", "monospace"],
-        jp: ['"Noto Sans JP"', "system-ui", "sans-serif"],
+        jp: ['"Zen Kaku Gothic New"', "system-ui", "sans-serif"],
       },
       colors: {
         /* Semantic theme tokens — backed by CSS variables in src/index.css.

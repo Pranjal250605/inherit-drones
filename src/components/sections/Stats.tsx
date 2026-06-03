@@ -1,9 +1,24 @@
 import { SectionFrame } from "../primitives";
-import { useT } from "../../i18n";
+import { useT, type Dict } from "../../i18n";
 
 /* Per-column vertical offsets so the row of figures reads as a staggered,
    hand-composed grid rather than a flat even rule. */
 const OFFSET = ["lg:mt-0", "lg:mt-12", "lg:mt-4", "lg:mt-16"];
+
+/* Final formatted value — rendered as the DEFAULT text so the real number is
+   always present (no-JS, SSR, and prefers-reduced-motion all show it). The
+   GSAP count-up only animates it as a progressive enhancement. */
+function formatStat(it: Dict["stats"][number]): string {
+  const v = parseFloat(it.n);
+  const decimals = it.decimal ? 1 : 0;
+  const num = it.thousands
+    ? v.toLocaleString(undefined, {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+      })
+    : v.toFixed(decimals);
+  return num + it.suf;
+}
 
 export function Stats() {
   const { t } = useT();
@@ -46,7 +61,7 @@ export function Stats() {
                 data-thousands={it.thousands ? "true" : "false"}
                 className="mt-5 font-display text-6xl font-bold leading-none tracking-[-0.03em] text-white md:text-7xl"
               >
-                0{it.suf}
+                {formatStat(it)}
               </div>
               <div className="mt-6 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-white/80">
                 {it.label}

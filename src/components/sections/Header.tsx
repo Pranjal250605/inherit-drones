@@ -14,9 +14,9 @@ export function Header() {
   }, []);
 
   const nav: Array<{ label: string; href: string }> = [
-    { label: t.header.nav.technology, href: "#technology" },
     { label: t.header.nav.solutions, href: "#solutions" },
     { label: t.header.nav.operations, href: "#process" },
+    { label: t.header.nav.technology, href: "#technology" },
     { label: t.header.nav.field, href: "#field" },
     { label: t.header.nav.contact, href: "#contact" },
   ];
@@ -26,7 +26,7 @@ export function Header() {
       className={
         "fixed inset-x-0 top-0 z-50 transition-colors duration-300 " +
         (scrolled || mobileOpen
-          ? "glass text-fg"
+          ? "backdrop-blur-xl bg-bg/80 border-b border-fg/10 text-fg shadow-sm"
           : "border-b border-transparent bg-transparent text-white")
       }
     >
