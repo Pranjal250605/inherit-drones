@@ -152,8 +152,6 @@ export function DroneNavigator() {
     window.scrollTo({ top: el.offsetTop, behavior: "smooth" });
   };
 
-  const active = WAYPOINTS[activeIdx];
-
   return (
     <div
       aria-hidden="true"
@@ -235,15 +233,6 @@ export function DroneNavigator() {
           {/* idle hover so vertical scroll-travel and the gentle bob compose */}
           <div className="drone-bob relative grid place-items-center">
             <DroneGlyph className="h-12 w-12 text-white drop-shadow-[0_0_10px_rgba(249,115,22,0.35)]" />
-            {/* live readout to the LEFT of the drone */}
-            <div className="pointer-events-none absolute right-full mr-4 top-1/2 -translate-y-1/2 text-right">
-              <div className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/35">
-                IH-04 · {String(Math.round(progress * 428)).padStart(4, "0")} M
-              </div>
-              <div className="font-mono text-[11px] font-bold uppercase tracking-[0.24em] text-orange-400">
-                {active.label}
-              </div>
-            </div>
           </div>
         </div>
       </div>

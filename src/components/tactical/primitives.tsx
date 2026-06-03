@@ -58,12 +58,12 @@ export function Eyebrow({
   );
 }
 
-/* Full-bleed section shell with the tactical frame: faint top hairline,
-   corner index marks, generous vertical rhythm. `index` prints in the
-   corners (e.g. "S.02"). */
+/* Full-bleed section shell. Anduril-style restraint: NO visible frame, NO
+   corner marks — content floats in black with very generous vertical rhythm
+   so each section reads as one calm idea. (`index` is accepted but no longer
+   rendered, kept optional so existing call sites stay valid.) */
 export function TSection({
   id,
-  index,
   children,
   className = "",
 }: {
@@ -77,22 +77,46 @@ export function TSection({
       id={id}
       data-tac-section={id}
       className={
-        "relative scroll-mt-20 border-t border-white/10 px-6 py-24 sm:py-32 lg:px-16 " +
-        className
+        "relative scroll-mt-24 px-6 py-32 sm:py-40 lg:px-16 " + className
       }
     >
-      {index && (
-        <>
-          <span className="pointer-events-none absolute left-6 top-4 font-mono text-[10px] tracking-[0.3em] text-white/25 lg:left-16">
-            {index}
-          </span>
-          <span className="pointer-events-none absolute right-6 top-4 font-mono text-[10px] tracking-[0.3em] text-white/25 lg:right-16">
-            ////
-          </span>
-        </>
-      )}
-      <div className="mx-auto w-full max-w-[1320px]">{children}</div>
+      <div className="mx-auto w-full max-w-[1240px]">{children}</div>
     </section>
+  );
+}
+
+/* Standard section header: quiet eyebrow + room. Keeps headlines consistent
+   in scale and spacing across the variant. Pass the headline as children. */
+export function SectionHead({
+  eyebrow,
+  jp,
+  lead,
+  children,
+  className = "",
+}: {
+  eyebrow: string;
+  jp?: string;
+  lead?: string;
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <div data-tac="up" className={"max-w-3xl " + className}>
+      <Eyebrow>{eyebrow}</Eyebrow>
+      <h2 className="mt-8 font-display text-[2.5rem] font-bold uppercase leading-[1.02] tracking-[-0.03em] text-white sm:text-6xl">
+        {children}
+      </h2>
+      {jp && (
+        <div className="mt-6 font-jp text-[12px] tracking-[0.24em] text-white/40">
+          {jp}
+        </div>
+      )}
+      {lead && (
+        <p className="mt-7 max-w-xl text-pretty text-[17px] leading-relaxed text-white/55">
+          {lead}
+        </p>
+      )}
+    </div>
   );
 }
 

@@ -53,18 +53,12 @@ export function TacticalHeader() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
-          <span className="hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.28em] text-white/45 sm:flex">
-            <span className="h-1.5 w-1.5 rounded-full bg-orange-500 blink" />
-            {t.header.status}
-          </span>
-          <a
-            href="#contact"
-            className="inline-flex items-center bg-orange-500 px-5 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-black transition hover:bg-orange-400"
-          >
-            {t.header.cta}
-          </a>
-        </div>
+        <a
+          href="#contact"
+          className="inline-flex items-center bg-orange-500 px-5 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-black transition hover:bg-orange-400"
+        >
+          {t.header.cta}
+        </a>
       </div>
     </header>
   );
