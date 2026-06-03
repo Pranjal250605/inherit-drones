@@ -14,6 +14,9 @@ const IMG: Record<string, string> = {
   "bvlos-corridor": bvlosCorridor,
 };
 
+/* Fallback images so every dispatch is image-forward even if `img` is empty. */
+const FALLBACK = [droneSpraying, hiroshimaAerial, teamNapa, bvlosCorridor];
+
 type Variant = "big" | "small" | "wide";
 
 export function News() {
@@ -21,11 +24,24 @@ export function News() {
   const items = t.news.items;
 
   return (
-    <SectionFrame id="news" className="dot-grid-bg relative overflow-hidden bg-bg-alt py-24 md:py-32">
+    <SectionFrame
+      id="news"
+      className="dot-grid-bg relative overflow-hidden bg-bg-alt py-24 md:py-32"
+    >
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
         <div className="flex flex-col items-start gap-8 md:flex-row md:items-end md:justify-between">
           <div className="max-w-3xl">
-            <SectionLabel>{t.news.tag}</SectionLabel>
+            <div className="flex flex-wrap items-center gap-3">
+              <SectionLabel>{t.news.tag}</SectionLabel>
+              {/* live pulse — signals an active newsroom */}
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-orange-500">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-500 opacity-75" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-orange-500" />
+                </span>
+                Live
+              </span>
+            </div>
             <h2
               data-anim="title-up"
               className="mt-6 font-display text-4xl font-bold leading-[1.02] tracking-[-0.03em] text-fg md:text-6xl"
@@ -43,16 +59,16 @@ export function News() {
             className="group inline-flex items-center gap-3 whitespace-nowrap text-[12px] font-bold uppercase tracking-[0.18em] text-fg/80 transition hover:text-orange-500"
           >
             {t.news.view_all}
-            <span className="grid h-8 w-8 place-items-center rounded-full bg-orange-500 text-white transition group-hover:bg-orange-400">
+            <span className="grid h-8 w-8 place-items-center rounded-full bg-orange-500 text-white transition group-hover:bg-orange-400 group-hover:translate-x-0.5">
               <ArrowRight className="h-3.5 w-3.5" />
             </span>
           </a>
         </div>
 
-        {/* Editorial bento: one large feature, two stacked, one wide banner. */}
+        {/* Editorial bento — every dispatch is an image-forward overlay card. */}
         <div
           data-anim="card-stagger"
-          className="mt-12 grid grid-cols-1 gap-6 md:mt-16 md:grid-cols-2 lg:auto-rows-[minmax(0,1fr)] lg:grid-cols-3"
+          className="mt-12 grid grid-cols-1 gap-5 md:mt-16 md:grid-cols-2 lg:auto-rows-[minmax(0,1fr)] lg:grid-cols-3"
         >
           {items.map((item, i) => {
             const variant: Variant = i === 0 ? "big" : i === 3 ? "wide" : "small";
@@ -64,7 +80,7 @@ export function News() {
                 : "";
             return (
               <div key={item.code} data-anim-item className={cls}>
-                <NewsCard item={item} variant={variant} />
+                <NewsCard item={item} variant={variant} fallback={FALLBACK[i] ?? droneSpraying} />
               </div>
             );
           })}
@@ -74,67 +90,75 @@ export function News() {
   );
 }
 
-function NewsCard({ item, variant }: { item: NewsItem; variant: Variant }) {
+function NewsCard({
+  item,
+  variant,
+  fallback,
+}: {
+  item: NewsItem;
+  variant: Variant;
+  fallback: string;
+}) {
   const { t } = useT();
-  const imgSrc = item.img ? IMG[item.img] : undefined;
-  const wide = variant === "wide";
+  const imgSrc = (item.img && IMG[item.img]) || fallback;
   const big = variant === "big";
+  const wide = variant === "wide";
 
   return (
     <a
       href="#contact"
       className={
-        "group card-lift flex h-full overflow-hidden rounded-2xl border border-fg/10 bg-bg shadow-sm hover:border-orange-300 hover:shadow-xl " +
-        (wide ? "flex-col sm:flex-row" : "flex-col")
+        "group card-lift relative flex flex-col justify-end overflow-hidden rounded-2xl border border-fg/10 text-white shadow-sm transition hover:shadow-2xl " +
+        (big ? "min-h-[460px]" : wide ? "min-h-[300px]" : "min-h-[222px]")
       }
     >
-      <div
-        className={
-          "relative overflow-hidden bg-bg-alt " +
-          (big ? "min-h-[240px] flex-1" : wide ? "sm:w-1/2 aspect-[16/9] sm:aspect-auto" : "aspect-[4/3]")
-        }
-      >
-        {imgSrc ? (
-          <ParallaxImage
-            src={imgSrc}
-            alt={item.title}
-            speed={big ? 0.2 : 0.12}
-            className="absolute inset-0 h-full w-full"
-          />
-        ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-orange-500/90 via-[#E9810F] to-[#DB780C]" />
-        )}
+      {/* image + cinematic gradient */}
+      <ParallaxImage
+        src={imgSrc}
+        alt={item.title}
+        speed={big ? 0.18 : 0.1}
+        overlay={false}
+        className="absolute inset-0 h-full w-full"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/10" />
+      <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
+
+      {/* top row — category badge + dispatch code */}
+      <div className="absolute inset-x-0 top-0 z-10 flex items-start justify-between p-5">
+        <span className="inline-flex items-center gap-2 rounded-full bg-orange-500 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white shadow-lg shadow-black/20">
+          {item.category}
+          <span className="font-jp text-[9px] font-normal tracking-[0.04em] text-white/80">
+            {item.category_jp}
+          </span>
+        </span>
+        <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-white/75">
+          {item.code}
+        </span>
       </div>
 
-      <div className={"flex flex-1 flex-col p-6 " + (wide ? "sm:justify-center sm:p-8" : "")}>
-        <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.18em]">
-          <span className="text-orange-500">{item.category}</span>
-          <span className="font-jp text-[9px] normal-case tracking-[0.06em] text-fg/35">{item.category_jp}</span>
-          <span className="h-px flex-1 bg-fg/10" />
-          <span className="font-mono text-fg/45">{item.date}</span>
+      {/* bottom content */}
+      <div className="relative z-10 p-5 md:p-7">
+        <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-white/70">
+          <span className="h-px w-6 bg-orange-400" />
+          {item.date}
         </div>
-
         <h3
           className={
-            "mt-4 font-display font-semibold leading-[1.25] tracking-[-0.01em] transition group-hover:text-orange-500 " +
-            (big || wide ? "text-2xl md:text-3xl" : "text-lg")
+            "mt-3 font-display font-bold leading-[1.15] tracking-[-0.01em] text-white " +
+            (big ? "text-2xl md:text-4xl" : wide ? "text-2xl md:text-3xl" : "text-lg")
           }
         >
           {item.title}
         </h3>
-
-        <p className="mt-3 text-pretty text-[14px] leading-relaxed text-muted">
-          {item.excerpt}
-        </p>
-
-        <div className="mt-auto flex items-center gap-2 pt-5">
-          <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-fg/35">{item.code}</span>
-          <span className="h-px flex-1 bg-fg/8" />
-          <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-orange-500 opacity-0 transition-opacity group-hover:opacity-100">
-            {t.news.read_label}
-            <ArrowRight className="h-3 w-3" />
-          </span>
-        </div>
+        {(big || wide) && (
+          <p className="mt-3 max-w-xl text-pretty text-[14px] leading-relaxed text-white/75 line-clamp-2">
+            {item.excerpt}
+          </p>
+        )}
+        <span className="mt-4 inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-orange-300">
+          {t.news.read_label}
+          <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" />
+        </span>
       </div>
     </a>
   );
