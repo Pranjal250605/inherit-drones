@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { ArrowRight, SectionFrame, SectionLabel, ParallaxImage } from "../primitives";
+import {
+  ArrowRight,
+  SectionFrame,
+  SectionLabel,
+  ParallaxImage,
+  TickMark,
+} from "../primitives";
 import { useT, type Dict } from "../../i18n";
 import droneSpraying from "../../assets/drone-spraying.jpg";
 import hiroshimaAerial from "../../assets/hiroshima-aerial.jpg";
@@ -98,8 +104,10 @@ export function News() {
           </a>
         </div>
 
-        {/* Masonry — Pinterest-style packing via real flex columns. */}
-        <div data-anim="stagger" className="mt-12 flex flex-col gap-5 sm:flex-row md:mt-16">
+        {/* Masonry — Pinterest-style packing via real flex columns. Each column
+            ends with a brand "queued" placeholder that grows to flush the
+            ragged bottoms (columns stretch to equal height). */}
+        <div data-anim="stagger" className="mt-12 flex flex-col gap-5 sm:flex-row sm:items-stretch md:mt-16">
           {columns.map((col, ci) => (
             <div key={ci} className="flex flex-1 flex-col gap-5">
               {col.map(({ item, i }) => {
@@ -115,11 +123,43 @@ export function News() {
                   </div>
                 );
               })}
+              <QueuedTile />
             </div>
           ))}
         </div>
       </div>
     </SectionFrame>
+  );
+}
+
+/* Brand-toned "awaiting dispatch" slot. Grows (flex-1) to flush the ragged
+   bottoms of the masonry columns, using the site's surface + grid texture +
+   orange instrumentation accents (a radar ping, the "////" tick, skeleton
+   lines) so the empty space reads as intentional rather than blank. */
+function QueuedTile() {
+  return (
+    <div className="dot-grid-bg relative hidden min-h-[150px] flex-1 flex-col justify-between overflow-hidden rounded-2xl border border-fg/10 bg-bg p-5 shadow-sm sm:flex">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <TickMark />
+          <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-fg/45">
+            Queued
+          </span>
+        </div>
+        <span className="relative flex h-2.5 w-2.5">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-500/60" />
+          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-orange-500" />
+        </span>
+      </div>
+
+      <div className="space-y-2.5">
+        <div className="h-2.5 w-3/4 rounded-full bg-fg/[0.07]" />
+        <div className="h-2.5 w-1/2 rounded-full bg-fg/[0.07]" />
+        <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-fg/30">
+          20XX.XX · ——
+        </div>
+      </div>
+    </div>
   );
 }
 
