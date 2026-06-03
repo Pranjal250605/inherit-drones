@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { ArrowRight, SectionFrame, SectionLabel, ParallaxImage } from "../primitives";
 import { useT, type Dict } from "../../i18n";
 import droneSpraying from "../../assets/drone-spraying.jpg";
@@ -14,9 +15,8 @@ const IMG: Record<string, string> = {
   "bvlos-corridor": bvlosCorridor,
 };
 
-/* Per-tile aspect ratios + fallbacks. Varied heights are what make the masonry
-   pack like Pinterest — tiles of different shapes nest tightly into the columns
-   instead of sitting in a rigid grid. The first tile is the tall "feature". */
+/* Per-tile aspect ratios + fallbacks → varied heights make the masonry nest
+   like Pinterest. The first tile is the tall "feature". */
 const TILES = [
   { aspect: "aspect-[4/5]", feature: true, fallback: droneSpraying },
   { aspect: "aspect-[5/4]", feature: false, fallback: hiroshimaAerial },
@@ -24,9 +24,38 @@ const TILES = [
   { aspect: "aspect-[16/11]", feature: false, fallback: bvlosCorridor },
 ];
 
+/* Responsive column count. We build the masonry from REAL flex columns rather
+   than CSS multicolumn — multicol re-fragments on hover when a descendant gets
+   composited (the parallax/hover transform), which made cards flicker/vanish in
+   Chrome. Flex columns avoid that entirely. */
+function useColumnCount(): number {
+  const read = () =>
+    typeof window === "undefined"
+      ? 3
+      : window.innerWidth < 640
+      ? 1
+      : window.innerWidth < 1024
+      ? 2
+      : 3;
+  const [cols, setCols] = useState(read);
+  useEffect(() => {
+    const onResize = () => setCols(read());
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+  return cols;
+}
+
 export function News() {
   const { t } = useT();
   const items = t.news.items;
+  const cols = useColumnCount();
+
+  // Distribute items round-robin into `cols` columns (masonry packing).
+  const columns: Array<Array<{ item: NewsItem; i: number }>> = Array.from(
+    { length: cols },
+    (_, c) => items.map((item, i) => ({ item, i })).filter(({ i }) => i % cols === c)
+  );
 
   return (
     <SectionFrame
@@ -69,25 +98,25 @@ export function News() {
           </a>
         </div>
 
-        {/* Masonry — Pinterest-style: tiles of different heights flow and pack
-            into balanced columns (CSS multicol + break-inside-avoid). */}
-        <div
-          data-anim="stagger"
-          className="mt-12 gap-5 [column-fill:balance] columns-1 sm:columns-2 lg:columns-3 md:mt-16"
-        >
-          {items.map((item, i) => {
-            const tile = TILES[i] ?? TILES[0];
-            return (
-              <div key={item.code} data-anim-item className="mb-5 break-inside-avoid">
-                <NewsCard
-                  item={item}
-                  aspect={tile.aspect}
-                  feature={tile.feature}
-                  fallback={tile.fallback}
-                />
-              </div>
-            );
-          })}
+        {/* Masonry — Pinterest-style packing via real flex columns. */}
+        <div data-anim="stagger" className="mt-12 flex flex-col gap-5 sm:flex-row md:mt-16">
+          {columns.map((col, ci) => (
+            <div key={ci} className="flex flex-1 flex-col gap-5">
+              {col.map(({ item, i }) => {
+                const tile = TILES[i] ?? TILES[0];
+                return (
+                  <div key={item.code} data-anim-item>
+                    <NewsCard
+                      item={item}
+                      aspect={tile.aspect}
+                      feature={tile.feature}
+                      fallback={tile.fallback}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          ))}
         </div>
       </div>
     </SectionFrame>
