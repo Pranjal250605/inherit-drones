@@ -14,10 +14,15 @@ const IMG: Record<string, string> = {
   "bvlos-corridor": bvlosCorridor,
 };
 
-/* Fallback images so every dispatch is image-forward even if `img` is empty. */
-const FALLBACK = [droneSpraying, hiroshimaAerial, teamNapa, bvlosCorridor];
-
-type Variant = "big" | "small" | "wide";
+/* Per-tile aspect ratios + fallbacks. Varied heights are what make the masonry
+   pack like Pinterest — tiles of different shapes nest tightly into the columns
+   instead of sitting in a rigid grid. The first tile is the tall "feature". */
+const TILES = [
+  { aspect: "aspect-[4/5]", feature: true, fallback: droneSpraying },
+  { aspect: "aspect-[5/4]", feature: false, fallback: hiroshimaAerial },
+  { aspect: "aspect-[4/5]", feature: false, fallback: teamNapa },
+  { aspect: "aspect-[16/11]", feature: false, fallback: bvlosCorridor },
+];
 
 export function News() {
   const { t } = useT();
@@ -33,7 +38,6 @@ export function News() {
           <div className="max-w-3xl">
             <div className="flex flex-wrap items-center gap-3">
               <SectionLabel>{t.news.tag}</SectionLabel>
-              {/* live pulse — signals an active newsroom */}
               <span className="inline-flex items-center gap-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-orange-500">
                 <span className="relative flex h-1.5 w-1.5">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-500 opacity-75" />
@@ -59,28 +63,28 @@ export function News() {
             className="group inline-flex items-center gap-3 whitespace-nowrap text-[12px] font-bold uppercase tracking-[0.18em] text-fg/80 transition hover:text-orange-500"
           >
             {t.news.view_all}
-            <span className="grid h-8 w-8 place-items-center rounded-full bg-orange-500 text-white transition group-hover:bg-orange-400 group-hover:translate-x-0.5">
+            <span className="grid h-8 w-8 place-items-center rounded-full bg-orange-500 text-white transition group-hover:translate-x-0.5 group-hover:bg-orange-400">
               <ArrowRight className="h-3.5 w-3.5" />
             </span>
           </a>
         </div>
 
-        {/* Editorial bento — every dispatch is an image-forward overlay card. */}
+        {/* Masonry — Pinterest-style: tiles of different heights flow and pack
+            into balanced columns (CSS multicol + break-inside-avoid). */}
         <div
-          data-anim="card-stagger"
-          className="mt-12 grid grid-cols-1 gap-5 md:mt-16 md:grid-cols-2 lg:auto-rows-[minmax(0,1fr)] lg:grid-cols-3"
+          data-anim="stagger"
+          className="mt-12 gap-5 [column-fill:balance] columns-1 sm:columns-2 lg:columns-3 md:mt-16"
         >
           {items.map((item, i) => {
-            const variant: Variant = i === 0 ? "big" : i === 3 ? "wide" : "small";
-            const cls =
-              i === 0
-                ? "md:col-span-2 lg:row-span-2"
-                : i === 3
-                ? "md:col-span-2 lg:col-span-3"
-                : "";
+            const tile = TILES[i] ?? TILES[0];
             return (
-              <div key={item.code} data-anim-item className={cls}>
-                <NewsCard item={item} variant={variant} fallback={FALLBACK[i] ?? droneSpraying} />
+              <div key={item.code} data-anim-item className="mb-5 break-inside-avoid">
+                <NewsCard
+                  item={item}
+                  aspect={tile.aspect}
+                  feature={tile.feature}
+                  fallback={tile.fallback}
+                />
               </div>
             );
           })}
@@ -92,39 +96,38 @@ export function News() {
 
 function NewsCard({
   item,
-  variant,
+  aspect,
+  feature,
   fallback,
 }: {
   item: NewsItem;
-  variant: Variant;
+  aspect: string;
+  feature: boolean;
   fallback: string;
 }) {
   const { t } = useT();
   const imgSrc = (item.img && IMG[item.img]) || fallback;
-  const big = variant === "big";
-  const wide = variant === "wide";
 
   return (
     <a
       href="#contact"
       className={
-        "group card-lift relative flex flex-col justify-end overflow-hidden rounded-2xl border border-fg/10 text-white shadow-sm transition hover:shadow-2xl " +
-        (big ? "min-h-[460px]" : wide ? "min-h-[300px]" : "min-h-[222px]")
+        "group relative flex w-full flex-col justify-end overflow-hidden rounded-2xl border border-fg/10 text-white shadow-sm transition-shadow duration-500 hover:shadow-2xl " +
+        aspect
       }
     >
-      {/* image + cinematic gradient */}
       <ParallaxImage
         src={imgSrc}
         alt={item.title}
-        speed={big ? 0.18 : 0.1}
+        speed={feature ? 0.16 : 0.1}
         overlay={false}
         className="absolute inset-0 h-full w-full"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/10" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/5" />
       <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
 
-      {/* top row — category badge + dispatch code */}
-      <div className="absolute inset-x-0 top-0 z-10 flex items-start justify-between p-5">
+      {/* top — category badge + dispatch code */}
+      <div className="absolute inset-x-0 top-0 z-10 flex items-start justify-between p-4">
         <span className="inline-flex items-center gap-2 rounded-full bg-orange-500 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white shadow-lg shadow-black/20">
           {item.category}
           <span className="font-jp text-[9px] font-normal tracking-[0.04em] text-white/80">
@@ -136,22 +139,22 @@ function NewsCard({
         </span>
       </div>
 
-      {/* bottom content */}
-      <div className="relative z-10 p-5 md:p-7">
+      {/* bottom — meta + headline + (feature) excerpt + read */}
+      <div className="relative z-10 p-5 md:p-6">
         <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-white/70">
           <span className="h-px w-6 bg-orange-400" />
           {item.date}
         </div>
         <h3
           className={
-            "mt-3 font-display font-bold leading-[1.15] tracking-[-0.01em] text-white " +
-            (big ? "text-2xl md:text-4xl" : wide ? "text-2xl md:text-3xl" : "text-lg")
+            "mt-2.5 font-display font-bold leading-[1.14] tracking-[-0.01em] text-white " +
+            (feature ? "text-2xl md:text-3xl" : "text-lg md:text-xl")
           }
         >
           {item.title}
         </h3>
-        {(big || wide) && (
-          <p className="mt-3 max-w-xl text-pretty text-[14px] leading-relaxed text-white/75 line-clamp-2">
+        {feature && (
+          <p className="mt-3 text-pretty text-[13.5px] leading-relaxed text-white/75 line-clamp-2">
             {item.excerpt}
           </p>
         )}
