@@ -200,6 +200,55 @@ export function Brackets({ className = "" }: { className?: string }) {
 }
 
 /* ------------------------------------------------------------
+   Photo — the standard cinematic image treatment for the variant.
+   • clip-path wipe-in on scroll       (frame: data-tac="reveal")
+   • slow parallax drift on scroll     (layer: data-tac="parallax")
+   • gentle hover zoom + brightness     (img: CSS transform only)
+   Parallax lives on an oversized inner LAYER (GSAP owns its transform)
+   while the hover zoom lives on the <img> (CSS owns its transform), so
+   the two never fight over the same transform. Size/aspect is set by the
+   caller via `className` on the frame (e.g. "aspect-[4/5]" or "h-[60vh]").
+------------------------------------------------------------ */
+export function Photo({
+  src,
+  alt,
+  className = "",
+  speed = 0.1,
+  eager = false,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  speed?: number;
+  eager?: boolean;
+}) {
+  return (
+    <div
+      data-tac="reveal"
+      className={"group relative overflow-hidden bg-white/[0.04] " + className}
+    >
+      <div
+        data-tac="parallax"
+        data-speed={String(speed)}
+        className="absolute inset-x-0 -top-[14%] h-[128%] will-change-transform"
+      >
+        <img
+          src={src}
+          alt={alt}
+          loading={eager ? "eager" : "lazy"}
+          decoding="async"
+          className="h-full w-full object-cover brightness-[0.82] saturate-[1.05] transition-[transform,filter] duration-[1200ms] ease-out group-hover:scale-[1.05] group-hover:brightness-100"
+        />
+      </div>
+      {/* legibility + brand wash */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#04060a]/75 via-[#04060a]/10 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100 bg-gradient-to-tr from-orange-500/15 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------
    DroneGlyph — top-down quadcopter. Used by the scroll navigator
    and as decoration. When `spinning`, rotor discs blur-spin.
 ------------------------------------------------------------ */

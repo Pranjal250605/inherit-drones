@@ -375,9 +375,12 @@
   color: #fff;
   color-scheme: dark;
 }
+:root[data-experience="tactical"] {
+  scroll-behavior: smooth;
+}
 
 @layer utilities {
-  /* Spinning quadcopter rotor blur disc */
+  /* Spinning quadcopter rotor (used by the Technology drone illustration) */
   .rotor {
     animation: rotor 0.18s linear infinite;
     transform-origin: center;
@@ -387,65 +390,15 @@
     animation: rotor 0.6s linear infinite;
     transform-origin: center;
   }
-  /* Sweeping scan line across HUD panels */
-  .scanline {
-    animation: scanline 3.6s ease-in-out infinite;
-  }
-  /* Blinking telemetry status dot */
-  .blink {
-    animation: blink 1.6s steps(1, end) infinite;
-  }
-  /* Drifting fine grid (motion through space) */
-  .grid-drift {
-    animation: gridDrift 18s linear infinite;
-  }
-  /* Animated dashed flight rail */
-  .rail-dash {
-    animation: railDash 1.2s linear infinite;
-  }
-  /* Gentle idle hover for the navigator drone (no opacity change) */
-  .drone-bob {
-    animation: droneBob 3s ease-in-out infinite;
-  }
-}
-
-@keyframes droneBob {
-  0%, 100% { transform: translateY(-2px); }
-  50%      { transform: translateY(2px); }
 }
 
 @keyframes rotor {
   to { transform: rotate(360deg); }
 }
 
-@keyframes scanline {
-  0%   { transform: translateY(-100%); opacity: 0; }
-  10%  { opacity: 1; }
-  90%  { opacity: 1; }
-  100% { transform: translateY(2000%); opacity: 0; }
-}
-
-@keyframes blink {
-  0%, 60%  { opacity: 1; }
-  61%, 100% { opacity: 0.15; }
-}
-
-@keyframes gridDrift {
-  from { background-position: 0 0; }
-  to   { background-position: 0 -480px; }
-}
-
-@keyframes railDash {
-  to { stroke-dashoffset: -16; }
-}
-
 /* Tactical reduced-motion / no-anim fallbacks */
 .no-anim .rotor,
-.no-anim .rotor-idle,
-.no-anim .scanline,
-.no-anim .grid-drift,
-.no-anim .rail-dash,
-.no-anim .drone-bob {
+.no-anim .rotor-idle {
   animation: none !important;
 }
 

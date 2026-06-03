@@ -4,6 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TacticalHeader } from "./TacticalHeader";
 import { TacticalHero } from "./TacticalHero";
 import { TacticalMission } from "./TacticalMission";
+import { TacticalInterstitial } from "./TacticalInterstitial";
 import { TacticalSolutions } from "./TacticalSolutions";
 import { TacticalProcess } from "./TacticalProcess";
 import { TacticalTechnology } from "./TacticalTechnology";
@@ -13,7 +14,6 @@ import { TacticalTestimonial } from "./TacticalTestimonial";
 import { TacticalFAQ } from "./TacticalFAQ";
 import { TacticalContact } from "./TacticalContact";
 import { TacticalFooter } from "./TacticalFooter";
-import { DroneNavigator } from "./DroneNavigator";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -119,9 +119,49 @@ export function TacticalApp() {
           }
         );
       });
+
+      // cinematic image wipe-in: [data-tac="reveal"] clips from the top down.
+      gsap.utils.toArray<HTMLElement>('[data-tac="reveal"]').forEach((el) => {
+        gsap.fromTo(
+          el,
+          { clipPath: "inset(0 0 100% 0)" },
+          {
+            clipPath: "inset(0 0 0% 0)",
+            duration: 1.4,
+            ease: "power3.inOut",
+            scrollTrigger: { trigger: el, start: "top 88%" },
+          }
+        );
+      });
+
+      // parallax drift: [data-tac="parallax"] (oversized layer), data-speed tunes it.
+      gsap.utils.toArray<HTMLElement>('[data-tac="parallax"]').forEach((el) => {
+        const speed = parseFloat(el.dataset.speed || "0.1");
+        gsap.fromTo(
+          el,
+          { yPercent: -speed * 100 },
+          {
+            yPercent: speed * 100,
+            ease: "none",
+            scrollTrigger: {
+              trigger: el,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      });
     });
 
-    return () => ctx.revert();
+    // Big photos load after first paint; recompute trigger positions when they do.
+    const onLoad = () => ScrollTrigger.refresh();
+    window.addEventListener("load", onLoad);
+
+    return () => {
+      window.removeEventListener("load", onLoad);
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -136,11 +176,11 @@ export function TacticalApp() {
       </div>
 
       <TacticalHeader />
-      <DroneNavigator />
 
       <main>
         <TacticalHero />
         <TacticalMission />
+        <TacticalInterstitial />
         <TacticalSolutions />
         <TacticalProcess />
         <TacticalTechnology />

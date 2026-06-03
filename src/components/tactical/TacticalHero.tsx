@@ -57,10 +57,6 @@ export function TacticalHero() {
           </span>
         </h1>
 
-        <p className="mt-8 max-w-lg text-pretty text-[17px] leading-relaxed text-white/65">
-          {t.hero.paragraph}
-        </p>
-
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
           <TacButton href="#solutions">{t.hero.cta_primary}</TacButton>
           <GhostButton href="#technology">{t.hero.cta_secondary}</GhostButton>
