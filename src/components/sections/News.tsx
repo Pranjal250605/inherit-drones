@@ -192,21 +192,21 @@ function NewsCard({
         overlay={false}
         className="absolute inset-0 h-full w-full"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/5" />
+      {/* warm, brand-aligned legibility gradient (deep charcoal-brown → faint
+          orange wash → clear) instead of a flat black scrim */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to top, rgba(20,13,7,0.92) 0%, rgba(20,13,7,0.5) 34%, rgba(249,115,22,0.12) 58%, transparent 80%)",
+        }}
+      />
       <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
 
-      {/* top — category badge + dispatch code */}
-      <div className="absolute inset-x-0 top-0 z-10 flex items-start justify-between p-4">
-        <span className="inline-flex items-center gap-2 rounded-full bg-orange-500 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white shadow-lg shadow-black/20">
-          {item.category}
-          <span className="font-jp text-[9px] font-normal tracking-[0.04em] text-white/80">
-            {item.category_jp}
-          </span>
-        </span>
-        <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-white/75">
-          {item.code}
-        </span>
-      </div>
+      {/* dispatch code (top-right corner detail) */}
+      <span className="absolute right-4 top-4 z-10 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-white/70">
+        {item.code}
+      </span>
 
       {/* bottom — meta + headline + (feature) excerpt + read */}
       <div className="relative z-10 p-5 md:p-6">
