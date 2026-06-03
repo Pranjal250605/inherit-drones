@@ -16,9 +16,25 @@ import { FAQ } from "./components/sections/FAQ";
 import { Contact } from "./components/sections/Contact";
 import { Footer } from "./components/sections/Footer";
 import { SettingsDock } from "./components/SettingsDock";
+import { useExperience } from "./experience";
+import { TacticalApp } from "./components/tactical/TacticalApp";
 
 export default function App() {
+  const { experience } = useExperience();
+
+  // Hooks must run unconditionally; the standard-variant scroll animations are
+  // a no-op when the tactical tree is mounted (none of their target attributes
+  // are present), so it is safe to always call the hook.
   useGsapAnimations();
+
+  if (experience === "tactical") {
+    return (
+      <>
+        <TacticalApp />
+        <SettingsDock />
+      </>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-bg text-fg">

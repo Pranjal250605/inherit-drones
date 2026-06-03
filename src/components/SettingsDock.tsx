@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { ThemeSwitcher } from "./ThemeSwitcher";
+import { ExperienceSwitcher } from "./ExperienceSwitcher";
 
 /* Floating bottom-right control. Minimized to a single button; expands to a
    small popover with the theme + language switchers (moved out of the nav). */
@@ -41,6 +42,12 @@ export function SettingsDock() {
         }
       >
         <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-fg/45">
+          Experience
+        </div>
+        <div className="mt-2.5">
+          <ExperienceSwitcher />
+        </div>
+        <div className="mt-5 text-[10px] font-bold uppercase tracking-[0.2em] text-fg/45">
           Theme
         </div>
         <div className="mt-2.5">
