@@ -1,8 +1,10 @@
-import { Mono, SectionFrame, SectionLabel, ParallaxImage } from "../primitives";
+import { SectionFrame, SectionLabel, ParallaxImage } from "../primitives";
 import { useT } from "../../i18n";
 import teamNapa from "../../assets/team-napa.jpg";
 
-const PILLAR_OFFSET = ["", "md:mt-12", "md:mt-5"];
+const PILLAR_OFFSET = ["", "md:mt-10", "md:mt-5"];
+/* Punchy solid card colours (brand orange shades + one ink card for contrast). */
+const PILLAR_COLORS = ["#F97316", "#18120E", "#EA580C"];
 
 export function Mission() {
   const { t } = useT();
@@ -61,15 +63,24 @@ export function Mission() {
             <div
               key={p.code}
               data-anim-item
-              className={"border-t-2 border-orange-500/80 pt-6 " + (PILLAR_OFFSET[i] ?? "")}
+              className={
+                "flex flex-col rounded-2xl p-8 text-white shadow-lg shadow-black/10 transition-transform duration-300 hover:-translate-y-1 md:p-9 " +
+                (PILLAR_OFFSET[i] ?? "")
+              }
+              style={{ backgroundColor: PILLAR_COLORS[i % PILLAR_COLORS.length] }}
             >
-              <div className="flex items-baseline justify-between">
-                <h3 className="font-display text-xl font-bold tracking-[-0.01em]">
-                  {p.title}
-                </h3>
-                <Mono className="text-fg/40">{p.jp}</Mono>
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-[13px] font-bold tracking-[0.18em] text-white/75">
+                  0{i + 1}
+                </span>
+                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.24em] text-white/55">
+                  {p.jp}
+                </span>
               </div>
-              <p className="mt-5 max-w-sm text-pretty text-[15px] leading-relaxed text-muted">
+              <h3 className="mt-10 font-display text-3xl font-bold leading-[1.05] tracking-[-0.02em] text-white md:text-4xl">
+                {p.title}
+              </h3>
+              <p className="mt-4 text-pretty text-[15px] leading-relaxed text-white/85">
                 {p.body}
               </p>
             </div>
