@@ -159,33 +159,23 @@ function SolutionCard({
   return (
     <a
       href="#contact"
-      className="card-lift group block rounded-2xl bg-white p-6 shadow-lg shadow-black/10 md:p-7"
+      className="card-lift group block rounded-2xl bg-white p-7 shadow-lg shadow-black/10 md:p-9"
     >
-      <div className="flex items-baseline gap-3">
-        <span className="font-mono text-base font-bold text-orange-500">
+      <div className="flex items-baseline gap-3.5">
+        <span className="font-mono text-lg font-bold text-orange-500">
           {String(index + 1).padStart(2, "0")}
         </span>
-        <h3 className="font-display text-xl font-bold leading-tight tracking-[-0.01em] text-orange-600 md:text-2xl">
+        <h3 className="font-display text-2xl font-bold leading-tight tracking-[-0.01em] text-orange-600 md:text-3xl">
           {card.title}
         </h3>
       </div>
-      <p className="mt-3 text-[15px] leading-relaxed text-fg/70 md:text-base">
+      <p className="mt-4 text-[17px] leading-relaxed text-fg/75 md:text-lg">
         {card.desc}
       </p>
-      <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2">
-        {card.metrics.map(([k, v]) => (
-          <span key={k} className="inline-flex items-baseline gap-1.5">
-            <span className="font-mono text-[14px] font-bold text-orange-500">{v}</span>
-            <span className="font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-fg/45">
-              {k}
-            </span>
-          </span>
-        ))}
-        <span className="ml-auto inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-[0.16em] text-orange-500 opacity-0 transition-opacity group-hover:opacity-100">
-          {cta}
-          <ArrowRight className="h-3 w-3" />
-        </span>
-      </div>
+      <span className="mt-6 inline-flex items-center gap-1.5 text-[12px] font-bold uppercase tracking-[0.16em] text-orange-500 transition-all group-hover:gap-3">
+        {cta}
+        <ArrowRight className="h-3.5 w-3.5" />
+      </span>
     </a>
   );
 }
