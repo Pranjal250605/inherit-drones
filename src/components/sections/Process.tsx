@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, SectionFrame, SectionLabel } from "../primitives";
@@ -7,69 +7,89 @@ import { useT } from "../../i18n";
 gsap.registerPlugin(ScrollTrigger);
 
 const CARD_GRADIENTS = [
-  "from-[#FF6133] to-[#FF3717]",
-  "from-[#F2861A] to-[#DB780C]",
-  "from-[#FF6133] to-[#E0500C]",
-  "from-[#E08410] to-[#C96A00]",
+  "linear-gradient(155deg,#FF6A33,#EA3D0C)",
+  "linear-gradient(155deg,#F7951B,#E07407)",
+  "linear-gradient(155deg,#FB5E28,#D8410B)",
+  "linear-gradient(155deg,#F2A516,#E07A00)",
 ];
+
+/* Faint top-down quadcopter line art — gives each card a subject. */
+function DroneLineArt({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 120 120"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <line x1="60" y1="60" x2="28" y2="28" />
+      <line x1="60" y1="60" x2="92" y2="28" />
+      <line x1="60" y1="60" x2="28" y2="92" />
+      <line x1="60" y1="60" x2="92" y2="92" />
+      <circle cx="28" cy="28" r="14" />
+      <circle cx="92" cy="28" r="14" />
+      <circle cx="28" cy="92" r="14" />
+      <circle cx="92" cy="92" r="14" />
+      <rect x="49" y="49" width="22" height="22" rx="4" />
+      <circle cx="60" cy="60" r="3.5" />
+    </svg>
+  );
+}
 
 export function Process() {
   const { t } = useT();
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
+  const rowRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    const track = trackRef.current;
-    if (!section || !track) return;
-
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const narrow = window.innerWidth < 768;
-
-    if (reduced || narrow) return;
+  /* Cards slide in (from the right, staggered) when the row is reached. No pin /
+     horizontal scroll — the heading + all four cards sit on screen together. */
+  useLayoutEffect(() => {
+    const row = rowRef.current;
+    if (!row) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const ctx = gsap.context(() => {
-      const getDistance = () => track.scrollWidth - section.clientWidth;
-
-      gsap.to(track, {
-        x: () => -getDistance(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: () => "+=" + getDistance(),
-          pin: true,
-          scrub: 1,
-          invalidateOnRefresh: true,
-        },
-      });
-    }, section);
+      const cards = gsap.utils.toArray<HTMLElement>("[data-card]", row);
+      gsap.fromTo(
+        cards,
+        { autoAlpha: 0, x: 70 },
+        {
+          autoAlpha: 1,
+          x: 0,
+          duration: 0.7,
+          ease: "power3.out",
+          stagger: 0.12,
+          scrollTrigger: { trigger: row, start: "top 80%", once: true },
+        }
+      );
+    }, row);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <SectionFrame id="process" className="relative bg-bg">
-      {/* Header: not pinned — sits above the pinned scroll zone */}
-      <div className="mx-auto max-w-[1200px] px-6 py-20 lg:px-12 md:py-32">
-        <header className="flex flex-col items-start gap-8 md:flex-row md:items-end md:justify-between">
+    <SectionFrame id="process" className="dot-grid-bg relative overflow-hidden bg-bg py-16 md:py-20">
+      <div className="mx-auto max-w-[1500px] px-6 lg:px-12">
+        <header className="flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-3xl">
             <SectionLabel>{t.process.tag}</SectionLabel>
             <h2
               data-anim="title-up"
-              className="mt-6 font-display text-5xl font-bold leading-[1.04] tracking-[-0.03em] text-fg md:text-7xl"
+              className="mt-5 font-display text-4xl font-bold leading-[1.04] tracking-[-0.03em] text-fg md:text-5xl lg:text-6xl"
             >
               {t.process.h2_line1}{" "}
               <em className="not-italic text-orange-500">{t.process.h2_emph}</em>{" "}
               {t.process.h2_line2}
             </h2>
-            <div className="mt-5 font-jp text-[12px] tracking-[0.08em] text-fg/50">
+            <div className="mt-4 font-jp text-[12px] tracking-[0.08em] text-fg/50">
               {t.process.subtitle_jp}
             </div>
           </div>
           <a
             href="#contact"
-            className="group mt-6 inline-flex items-center gap-3 whitespace-nowrap text-[12px] font-bold uppercase tracking-[0.18em] text-fg/80 transition-colors hover:text-orange-500 md:mt-0"
+            className="group inline-flex items-center gap-3 whitespace-nowrap text-[12px] font-bold uppercase tracking-[0.18em] text-fg/80 transition-colors hover:text-orange-500"
           >
             {t.process.cta}
             <span className="grid h-8 w-8 place-items-center rounded-full bg-orange-500 text-white transition group-hover:bg-orange-400">
@@ -77,63 +97,38 @@ export function Process() {
             </span>
           </a>
         </header>
-      </div>
 
-      {/* Scroll-pinned horizontal track */}
-      <div
-        ref={sectionRef}
-        className="overflow-hidden"
-      >
         <div
-          ref={trackRef}
-          className="flex flex-col gap-6 px-6 pb-20 md:flex-row md:flex-nowrap md:gap-8 md:px-12 md:pb-32 lg:px-16"
+          ref={rowRef}
+          className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
         >
           {t.process.steps.map((s, i) => (
             <div
               key={s.n}
-              className={[
-                "group relative flex min-w-full flex-col justify-between overflow-hidden rounded-3xl bg-gradient-to-br p-8 shadow-2xl shadow-black/20 transition-transform duration-300 hover:-translate-y-1 md:min-w-[480px] md:p-12 lg:min-w-[560px]",
-                CARD_GRADIENTS[i % CARD_GRADIENTS.length],
-              ].join(" ")}
-              style={{ minHeight: "520px" }}
+              data-card
+              className="group relative flex min-h-[300px] flex-col justify-between overflow-hidden rounded-2xl p-7 text-white shadow-xl shadow-black/15 transition-transform duration-300 hover:-translate-y-1.5 md:min-h-[330px]"
+              style={{ background: CARD_GRADIENTS[i % CARD_GRADIENTS.length] }}
             >
-              {/* Decorative watermark number */}
-              <div className="pointer-events-none absolute -right-6 -top-4 select-none">
-                <span className="font-display text-[11rem] font-bold leading-none tracking-tighter text-white/10 md:text-[14rem]">
-                  0{i + 1}
-                </span>
-              </div>
+              {/* drone line art watermark */}
+              <DroneLineArt className="pointer-events-none absolute -right-5 -top-5 h-36 w-36 text-white/20 transition-transform duration-500 group-hover:rotate-45" />
 
-              {/* Top: phase label */}
-              <div className="relative z-10 flex items-center gap-3">
-                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/60">
-                  Phase 0{i + 1}
-                </span>
-              </div>
+              <span className="relative z-10 font-mono text-[11px] font-bold uppercase tracking-[0.24em] text-white/70">
+                Phase 0{i + 1}
+              </span>
 
-              {/* Middle: jp kicker + title */}
-              <div className="relative z-10 mt-auto">
-                <p className="font-jp text-[11px] tracking-[0.1em] text-white/50">{s.jp}</p>
-                <h3 className="mt-3 font-display text-3xl font-bold leading-tight tracking-[-0.02em] text-white md:text-4xl">
+              <div className="relative z-10">
+                <p className="font-jp text-[12px] tracking-[0.1em] text-white/60">
+                  {s.jp}
+                </p>
+                <h3 className="mt-2 font-display text-3xl font-bold leading-tight tracking-[-0.02em] text-white md:text-4xl">
                   {s.title}
                 </h3>
-                <p className="mt-5 text-base leading-relaxed text-white/75">{s.body}</p>
-              </div>
-
-              {/* Bottom: big number accent */}
-              <div className="relative z-10 mt-10 flex items-end justify-between">
-                <span className="font-display text-6xl font-bold leading-none text-white/20 md:text-7xl">
-                  0{i + 1}
-                </span>
-                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/40">
-                  Sys.Ready
-                </span>
+                <p className="mt-3 text-[15px] leading-relaxed text-white/85">
+                  {s.body}
+                </p>
               </div>
             </div>
           ))}
-          {/* trailing spacer — extends the horizontal travel so the slide reads
-              as the dominant motion (and the last card fully clears) */}
-          <div aria-hidden="true" className="hidden shrink-0 md:block md:min-w-[24vw]" />
         </div>
       </div>
     </SectionFrame>
