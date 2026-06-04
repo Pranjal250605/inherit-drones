@@ -84,39 +84,38 @@ export function Solutions() {
             </div>
           </div>
 
-          {/* RIGHT — circular node diagram */}
-          <div data-anim="stagger" className="relative mx-auto aspect-square w-full max-w-[460px]">
+          {/* RIGHT — circular node diagram (nodes orbit slowly) */}
+          <div className="relative mx-auto aspect-square w-full max-w-[460px]">
             {/* ring */}
             <div className="absolute left-1/2 top-1/2 h-[74%] w-[74%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/45" />
-            {/* centre label */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center leading-none">
-              <div className="font-display text-xl font-bold tracking-[0.02em] md:text-2xl">
+            {/* centre label (static hub) */}
+            <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-center leading-none">
+              <div className="font-display text-2xl font-bold tracking-[0.02em] md:text-3xl">
                 {s.center_a}
               </div>
-              <div className="mt-1 font-display text-2xl font-bold tracking-[-0.01em] md:text-3xl">
+              <div className="mt-1.5 font-display text-3xl font-bold tracking-[-0.01em] md:text-4xl">
                 {s.center_b}
               </div>
             </div>
-            {/* nodes */}
-            {cards.map((c, i) => (
-              <div
-                key={c.id}
-                data-anim-item
-                className="absolute -translate-x-1/2 -translate-y-1/2"
-                style={{ top: NODE_POS[i]?.top, left: NODE_POS[i]?.left }}
-              >
-                <div className="glass-dark grid h-28 w-28 place-items-center rounded-full text-center transition-transform duration-300 hover:scale-105 md:h-32 md:w-32">
-                  <div>
-                    <div className="font-mono text-[11px] font-bold text-orange-300">
-                      {String(i + 1).padStart(2, "0")}
-                    </div>
-                    <div className="mt-1 px-2 font-display text-sm font-bold leading-tight text-white md:text-base">
-                      {c.short}
+            {/* orbiting node ring — the three circles rotate slowly around the
+                hub; each label counter-rotates so it stays upright */}
+            <div className="absolute inset-0 motion-safe:animate-[spin_50s_linear_infinite]">
+              {cards.map((c, i) => (
+                <div
+                  key={c.id}
+                  className="absolute -translate-x-1/2 -translate-y-1/2"
+                  style={{ top: NODE_POS[i]?.top, left: NODE_POS[i]?.left }}
+                >
+                  <div className="motion-safe:animate-[spin_50s_linear_infinite_reverse]">
+                    <div className="grid h-32 w-32 place-items-center rounded-full bg-white text-center shadow-xl shadow-black/15 transition-transform duration-300 hover:scale-105 md:h-36 md:w-36">
+                      <span className="px-3 font-display text-xl font-bold leading-tight text-orange-600 md:text-2xl">
+                        {c.short}
+                      </span>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
@@ -160,29 +159,29 @@ function SolutionCard({
   return (
     <a
       href="#contact"
-      className="card-lift glass-dark group block rounded-xl p-5 text-white md:p-6"
+      className="card-lift group block rounded-2xl bg-white p-6 shadow-lg shadow-black/10 md:p-7"
     >
       <div className="flex items-baseline gap-3">
-        <span className="font-mono text-sm font-bold text-orange-300">
+        <span className="font-mono text-base font-bold text-orange-500">
           {String(index + 1).padStart(2, "0")}
         </span>
-        <h3 className="font-display text-lg font-bold leading-tight tracking-[-0.01em] transition-colors group-hover:text-orange-300 md:text-xl">
+        <h3 className="font-display text-xl font-bold leading-tight tracking-[-0.01em] text-orange-600 md:text-2xl">
           {card.title}
         </h3>
       </div>
-      <p className="mt-2 text-[13.5px] leading-relaxed text-white/70">
+      <p className="mt-3 text-[15px] leading-relaxed text-fg/70 md:text-base">
         {card.desc}
       </p>
-      <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-1.5">
+      <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2">
         {card.metrics.map(([k, v]) => (
           <span key={k} className="inline-flex items-baseline gap-1.5">
-            <span className="font-mono text-[12px] font-bold text-white">{v}</span>
-            <span className="font-mono text-[9.5px] font-medium uppercase tracking-[0.16em] text-white/50">
+            <span className="font-mono text-[14px] font-bold text-orange-500">{v}</span>
+            <span className="font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-fg/45">
               {k}
             </span>
           </span>
         ))}
-        <span className="ml-auto inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-[0.16em] text-orange-300 opacity-0 transition-opacity group-hover:opacity-100">
+        <span className="ml-auto inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-[0.16em] text-orange-500 opacity-0 transition-opacity group-hover:opacity-100">
           {cta}
           <ArrowRight className="h-3 w-3" />
         </span>
