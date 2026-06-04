@@ -70,7 +70,7 @@ export function News() {
     >
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
         <div className="flex flex-col items-start gap-8 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-3xl">
+          <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-3">
               <SectionLabel>{t.news.tag}</SectionLabel>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-orange-500">
@@ -83,7 +83,7 @@ export function News() {
             </div>
             <h2
               data-anim="title-up"
-              className="mt-6 font-display text-5xl font-bold leading-[1.02] tracking-[-0.03em] text-fg md:text-7xl"
+              className="mt-6 font-display text-4xl font-bold leading-[1.05] tracking-[-0.03em] text-fg md:text-5xl lg:whitespace-nowrap lg:text-6xl"
             >
               {t.news.h2_pre}
               {t.news.h2_emph}
@@ -192,42 +192,37 @@ function NewsCard({
         overlay={false}
         className="absolute inset-0 h-full w-full"
       />
-      {/* warm, brand-aligned legibility gradient (deep charcoal-brown → faint
-          orange wash → clear) instead of a flat black scrim */}
+      {/* brand orange legibility gradient (deep burnt-orange → orange wash →
+          clear) — keeps the cards on-brand instead of a grey/charcoal scrim */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(to top, rgba(20,13,7,0.92) 0%, rgba(20,13,7,0.5) 34%, rgba(249,115,22,0.12) 58%, transparent 80%)",
+            "linear-gradient(to top, rgba(122,40,8,0.95) 0%, rgba(216,75,12,0.66) 30%, rgba(249,115,22,0.26) 55%, transparent 82%)",
         }}
       />
       <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
 
       {/* dispatch code (top-right corner detail) */}
-      <span className="absolute right-4 top-4 z-10 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-white/70">
+      <span className="absolute right-4 top-4 z-10 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-white/75">
         {item.code}
       </span>
 
-      {/* bottom — meta + headline + (feature) excerpt + read */}
+      {/* bottom — meta + headline + read (no excerpt) */}
       <div className="relative z-10 p-5 md:p-6">
-        <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-white/70">
-          <span className="h-px w-6 bg-orange-400" />
+        <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-white/75">
+          <span className="h-px w-6 bg-white/80" />
           {item.date}
         </div>
         <h3
           className={
-            "mt-2.5 font-display font-bold leading-[1.14] tracking-[-0.01em] text-white " +
-            (feature ? "text-2xl md:text-3xl" : "text-lg md:text-xl")
+            "mt-2.5 font-display font-bold leading-[1.1] tracking-[-0.015em] text-white " +
+            (feature ? "text-3xl md:text-4xl" : "text-xl md:text-2xl")
           }
         >
           {item.title}
         </h3>
-        {feature && (
-          <p className="mt-3 text-pretty text-[13.5px] leading-relaxed text-white/75 line-clamp-2">
-            {item.excerpt}
-          </p>
-        )}
-        <span className="mt-4 inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-orange-300">
+        <span className="mt-4 inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-white">
           {t.news.read_label}
           <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" />
         </span>
