@@ -27,7 +27,7 @@ export function Header() {
         "fixed inset-x-0 top-0 z-50 transition-colors duration-300 " +
         (scrolled || mobileOpen
           ? "backdrop-blur-xl bg-bg/80 border-b border-fg/10 text-fg shadow-sm"
-          : "border-b border-transparent bg-transparent text-white [text-shadow:0_1px_10px_rgb(0_0_0/0.45)]")
+          : "border-b border-transparent bg-transparent text-fg")
       }
     >
       <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-6 lg:h-20 lg:px-12">

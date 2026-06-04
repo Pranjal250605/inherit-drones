@@ -1,166 +1,110 @@
-import { useEffect, useState } from "react";
-import { ArrowRight } from "../primitives";
+import { TickMark, ArrowRight } from "../primitives";
 import { useT } from "../../i18n";
-import { useTheme } from "../../theme";
 import hiroshimaAerial from "../../assets/hiroshima-aerial.jpg";
 import droneSpraying from "../../assets/drone-spraying.jpg";
 import teamNapa from "../../assets/team-napa.jpg";
 
-/* Fujitaka-style full-bleed photo carousel — auto-advancing slides with a slow
-   Ken Burns zoom, centered messaging, minimal chrome. Kept distinct from
-   Fujitaka with the Inherit orange accent, JP/EN slide captions and an orange
-   segmented progress indicator. */
-const SLIDES = [
-  { img: hiroshimaAerial, jp: "瀬戸内", en: "SETOUCHI" },
-  { img: droneSpraying, jp: "現場", en: "FIELD OPS" },
-  { img: teamNapa, jp: "広島", en: "HIROSHIMA" },
-];
-
+/* Fujitaka-feel hero: a light photo mosaic (big left + cityscape + small cells)
+   with a giant orange brand wordmark marquee laid across the images, and a
+   tick + bold heading text panel anchored bottom-left. Kept distinct with the
+   Inherit orange + our own copy/imagery. */
 export function Hero() {
   const { t } = useT();
-  const { theme } = useTheme();
-  const [active, setActive] = useState(0);
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = window.setInterval(
-      () => setActive((a) => (a + 1) % SLIDES.length),
-      5500
-    );
-    return () => window.clearInterval(id);
-  }, []);
 
   return (
     <section
       id="top"
-      data-theme="dark"
-      className="relative isolate flex min-h-[100svh] flex-col items-center justify-center overflow-hidden bg-bg text-fg"
+      className="relative min-h-[100svh] overflow-hidden bg-bg-alt pt-[72px] lg:pt-[92px]"
     >
-      {/* crossfading photo carousel */}
-      {SLIDES.map((s, i) => (
-        <div
-          key={s.en}
-          aria-hidden={i !== active}
-          className={
-            "absolute inset-0 -z-20 transition-opacity duration-[1200ms] ease-out " +
-            (i === active ? "opacity-100" : "opacity-0")
-          }
-        >
-          <img
-            src={s.img}
-            alt=""
-            loading={i === 0 ? "eager" : "lazy"}
-            className={
-              "h-full w-full object-cover " + (i === active ? "hero-kenburns" : "")
-            }
-          />
-        </div>
-      ))}
-
-      {/* legibility wash + fade into the page below */}
-      <div
-        className="absolute inset-0 -z-10"
-        style={{
-          background:
-            theme === "light"
-              ? "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.32) 45%, rgba(0,0,0,0.55) 78%, rgb(var(--page-bg)) 100%)"
-              : "linear-gradient(to bottom, rgb(var(--bg) / 0.55) 0%, rgb(var(--bg) / 0.32) 45%, rgb(var(--bg) / 0.6) 78%, rgb(var(--page-bg)) 100%)",
-        }}
-      />
-
-      {/* centered messaging */}
-      <div
-        data-hero="content"
-        className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-6 text-center"
-      >
-        <div
-          data-hero="tag"
-          className="mb-7 inline-flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.28em] text-white/75"
-        >
-          <span className="h-1.5 w-1.5 rounded-full bg-orange-500" />
-          {t.hero.tag_brand} · {t.hero.tag_country}
-        </div>
-
-        <h1
-          data-hero="title"
-          className="font-display text-[3.25rem] font-bold uppercase leading-[0.95] tracking-[-0.04em] text-white sm:text-7xl lg:text-[6rem]"
-        >
-          <span className="block">
-            {t.hero.h1_line1_pre}
-            <span className="text-orange-400">{t.hero.h1_line1_emph}</span>
-          </span>
-          <span className="block text-white/90">
-            {t.hero.h1_line2_pre}
-            {t.hero.h1_line2_emph}
-          </span>
-        </h1>
-
-        <div
-          data-hero="rule"
-          className="mt-7 flex items-center gap-4 font-jp text-[12px] tracking-[0.22em] text-white/55"
-        >
-          <span className="h-px w-10 bg-orange-500" />
-          {t.hero.rule_jp}
-          <span className="h-px w-10 bg-orange-500" />
-        </div>
-
-        <p
-          data-hero="paragraph"
-          className="mt-7 max-w-lg text-pretty text-[15px] leading-relaxed text-white/75 md:text-base"
-        >
-          {t.hero.paragraph}
-        </p>
-
-        <div data-hero="ctas" className="mt-10 flex flex-col gap-4 sm:flex-row">
-          <a
-            href="#solutions"
-            className="group relative inline-flex items-center justify-center gap-2.5 overflow-hidden whitespace-nowrap rounded-full border border-white/30 px-7 py-3.5 text-[13px] font-bold tracking-[0.03em] text-white backdrop-blur-md transition duration-300 hover:border-white/45 hover:brightness-110"
-            style={{
-              background:
-                "linear-gradient(135deg, rgba(249,115,22,0.82) 0%, rgba(234,88,12,0.68) 100%)",
-              boxShadow:
-                "inset 0 1px 0 rgba(255,255,255,0.45), 0 12px 34px -10px rgba(249,115,22,0.55)",
-            }}
-          >
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/35 to-transparent"
+      <div className="mx-auto grid max-w-[1600px] grid-cols-1 gap-3 p-3 lg:h-[calc(100svh-92px)] lg:grid-cols-12">
+        {/* LEFT — big image + text panel */}
+        <div className="flex flex-col gap-3 lg:col-span-7">
+          <figure className="relative aspect-[16/10] overflow-hidden rounded-[1.75rem] lg:aspect-auto lg:flex-1">
+            <img
+              src={teamNapa}
+              alt="INHERIT pilot team"
+              className="h-full w-full object-cover"
+              loading="eager"
             />
-            <span className="relative z-10">{t.hero.cta_primary}</span>
-            <ArrowRight className="relative z-10 h-3.5 w-3.5 transition group-hover:translate-x-1" />
-          </a>
-          <a
-            href="#technology"
-            className="group inline-flex items-center gap-2.5 whitespace-nowrap rounded-full border border-white/25 px-7 py-3.5 text-[13px] font-medium tracking-[0.04em] text-white/85 backdrop-blur-sm transition hover:border-white/50 hover:text-white"
+          </figure>
+
+          <div
+            data-hero="content"
+            className="relative z-30 flex flex-col justify-center rounded-[1.75rem] bg-bg p-8 shadow-sm lg:p-12"
           >
-            {t.hero.cta_secondary}
-            <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
-          </a>
+            <TickMark className="h-4" />
+            <h1 className="mt-5 font-display text-4xl font-bold leading-[1.04] tracking-[-0.03em] text-fg md:text-5xl lg:text-6xl">
+              {t.hero.h1_line1_pre}
+              <span className="text-orange-500">{t.hero.h1_line1_emph}</span>{" "}
+              {t.hero.h1_line2_pre}
+              {t.hero.h1_line2_emph}
+            </h1>
+            <p className="mt-5 max-w-lg text-pretty text-[16px] leading-relaxed text-muted md:text-lg">
+              {t.hero.paragraph}
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a
+                href="#solutions"
+                className="group inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-full bg-orange-500 px-7 py-3.5 text-[13px] font-bold tracking-[0.03em] text-white transition hover:bg-orange-400"
+              >
+                {t.hero.cta_primary}
+                <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+              </a>
+              <a
+                href="#technology"
+                className="group inline-flex items-center gap-2.5 whitespace-nowrap rounded-full border border-fg/20 px-7 py-3.5 text-[13px] font-semibold tracking-[0.03em] text-fg transition hover:border-orange-500 hover:text-orange-500"
+              >
+                {t.hero.cta_secondary}
+                <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT — cityscape + two small cells */}
+        <div className="flex flex-col gap-3 lg:col-span-5">
+          <figure className="relative aspect-[16/9] overflow-hidden rounded-[1.75rem] lg:aspect-auto lg:flex-1">
+            <img
+              src={hiroshimaAerial}
+              alt="Setouchi inland sea"
+              className="h-full w-full object-cover"
+              loading="eager"
+            />
+          </figure>
+          <div className="grid grid-cols-2 gap-3 lg:flex-1">
+            <figure className="relative aspect-square overflow-hidden rounded-[1.75rem] lg:aspect-auto">
+              <img
+                src={droneSpraying}
+                alt="IH-04 on a field mission"
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </figure>
+            <figure className="relative aspect-square overflow-hidden rounded-[1.75rem] lg:aspect-auto">
+              <img
+                src={hiroshimaAerial}
+                alt="Coastal corridor"
+                className="h-full w-full object-cover object-bottom"
+                loading="lazy"
+              />
+            </figure>
+          </div>
         </div>
       </div>
 
-      {/* slide caption + segmented progress indicator */}
-      <div className="absolute inset-x-0 bottom-8 z-10 mx-auto flex max-w-[1400px] items-center justify-between px-6 lg:px-12">
-        <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.24em] text-white/70">
-          <span className="font-jp">{SLIDES[active]?.jp}</span>
-          <span className="text-white/40">/ {SLIDES[active]?.en}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          {SLIDES.map((s, i) => (
-            <button
-              key={s.en}
-              type="button"
-              onClick={() => setActive(i)}
-              aria-label={`Go to slide ${i + 1}`}
-              className="h-1 w-10 overflow-hidden rounded-full bg-white/25"
+      {/* giant orange brand wordmark, laid across the mosaic */}
+      <div
+        data-hero="ticker"
+        className="pointer-events-none absolute inset-x-0 top-[44%] z-20 -translate-y-1/2 overflow-hidden lg:top-[46%]"
+      >
+        <div className="marquee flex w-max items-center gap-10">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <span
+              key={i}
+              className="font-display text-[16vw] font-extrabold uppercase leading-none tracking-[-0.05em] text-orange-500 lg:text-[9.5rem]"
             >
-              <span
-                className={
-                  "block h-full rounded-full bg-orange-500 transition-all duration-500 " +
-                  (i === active ? "w-full" : "w-0")
-                }
-              />
-            </button>
+              INHERIT
+            </span>
           ))}
         </div>
       </div>
