@@ -9,59 +9,74 @@ gsap.registerPlugin(ScrollTrigger);
 
 type Spec = Dict["tech"]["specs"][number];
 
-// Strict 4-corner positions for the HUD stats to prevent overlapping
-// Six specs → six slots, three down each flank of the drone (no overlap).
-const HUD_POSITIONS = [
-  "top-[2%] left-[-8%] lg:left-[-26%] xl:left-[-34%]",        // L top
-  "top-[39%] left-[-12%] lg:left-[-32%] xl:left-[-40%]",      // L middle
-  "bottom-[2%] left-[-8%] lg:left-[-26%] xl:left-[-34%]",     // L bottom
-  "top-[2%] right-[-8%] lg:right-[-26%] xl:right-[-34%]",     // R top
-  "top-[39%] right-[-12%] lg:right-[-32%] xl:right-[-40%]",   // R middle
-  "bottom-[2%] right-[-8%] lg:right-[-26%] xl:right-[-34%]",  // R bottom
-];
-
 export function Technology() {
   const { t } = useT();
-  const containerRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const droneRef = useRef<HTMLDivElement>(null);
   const specsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const leftRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container || window.innerWidth < 768) return;
+    const section = sectionRef.current;
+    if (!section) return;
 
-    let ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: container,
-          start: "top top",
-          end: "+=2000", // ~2 screens of scrolling (was 3.5 — too sticky)
-          pin: true,
-          scrub: 1,
-        },
-      });
+    // Respect reduced motion
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-      // Drone scales up, glows intensely
-      tl.to(droneRef.current, {
-        scale: 1.1,
-        filter: "drop-shadow(0 0 80px rgba(249,115,22,0.4))",
-        duration: 1,
-      });
+    const ctx = gsap.context(() => {
+      // Left column: fade up on scroll
+      gsap.fromTo(
+        leftRef.current,
+        { autoAlpha: 0, y: 40 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 70%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
 
-      // Stagger in the HUD spec cards
-      specsRef.current.forEach((spec, i) => {
-        if (!spec) return;
-        tl.fromTo(
-          spec,
-          { autoAlpha: 0, scale: 0.8, x: i % 2 === 0 ? 50 : -50 },
-          { autoAlpha: 1, scale: 1, x: 0, duration: 0.8, ease: "power2.out" },
-          "-=0.4"
-        );
-      });
+      // Drone entrance
+      gsap.fromTo(
+        droneRef.current,
+        { autoAlpha: 0, scale: 0.85 },
+        {
+          autoAlpha: 1,
+          scale: 1,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 65%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
 
-      // Hold at the end
-      tl.to({}, { duration: 1.5 });
-    }, container);
+      // Spec cards stagger in
+      const cards = specsRef.current.filter(Boolean);
+      gsap.fromTo(
+        cards,
+        { autoAlpha: 0, y: 28 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.55,
+          ease: "power2.out",
+          stagger: 0.07,
+          scrollTrigger: {
+            trigger: section,
+            start: "top 55%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }, section);
 
     return () => ctx.revert();
   }, []);
@@ -69,81 +84,99 @@ export function Technology() {
   return (
     <section
       id="technology"
-      ref={containerRef}
-      className="topo-bg relative h-auto md:h-screen w-full overflow-hidden bg-bg-alt py-24 md:py-0"
+      ref={sectionRef}
+      className="topo-bg relative w-full overflow-hidden bg-bg-alt py-24 md:py-32"
     >
-      <div className="mx-auto flex h-full max-w-[1400px] flex-col items-center justify-center px-6 lg:px-12 md:static relative">
-        
-        {/* Header - Fixed top left in desktop, static in mobile */}
-        <div className="z-20 w-full md:absolute md:left-12 md:top-24 md:w-auto">
-          <SectionLabel>{t.tech.tag}</SectionLabel>
-          <h2 className="mt-6 max-w-xl font-display text-4xl font-bold leading-[1.04] tracking-tight text-fg md:text-5xl">
-            {t.tech.h2_pre}
-            <span className="text-orange-500">{t.tech.h2_emph}</span>
-            {t.tech.h2_post}
-          </h2>
-          <div className="mt-5 font-jp text-[12px] tracking-[0.08em] text-fg/50">
-            {t.tech.subtitle_jp}
-          </div>
-          <p className="mt-6 max-w-md text-pretty text-[15px] leading-relaxed text-muted">
-            {t.tech.lead}
-          </p>
-        </div>
+      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
 
-        {/* HUD Centerpiece */}
-        <div className="relative mt-24 flex items-center justify-center md:mt-0">
-          <div ref={droneRef} className="relative z-10 flex items-center justify-center transition-transform">
-            <DroneGlyph className="h-[300px] w-[300px] text-fg drop-shadow-[0_0_20px_rgba(249,115,22,0.15)] md:h-[500px] md:w-[500px]" />
-          </div>
+        {/* ─── Two-column layout ─── */}
+        <div className="grid grid-cols-1 items-start gap-16 md:grid-cols-2 md:gap-12 lg:gap-20">
 
-          {/* Absolute HUD Cards — one per slot (six). Any extra specs are shown
-              in the mobile grid below, so the HUD never doubles up / overlaps. */}
-          <div className="absolute inset-0 z-20 hidden md:block">
-            {t.tech.specs.slice(0, HUD_POSITIONS.length).map((s, i) => (
-              <div
-                key={s.k}
-                ref={(el) => (specsRef.current[i] = el)}
-                className={`absolute ${HUD_POSITIONS[i]} glass w-48 rounded-xl border border-orange-500/20 p-5`}
-              >
-                <SpecBar {...s} isHUD />
-              </div>
-            ))}
-          </div>
-        </div>
+          {/* LEFT — heading block */}
+          <div ref={leftRef} className="flex flex-col justify-center">
+            <SectionLabel>{t.tech.tag}</SectionLabel>
 
-        {/* Mobile-only specs grid (since HUD pinning is disabled on small screens) */}
-        <div className="mt-16 grid w-full grid-cols-2 gap-x-8 gap-y-12 md:hidden">
-          {t.tech.specs.map((s) => (
-            <div key={s.k}>
-              <SpecBar {...s} />
+            <h2 className="mt-6 font-display text-5xl font-bold leading-[1.02] tracking-[-0.02em] text-fg md:text-6xl lg:text-7xl">
+              {t.tech.h2_pre}
+              <span className="text-orange-500">{t.tech.h2_emph}</span>
+              {t.tech.h2_post}
+              <br />
+              {t.tech.h2_line2}
+            </h2>
+
+            <div className="mt-5 font-mono text-[11px] tracking-[0.12em] text-fg/45 uppercase">
+              {t.tech.subtitle_jp}
             </div>
-          ))}
+
+            <p className="mt-6 max-w-md text-pretty text-[15px] leading-relaxed text-muted">
+              {t.tech.lead}
+            </p>
+
+            {/* Chips */}
+            {t.tech.chips && t.tech.chips.length > 0 && (
+              <div className="mt-8 flex flex-wrap gap-2">
+                {t.tech.chips.map((chip) => (
+                  <span
+                    key={chip}
+                    className="glass rounded-full border border-fg/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-fg/60"
+                  >
+                    {chip}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* RIGHT — drone + spec grid */}
+          <div className="flex flex-col items-center gap-10">
+
+            {/* Drone illustration */}
+            <div
+              ref={droneRef}
+              className="flex items-center justify-center"
+            >
+              <DroneGlyph className="h-[260px] w-[260px] text-fg drop-shadow-[0_0_24px_rgba(249,115,22,0.18)] md:h-[340px] md:w-[340px] lg:h-[400px] lg:w-[400px]" />
+            </div>
+
+            {/* Spec cards — aligned 3-column grid (2 on mobile) */}
+            <div className="grid w-full grid-cols-2 gap-3 sm:grid-cols-3">
+              {t.tech.specs.map((s, i) => (
+                <div
+                  key={s.k}
+                  ref={(el) => (specsRef.current[i] = el)}
+                  className="glass rounded-xl border border-orange-500/15 p-4"
+                >
+                  <SpecBar {...s} />
+                </div>
+              ))}
+            </div>
+
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-function SpecBar({ k, v, unit, display, isHUD }: Spec & { isHUD?: boolean }) {
-  // We use inline styles for the width because the GSAP global observer might not reliably hit pinned elements.
+function SpecBar({ k, v, unit, display }: Spec) {
   return (
-    <div className={`group ${!isHUD ? "border-t-2 border-fg/10 pt-4" : ""}`}>
-      <div className="flex items-baseline gap-2">
-        <span className="font-display text-3xl font-bold leading-none tracking-[-0.02em] text-fg md:text-4xl">
+    <div>
+      <div className="flex items-baseline gap-1.5">
+        <span className="font-display text-2xl font-bold leading-none tracking-[-0.02em] text-fg">
           {display}
         </span>
         {unit && (
-          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-orange-500">
+          <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-orange-500">
             {unit}
           </span>
         )}
       </div>
-      <div className="mt-3 font-mono text-[9px] font-semibold uppercase tracking-[0.2em] text-fg/55">
+      <div className="mt-2 font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-fg/50">
         {k}
       </div>
-      <div className="relative mt-4 h-[2px] w-full rounded-full bg-fg/10">
+      <div className="relative mt-3 h-[2px] w-full rounded-full bg-fg/10">
         <div
-          className="absolute bottom-0 left-0 h-[2px] rounded-full bg-orange-500 transition-all duration-1000 ease-out"
+          className="absolute bottom-0 left-0 h-[2px] rounded-full bg-orange-500"
           style={{ width: `${v}%` }}
         />
       </div>

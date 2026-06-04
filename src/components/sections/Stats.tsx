@@ -59,7 +59,7 @@ export function Stats() {
                 data-suffix={it.suf}
                 data-decimals={it.decimal ? "1" : "0"}
                 data-thousands={it.thousands ? "true" : "false"}
-                className="mt-5 font-display text-6xl font-bold leading-none tracking-[-0.03em] text-white md:text-7xl"
+                className="mt-5 font-display text-7xl font-bold leading-none tracking-[-0.03em] text-white md:text-8xl"
               >
                 {formatStat(it)}
               </div>

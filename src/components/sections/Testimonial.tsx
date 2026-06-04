@@ -24,7 +24,7 @@ export function Testimonial() {
 
         <blockquote
           data-anim="title-up"
-          className="mt-10 max-w-4xl text-balance font-display text-2xl font-semibold leading-snug tracking-[-0.015em] text-fg md:pr-16 md:text-4xl"
+          className="mt-10 max-w-4xl text-balance font-display text-3xl font-semibold leading-snug tracking-[-0.02em] text-fg md:pr-16 md:text-5xl"
         >
           <span className="text-orange-500">“</span>
           {t.testimonial.quote}

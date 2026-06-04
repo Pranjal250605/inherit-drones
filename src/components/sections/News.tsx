@@ -83,7 +83,7 @@ export function News() {
             </div>
             <h2
               data-anim="title-up"
-              className="mt-6 font-display text-4xl font-bold leading-[1.02] tracking-[-0.03em] text-fg md:text-6xl"
+              className="mt-6 font-display text-5xl font-bold leading-[1.02] tracking-[-0.03em] text-fg md:text-7xl"
             >
               {t.news.h2_pre}
               {t.news.h2_emph}

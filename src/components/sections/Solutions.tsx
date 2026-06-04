@@ -66,7 +66,7 @@ export function Solutions() {
 
             <h2
               data-anim="title-up"
-              className="mt-6 max-w-xl font-display text-4xl font-bold leading-[1.04] tracking-[-0.03em] md:text-6xl"
+              className="mt-6 max-w-xl font-display text-5xl font-bold leading-[1.02] tracking-[-0.03em] md:text-7xl"
             >
               {s.h2_line1} {s.h2_emph}
               {s.h2_line2_post} {s.h2_line3}
