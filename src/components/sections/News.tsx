@@ -1,11 +1,4 @@
-import { useEffect, useState } from "react";
-import {
-  ArrowRight,
-  SectionFrame,
-  SectionLabel,
-  ParallaxImage,
-  TickMark,
-} from "../primitives";
+import { ArrowRight, SectionFrame, SectionLabel, ParallaxImage } from "../primitives";
 import { useT, type Dict } from "../../i18n";
 import droneSpraying from "../../assets/drone-spraying.jpg";
 import hiroshimaAerial from "../../assets/hiroshima-aerial.jpg";
@@ -21,55 +14,26 @@ const IMG: Record<string, string> = {
   "bvlos-corridor": bvlosCorridor,
 };
 
-/* Per-tile aspect ratios + fallbacks → varied heights make the masonry nest
-   like Pinterest. The first tile is the tall "feature". */
-const TILES = [
-  { aspect: "aspect-[4/5]", feature: true, fallback: droneSpraying, color: "#F97316" },
-  { aspect: "aspect-[5/4]", feature: false, fallback: hiroshimaAerial, color: "#18120E" },
-  { aspect: "aspect-[4/5]", feature: false, fallback: teamNapa, color: "#EA580C" },
-  { aspect: "aspect-[16/11]", feature: false, fallback: bvlosCorridor, color: "#E08400" },
+/* Per-card fallback image + a punchy solid caption colour (brand orange shades
+   + one ink card for contrast). */
+const CARDS = [
+  { fallback: droneSpraying, color: "#F97316" },
+  { fallback: hiroshimaAerial, color: "#18120E" },
+  { fallback: teamNapa, color: "#EA580C" },
+  { fallback: bvlosCorridor, color: "#E08400" },
 ];
-
-/* Responsive column count. We build the masonry from REAL flex columns rather
-   than CSS multicolumn — multicol re-fragments on hover when a descendant gets
-   composited (the parallax/hover transform), which made cards flicker/vanish in
-   Chrome. Flex columns avoid that entirely. */
-function useColumnCount(): number {
-  const read = () =>
-    typeof window === "undefined"
-      ? 3
-      : window.innerWidth < 640
-      ? 1
-      : window.innerWidth < 1024
-      ? 2
-      : 3;
-  const [cols, setCols] = useState(read);
-  useEffect(() => {
-    const onResize = () => setCols(read());
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
-  return cols;
-}
 
 export function News() {
   const { t } = useT();
   const items = t.news.items;
-  const cols = useColumnCount();
-
-  // Distribute items round-robin into `cols` columns (masonry packing).
-  const columns: Array<Array<{ item: NewsItem; i: number }>> = Array.from(
-    { length: cols },
-    (_, c) => items.map((item, i) => ({ item, i })).filter(({ i }) => i % cols === c)
-  );
 
   return (
     <SectionFrame
       id="news"
-      className="dot-grid-bg relative overflow-hidden bg-bg-alt py-24 md:py-32"
+      className="dot-grid-bg relative overflow-hidden bg-bg-alt py-20 md:py-24"
     >
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-        <div className="flex flex-col items-start gap-8 md:flex-row md:items-end md:justify-between">
+        <div className="flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between">
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-3">
               <SectionLabel>{t.news.tag}</SectionLabel>
@@ -83,13 +47,13 @@ export function News() {
             </div>
             <h2
               data-anim="title-up"
-              className="mt-6 font-display text-4xl font-bold leading-[1.05] tracking-[-0.03em] text-fg md:text-5xl lg:whitespace-nowrap lg:text-6xl"
+              className="mt-5 font-display text-4xl font-bold leading-[1.05] tracking-[-0.03em] text-fg md:text-5xl lg:whitespace-nowrap lg:text-6xl"
             >
               {t.news.h2_pre}
               {t.news.h2_emph}
               {t.news.h2_post}
             </h2>
-            <div className="mt-5 font-jp text-[12px] tracking-[0.08em] text-fg/50">
+            <div className="mt-4 font-jp text-[12px] tracking-[0.08em] text-fg/50">
               {t.news.subtitle_jp}
             </div>
           </div>
@@ -104,76 +68,31 @@ export function News() {
           </a>
         </div>
 
-        {/* Masonry — Pinterest-style packing via real flex columns. Each column
-            ends with a brand "queued" placeholder that grows to flush the
-            ragged bottoms (columns stretch to equal height). */}
-        <div data-anim="stagger" className="mt-12 flex flex-col gap-5 sm:flex-row sm:items-stretch md:mt-16">
-          {columns.map((col, ci) => (
-            <div key={ci} className="flex flex-1 flex-col gap-5">
-              {col.map(({ item, i }) => {
-                const tile = TILES[i] ?? TILES[0];
-                return (
-                  <div key={item.code} data-anim-item>
-                    <NewsCard
-                      item={item}
-                      aspect={tile.aspect}
-                      feature={tile.feature}
-                      fallback={tile.fallback}
-                      color={tile.color}
-                    />
-                  </div>
-                );
-              })}
-              <QueuedTile />
-            </div>
-          ))}
+        {/* Compact uniform row — equal-height cards, fits in one screen. */}
+        <div
+          data-anim="card-stagger"
+          className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 md:mt-12 lg:grid-cols-4"
+        >
+          {items.map((item, i) => {
+            const cfg = CARDS[i % CARDS.length] ?? CARDS[0];
+            return (
+              <div key={item.code} data-anim-item>
+                <NewsCard item={item} fallback={cfg.fallback} color={cfg.color} />
+              </div>
+            );
+          })}
         </div>
       </div>
     </SectionFrame>
   );
 }
 
-/* Brand-toned "awaiting dispatch" slot. Grows (flex-1) to flush the ragged
-   bottoms of the masonry columns, using the site's surface + grid texture +
-   orange instrumentation accents (a radar ping, the "////" tick, skeleton
-   lines) so the empty space reads as intentional rather than blank. */
-function QueuedTile() {
-  return (
-    <div className="dot-grid-bg relative hidden min-h-[150px] flex-1 flex-col justify-between overflow-hidden rounded-2xl border border-fg/10 bg-bg p-5 shadow-sm sm:flex">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <TickMark />
-          <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-fg/45">
-            Queued
-          </span>
-        </div>
-        <span className="relative flex h-2.5 w-2.5">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-500/60" />
-          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-orange-500" />
-        </span>
-      </div>
-
-      <div className="space-y-2.5">
-        <div className="h-2.5 w-3/4 rounded-full bg-fg/[0.07]" />
-        <div className="h-2.5 w-1/2 rounded-full bg-fg/[0.07]" />
-        <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-fg/30">
-          20XX.XX · ——
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function NewsCard({
   item,
-  aspect,
-  feature,
   fallback,
   color,
 }: {
   item: NewsItem;
-  aspect: string;
-  feature: boolean;
   fallback: string;
   color: string;
 }) {
@@ -183,34 +102,32 @@ function NewsCard({
   return (
     <a
       href="#contact"
-      className="group flex w-full flex-col overflow-hidden rounded-2xl text-white shadow-sm transition-shadow duration-500 hover:shadow-2xl"
+      className="group flex h-full w-full flex-col overflow-hidden rounded-2xl text-white shadow-sm transition-shadow duration-500 hover:shadow-xl"
     >
       {/* photo */}
-      <div className={"relative overflow-hidden " + aspect}>
+      <div className="relative aspect-[4/3] overflow-hidden">
         <ParallaxImage
           src={imgSrc}
           alt={item.title}
-          speed={feature ? 0.16 : 0.1}
+          speed={0.1}
           overlay={false}
           className="absolute inset-0 h-full w-full"
         />
       </div>
 
-      {/* solid punchy colour caption block (no gradient) */}
-      <div className="flex flex-col p-5 md:p-6" style={{ backgroundColor: color }}>
+      {/* solid punchy colour caption block */}
+      <div
+        className="flex flex-1 flex-col p-5"
+        style={{ backgroundColor: color }}
+      >
         <div className="flex items-center gap-3 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-white/80">
           <span>{item.date}</span>
           <span className="ml-auto">{item.code}</span>
         </div>
-        <h3
-          className={
-            "mt-3 font-display font-bold leading-[1.1] tracking-[-0.015em] text-white " +
-            (feature ? "text-3xl md:text-4xl" : "text-xl md:text-2xl")
-          }
-        >
+        <h3 className="mt-2.5 font-display text-lg font-bold leading-[1.18] tracking-[-0.01em] text-white line-clamp-3 md:text-xl">
           {item.title}
         </h3>
-        <span className="mt-5 inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-white">
+        <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-[11px] font-bold uppercase tracking-[0.16em] text-white">
           {t.news.read_label}
           <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" />
         </span>
