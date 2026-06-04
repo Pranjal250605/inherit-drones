@@ -101,9 +101,10 @@ export function News() {
           </a>
         </div>
 
-        {/* Pinterest-style masonry via flex columns (items-start = natural,
-            ragged column heights — no flex-grow fillers that balloon). */}
-        <div className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-start md:mt-12">
+        {/* Pinterest-style masonry via flex columns. Columns stretch to equal
+            height and the queued slot grows to fill each column's leftover space
+            (bounded by the tallest column, so it fills without adding length). */}
+        <div className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-stretch md:mt-12">
           {columns.map((col, ci) => (
             <div key={ci} className="flex flex-1 flex-col gap-5">
               {col.map(({ item, i }) => {
@@ -132,7 +133,7 @@ export function News() {
    it never balloons into a giant empty box). */
 function QueuedTile() {
   return (
-    <div className="dot-grid-bg relative hidden h-[150px] flex-col justify-between overflow-hidden rounded-2xl border border-fg/10 bg-bg p-5 shadow-sm sm:flex">
+    <div className="dot-grid-bg relative hidden min-h-[150px] flex-1 flex-col justify-between overflow-hidden rounded-2xl border border-fg/10 bg-bg p-5 shadow-sm sm:flex">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <TickMark />
