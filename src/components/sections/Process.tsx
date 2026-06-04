@@ -13,28 +13,45 @@ const CARD_GRADIENTS = [
   "linear-gradient(155deg,#F2A516,#E07A00)",
 ];
 
-/* Faint top-down quadcopter line art — gives each card a subject. */
+/* Detailed top-down quadcopter line art — propeller blades + guards, fuselage,
+   and a front camera/gimbal — so each card reads as an actual drone. */
 function DroneLineArt({ className = "" }: { className?: string }) {
+  const motors: Array<[number, number]> = [
+    [42, 42],
+    [158, 42],
+    [42, 158],
+    [158, 158],
+  ];
   return (
     <svg
-      viewBox="0 0 120 120"
+      viewBox="0 0 200 200"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="2.4"
       strokeLinecap="round"
+      strokeLinejoin="round"
       className={className}
       aria-hidden="true"
     >
-      <line x1="60" y1="60" x2="28" y2="28" />
-      <line x1="60" y1="60" x2="92" y2="28" />
-      <line x1="60" y1="60" x2="28" y2="92" />
-      <line x1="60" y1="60" x2="92" y2="92" />
-      <circle cx="28" cy="28" r="14" />
-      <circle cx="92" cy="28" r="14" />
-      <circle cx="28" cy="92" r="14" />
-      <circle cx="92" cy="92" r="14" />
-      <rect x="49" y="49" width="22" height="22" rx="4" />
-      <circle cx="60" cy="60" r="3.5" />
+      {/* arms */}
+      <path d="M100 100L42 42M100 100L158 42M100 100L42 158M100 100L158 158" />
+      {/* propellers: guard ring + two crossed blades + hub */}
+      {motors.map(([cx, cy], k) => (
+        <g key={k}>
+          <circle cx={cx} cy={cy} r="25" />
+          <ellipse cx={cx} cy={cy} rx="23" ry="6.5" />
+          <ellipse cx={cx} cy={cy} rx="6.5" ry="23" />
+          <circle cx={cx} cy={cy} r="4" />
+        </g>
+      ))}
+      {/* fuselage */}
+      <rect x="72" y="72" width="56" height="56" rx="16" />
+      {/* gimbal / camera nub at front */}
+      <path d="M90 72q10 -13 20 0" />
+      <circle cx="100" cy="67" r="3" />
+      {/* core + a detail line */}
+      <circle cx="100" cy="100" r="7" />
+      <line x1="84" y1="117" x2="116" y2="117" />
     </svg>
   );
 }
@@ -52,16 +69,17 @@ export function Process() {
 
     const ctx = gsap.context(() => {
       const cards = gsap.utils.toArray<HTMLElement>("[data-card]", row);
+      // Cards fly in from off the right edge of the screen, one after another.
       gsap.fromTo(
         cards,
-        { autoAlpha: 0, x: 70 },
+        { autoAlpha: 0, x: () => window.innerWidth * 0.9 },
         {
           autoAlpha: 1,
           x: 0,
-          duration: 0.7,
+          duration: 0.95,
           ease: "power3.out",
-          stagger: 0.12,
-          scrollTrigger: { trigger: row, start: "top 80%", once: true },
+          stagger: 0.14,
+          scrollTrigger: { trigger: row, start: "top 82%", once: true },
         }
       );
     }, row);
@@ -106,24 +124,24 @@ export function Process() {
             <div
               key={s.n}
               data-card
-              className="group relative flex min-h-[300px] flex-col justify-between overflow-hidden rounded-2xl p-7 text-white shadow-xl shadow-black/15 transition-transform duration-300 hover:-translate-y-1.5 md:min-h-[330px]"
+              className="group relative flex min-h-[400px] flex-col justify-between overflow-hidden rounded-3xl p-8 text-white shadow-xl shadow-black/15 transition-transform duration-300 hover:-translate-y-1.5 md:min-h-[460px] md:p-9"
               style={{ background: CARD_GRADIENTS[i % CARD_GRADIENTS.length] }}
             >
               {/* drone line art watermark */}
-              <DroneLineArt className="pointer-events-none absolute -right-5 -top-5 h-36 w-36 text-white/20 transition-transform duration-500 group-hover:rotate-45" />
+              <DroneLineArt className="pointer-events-none absolute -right-8 -top-8 h-52 w-52 text-white/20 transition-transform duration-700 group-hover:rotate-90" />
 
-              <span className="relative z-10 font-mono text-[11px] font-bold uppercase tracking-[0.24em] text-white/70">
+              <span className="relative z-10 font-mono text-[12px] font-bold uppercase tracking-[0.24em] text-white/70">
                 Phase 0{i + 1}
               </span>
 
               <div className="relative z-10">
-                <p className="font-jp text-[12px] tracking-[0.1em] text-white/60">
+                <p className="font-jp text-[13px] tracking-[0.1em] text-white/60">
                   {s.jp}
                 </p>
-                <h3 className="mt-2 font-display text-3xl font-bold leading-tight tracking-[-0.02em] text-white md:text-4xl">
+                <h3 className="mt-3 font-display text-4xl font-bold leading-[1.05] tracking-[-0.02em] text-white md:text-5xl">
                   {s.title}
                 </h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-white/85">
+                <p className="mt-4 text-[17px] leading-relaxed text-white/85 md:text-lg">
                   {s.body}
                 </p>
               </div>
