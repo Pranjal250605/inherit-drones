@@ -5,10 +5,10 @@ import hiroshimaAerial from "../../assets/hiroshima-aerial.jpg";
 import officeTeam from "../../assets/office-team.jpg";
 import teamNapa from "../../assets/team-napa.jpg";
 
-/* Fujitaka-feel hero: a one-screen photo collage with SHARP corners — big NAPA
-   team top-left, text in the bottom-left cell, cityscape top-right, two people
-   cells bottom-right — over soft abstract shapes, with one big orange wordmark
-   laid across the middle. */
+/* Distinct hero: a dominant lead image + a vertical 3-photo rail (not a symmetric
+   bento), with an OUTLINED orange wordmark so the photo reads through it (it
+   resonates with the image instead of clashing as a solid block). One screen,
+   sharp corners, soft brand blobs behind. */
 export function Hero() {
   const { t } = useT();
 
@@ -20,31 +20,48 @@ export function Hero() {
       {/* abstract background blobs */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <div className="absolute -left-40 top-10 h-[34rem] w-[34rem] rounded-[42%_58%_60%_40%/45%_45%_55%_55%] bg-orange-500/[0.07]" />
-        <div className="absolute -right-44 bottom-0 h-[42rem] w-[42rem] rounded-[60%_40%_46%_54%/55%_46%_54%_45%] bg-orange-400/[0.10] blur-2xl" />
+        <div className="absolute -right-48 bottom-0 h-[44rem] w-[44rem] rounded-[60%_40%_46%_54%/55%_46%_54%_45%] bg-orange-400/[0.10] blur-2xl" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-[1560px] px-4 pb-8 lg:px-6 lg:pb-0">
         <div className="grid grid-cols-1 gap-2.5 lg:h-[calc(100svh-116px)] lg:grid-cols-12 lg:grid-rows-2">
-          {/* big NAPA team — top-left */}
-          <figure className="relative aspect-[16/10] overflow-hidden lg:col-span-7 lg:aspect-auto">
+          {/* dominant lead image — top-left */}
+          <figure className="relative aspect-[16/9] overflow-hidden lg:col-span-8 lg:row-start-1 lg:aspect-auto">
             <img src={teamNapa} alt="NAPA pilot academy team" className="h-full w-full object-cover object-top" loading="eager" />
+            {/* outlined wordmark straddling the lead image's lower band */}
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 translate-y-[35%] overflow-hidden px-4 lg:px-0">
+              <span
+                className="block whitespace-nowrap font-display text-[15vw] font-extrabold uppercase leading-[0.78] tracking-[-0.06em] lg:text-[8.5rem]"
+                style={{ WebkitTextStroke: "2.5px #f97316", color: "transparent" }}
+              >
+                INHERIT
+              </span>
+            </div>
           </figure>
 
-          {/* cityscape — top-right */}
-          <figure className="relative aspect-[16/9] overflow-hidden lg:col-span-5 lg:aspect-auto">
-            <img src={hiroshimaAerial} alt="Setouchi inland sea" className="h-full w-full object-cover" loading="eager" />
-          </figure>
+          {/* vertical 3-photo rail — right, spans both rows */}
+          <div className="grid grid-cols-3 gap-2.5 lg:col-span-4 lg:row-span-2 lg:grid-cols-1 lg:grid-rows-3">
+            <figure className="relative aspect-[4/3] overflow-hidden lg:aspect-auto">
+              <img src={hiroshimaAerial} alt="Setouchi inland sea" className="h-full w-full object-cover" loading="eager" />
+            </figure>
+            <figure className="relative aspect-[4/3] overflow-hidden lg:aspect-auto">
+              <img src={businesswoman} alt="Inherit team member" className="h-full w-full object-cover object-top" loading="lazy" />
+            </figure>
+            <figure className="relative aspect-[4/3] overflow-hidden lg:aspect-auto">
+              <img src={officeTeam} alt="Operations team" className="h-full w-full object-cover" loading="lazy" />
+            </figure>
+          </div>
 
-          {/* text — bottom-left cell */}
-          <div className="relative z-20 flex flex-col justify-center py-6 lg:col-span-7 lg:row-start-2 lg:pr-10">
+          {/* text — bottom-left, wide */}
+          <div className="relative z-20 flex flex-col justify-center py-6 lg:col-span-8 lg:row-start-2 lg:pr-12">
             <TickMark className="h-3.5" />
-            <h1 className="mt-4 font-display text-3xl font-bold leading-[1.05] tracking-[-0.03em] text-fg md:text-4xl lg:text-5xl">
+            <h1 className="mt-4 font-display text-3xl font-bold leading-[1.04] tracking-[-0.03em] text-fg md:text-4xl lg:text-5xl">
               {t.hero.h1_line1_pre}
               <span className="text-orange-500">{t.hero.h1_line1_emph}</span>{" "}
               {t.hero.h1_line2_pre}
               {t.hero.h1_line2_emph}
             </h1>
-            <p className="mt-4 max-w-lg text-pretty text-[15px] leading-relaxed text-muted md:text-base">
+            <p className="mt-4 max-w-xl text-pretty text-[15px] leading-relaxed text-muted md:text-base">
               {t.hero.paragraph}
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -64,25 +81,6 @@ export function Hero() {
               </a>
             </div>
           </div>
-
-          {/* two people cells — bottom-right */}
-          <div className="grid grid-cols-2 gap-2.5 lg:col-span-5 lg:row-start-2">
-            <figure className="relative aspect-square overflow-hidden lg:aspect-auto">
-              <img src={businesswoman} alt="Inherit team member" className="h-full w-full object-cover object-top" loading="lazy" />
-            </figure>
-            <figure className="relative aspect-square overflow-hidden lg:aspect-auto">
-              <img src={officeTeam} alt="Operations team" className="h-full w-full object-cover" loading="lazy" />
-            </figure>
-          </div>
-        </div>
-      </div>
-
-      {/* single oversized wordmark across the middle */}
-      <div className="pointer-events-none absolute inset-x-0 top-[46%] z-[15] -translate-y-1/2 overflow-hidden">
-        <div className="mx-auto max-w-[1560px] px-4 lg:px-6">
-          <span className="block whitespace-nowrap font-display text-[16vw] font-extrabold uppercase leading-[0.8] tracking-[-0.06em] text-orange-500 lg:text-[8.5rem]">
-            INHERIT
-          </span>
         </div>
       </div>
     </section>
