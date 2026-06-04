@@ -1,12 +1,13 @@
 import { TickMark, ArrowRight } from "../primitives";
 import { useT } from "../../i18n";
+import businesswoman from "../../assets/businesswoman.jpg";
 import hiroshimaAerial from "../../assets/hiroshima-aerial.jpg";
-import droneSpraying from "../../assets/drone-spraying.jpg";
+import officeTeam from "../../assets/office-team.jpg";
 import teamNapa from "../../assets/team-napa.jpg";
 
-/* Fujitaka-feel hero: a contained light photo mosaic with ONE big orange brand
-   wordmark straddling the bottom edge (over the lower image band, not faces),
-   and a tick + bold heading block below. Distinct via the Inherit orange + copy. */
+/* Fujitaka-feel hero: a contained light photo mosaic (people-forward) over soft
+   abstract background blobs, with ONE big orange brand wordmark straddling the
+   mosaic's bottom edge, and a tick + bold heading block below. */
 export function Hero() {
   const { t } = useT();
 
@@ -15,19 +16,34 @@ export function Hero() {
       id="top"
       className="relative overflow-hidden bg-bg-alt pt-[84px] pb-16 lg:pt-[104px]"
     >
-      <div className="mx-auto max-w-[1440px] px-5 lg:px-8">
+      {/* abstract background shapes (Fujitaka-style organic blobs) */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute -left-40 top-16 h-[34rem] w-[34rem] rounded-[42%_58%_60%_40%/45%_45%_55%_55%] bg-orange-500/[0.07]" />
+        <div className="absolute -right-44 bottom-0 h-[42rem] w-[42rem] rounded-[60%_40%_46%_54%/55%_46%_54%_45%] bg-orange-400/[0.10] blur-2xl" />
+        <div className="absolute right-1/3 top-1/2 h-72 w-72 rounded-full bg-[#E0A35E]/15 blur-3xl" />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-[1440px] px-5 lg:px-8">
         {/* mosaic + wordmark */}
         <div className="relative">
-          <div className="grid grid-cols-1 gap-4 lg:h-[56vh] lg:min-h-[460px] lg:grid-cols-12 lg:grid-rows-2">
-            <figure className="relative aspect-[16/11] overflow-hidden rounded-[1.75rem] lg:aspect-auto lg:col-span-7 lg:row-span-2">
-              <img src={teamNapa} alt="INHERIT pilot team" className="h-full w-full object-cover" loading="eager" />
+          <div className="grid grid-cols-1 gap-4 lg:h-[58vh] lg:min-h-[480px] lg:grid-cols-12 lg:grid-rows-2">
+            {/* big people photo */}
+            <figure className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] lg:aspect-auto lg:col-span-7 lg:row-span-2">
+              <img src={businesswoman} alt="Inherit team member" className="h-full w-full object-cover object-top" loading="eager" />
             </figure>
+            {/* cityscape (kept) */}
             <figure className="relative aspect-[16/8] overflow-hidden rounded-[1.75rem] lg:aspect-auto lg:col-span-5">
               <img src={hiroshimaAerial} alt="Setouchi inland sea" className="h-full w-full object-cover" loading="eager" />
             </figure>
-            <figure className="relative aspect-[16/8] overflow-hidden rounded-[1.75rem] lg:aspect-auto lg:col-span-5">
-              <img src={droneSpraying} alt="IH-04 on a field mission" className="h-full w-full object-cover" loading="lazy" />
-            </figure>
+            {/* two small people cells */}
+            <div className="grid grid-cols-2 gap-4 lg:col-span-5">
+              <figure className="relative aspect-square overflow-hidden rounded-[1.75rem] lg:aspect-auto">
+                <img src={officeTeam} alt="Operations team" className="h-full w-full object-cover" loading="lazy" />
+              </figure>
+              <figure className="relative aspect-square overflow-hidden rounded-[1.75rem] lg:aspect-auto">
+                <img src={teamNapa} alt="NAPA pilot academy" className="h-full w-full object-cover" loading="lazy" />
+              </figure>
+            </div>
           </div>
 
           {/* single oversized wordmark, straddling the mosaic's bottom edge */}
