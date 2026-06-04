@@ -1,12 +1,68 @@
+import { useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SectionFrame, SectionLabel, ParallaxImage } from "../primitives";
 import { useT } from "../../i18n";
 import teamNapa from "../../assets/team-napa.jpg";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /* Punchy warm hues per pillar — orange → amber → yellow. */
 const PILLAR_COLORS = ["#F97316", "#F59E0B", "#EAB308"];
 
 export function Mission() {
   const { t } = useT();
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  /* Glitch-in reveal: each pillar stutters in with a chromatic (RGB-split)
+     flicker, one after another on a short delay, when the row scrolls into
+     view. Disabled (pillars simply visible) under reduced motion. */
+  useLayoutEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const ctx = gsap.context(() => {
+      const items = gsap.utils.toArray<HTMLElement>("[data-glitch]", grid);
+      gsap.set(items, { opacity: 0 });
+
+      ScrollTrigger.create({
+        trigger: grid,
+        start: "top 82%",
+        once: true,
+        onEnter: () => {
+          items.forEach((el, i) => {
+            const tl = gsap.timeline({ delay: i * 0.16 });
+            tl.fromTo(
+              el,
+              { opacity: 0.12, x: -12, skewX: 14 },
+              { opacity: 1, x: 0, skewX: 0, duration: 0.5, ease: "steps(10)" },
+              0
+            );
+            const title = el.querySelector<HTMLElement>("[data-glitch-title]");
+            if (title) {
+              tl.fromTo(
+                title,
+                {
+                  textShadow:
+                    "3px 0 rgba(34,211,238,0.9), -3px 0 rgba(244,63,94,0.9)",
+                },
+                {
+                  textShadow:
+                    "0px 0 rgba(34,211,238,0), 0px 0 rgba(244,63,94,0)",
+                  duration: 0.55,
+                  ease: "steps(8)",
+                },
+                0
+              );
+            }
+          });
+        },
+      });
+    }, grid);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <SectionFrame id="mission" className="topo-bg relative overflow-hidden bg-bg py-24 md:py-32">
@@ -55,7 +111,7 @@ export function Mission() {
         </figure>
 
         <div
-          data-anim="stagger"
+          ref={gridRef}
           className="mt-20 grid grid-cols-1 gap-x-12 gap-y-12 md:mt-28 md:grid-cols-3 md:items-start"
         >
           {t.mission.pillars.map((p, i) => {
@@ -63,7 +119,7 @@ export function Mission() {
             return (
               <div
                 key={p.code}
-                data-anim-item
+                data-glitch
                 className="border-t-2 pt-6"
                 style={{ borderColor: color }}
               >
@@ -79,6 +135,7 @@ export function Mission() {
                   </span>
                 </div>
                 <h3
+                  data-glitch-title
                   className="mt-6 font-display text-4xl font-bold leading-[1.02] tracking-[-0.02em] md:text-5xl"
                   style={{ color }}
                 >
