@@ -13,18 +13,18 @@ export function Technology() {
   const { t } = useT();
   const sectionRef = useRef<HTMLElement>(null);
   const droneRef = useRef<HTMLDivElement>(null);
-  const specsRef = useRef<(HTMLDivElement | null)[]>([]);
   const leftRef = useRef<HTMLDivElement>(null);
+  const specsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Six key specs, three down each flank of the drone.
+  const specs = t.tech.specs.slice(0, 6);
 
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
-
-    // Respect reduced motion
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const ctx = gsap.context(() => {
-      // Left column: fade up on scroll
       gsap.fromTo(
         leftRef.current,
         { autoAlpha: 0, y: 40 },
@@ -33,15 +33,9 @@ export function Technology() {
           y: 0,
           duration: 0.9,
           ease: "power3.out",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 70%",
-            toggleActions: "play none none none",
-          },
+          scrollTrigger: { trigger: section, start: "top 72%" },
         }
       );
-
-      // Drone entrance
       gsap.fromTo(
         droneRef.current,
         { autoAlpha: 0, scale: 0.85 },
@@ -50,30 +44,19 @@ export function Technology() {
           scale: 1,
           duration: 1,
           ease: "power3.out",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 65%",
-            toggleActions: "play none none none",
-          },
+          scrollTrigger: { trigger: section, start: "top 68%" },
         }
       );
-
-      // Spec cards stagger in
-      const cards = specsRef.current.filter(Boolean);
       gsap.fromTo(
-        cards,
-        { autoAlpha: 0, y: 28 },
+        specsRef.current.filter(Boolean),
+        { autoAlpha: 0, x: (i) => (i < 3 ? -40 : 40) },
         {
           autoAlpha: 1,
-          y: 0,
-          duration: 0.55,
-          ease: "power2.out",
-          stagger: 0.07,
-          scrollTrigger: {
-            trigger: section,
-            start: "top 55%",
-            toggleActions: "play none none none",
-          },
+          x: 0,
+          duration: 0.6,
+          ease: "power3.out",
+          stagger: 0.08,
+          scrollTrigger: { trigger: section, start: "top 60%" },
         }
       );
     }, section);
@@ -88,14 +71,10 @@ export function Technology() {
       className="topo-bg relative w-full overflow-hidden bg-bg-alt py-24 md:py-32"
     >
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-
-        {/* ─── Two-column layout ─── */}
-        <div className="grid grid-cols-1 items-start gap-16 md:grid-cols-2 md:gap-12 lg:gap-20">
-
-          {/* LEFT — heading block */}
-          <div ref={leftRef} className="flex flex-col justify-center">
+        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-10">
+          {/* LEFT — heading */}
+          <div ref={leftRef} className="lg:col-span-5">
             <SectionLabel>{t.tech.tag}</SectionLabel>
-
             <h2 className="mt-6 font-display text-5xl font-bold leading-[1.02] tracking-[-0.02em] text-fg md:text-6xl lg:text-7xl">
               {t.tech.h2_pre}
               <span className="text-orange-500">{t.tech.h2_emph}</span>
@@ -103,54 +82,43 @@ export function Technology() {
               <br />
               {t.tech.h2_line2}
             </h2>
-
-            <div className="mt-5 font-mono text-[11px] tracking-[0.12em] text-fg/45 uppercase">
-              {t.tech.subtitle_jp}
-            </div>
-
-            <p className="mt-6 max-w-md text-pretty text-[15px] leading-relaxed text-muted">
+            <p className="mt-7 max-w-md text-pretty text-[17px] leading-relaxed text-muted md:text-lg">
               {t.tech.lead}
             </p>
-
-            {/* Chips */}
-            {t.tech.chips && t.tech.chips.length > 0 && (
-              <div className="mt-8 flex flex-wrap gap-2">
-                {t.tech.chips.map((chip) => (
-                  <span
-                    key={chip}
-                    className="glass rounded-full border border-fg/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-fg/60"
-                  >
-                    {chip}
-                  </span>
-                ))}
-              </div>
-            )}
           </div>
 
-          {/* RIGHT — drone + spec grid */}
-          <div className="flex flex-col items-center gap-10">
+          {/* RIGHT — drone with 3 specs aligned on each flank */}
+          <div className="lg:col-span-7">
+            <div className="grid grid-cols-1 items-center gap-y-10 sm:grid-cols-[1fr_auto_1fr] sm:gap-x-6 lg:gap-x-10">
+              <div className="order-2 flex flex-col gap-10 sm:order-1">
+                {specs.slice(0, 3).map((s, i) => (
+                  <SpecStat
+                    key={s.k}
+                    spec={s}
+                    align="right"
+                    refCb={(el) => (specsRef.current[i] = el)}
+                  />
+                ))}
+              </div>
 
-            {/* Drone illustration */}
-            <div
-              ref={droneRef}
-              className="flex items-center justify-center"
-            >
-              <DroneGlyph className="h-[260px] w-[260px] text-fg drop-shadow-[0_0_24px_rgba(249,115,22,0.18)] md:h-[340px] md:w-[340px] lg:h-[400px] lg:w-[400px]" />
+              <div
+                ref={droneRef}
+                className="order-1 flex justify-center sm:order-2"
+              >
+                <DroneGlyph className="h-[260px] w-[260px] text-fg drop-shadow-[0_0_30px_rgba(249,115,22,0.2)] md:h-[320px] md:w-[320px] lg:h-[360px] lg:w-[360px]" />
+              </div>
+
+              <div className="order-3 flex flex-col gap-10">
+                {specs.slice(3, 6).map((s, i) => (
+                  <SpecStat
+                    key={s.k}
+                    spec={s}
+                    align="left"
+                    refCb={(el) => (specsRef.current[i + 3] = el)}
+                  />
+                ))}
+              </div>
             </div>
-
-            {/* Spec cards — aligned 3-column grid (2 on mobile) */}
-            <div className="grid w-full grid-cols-2 gap-3 sm:grid-cols-3">
-              {t.tech.specs.map((s, i) => (
-                <div
-                  key={s.k}
-                  ref={(el) => (specsRef.current[i] = el)}
-                  className="glass rounded-xl border border-orange-500/15 p-4"
-                >
-                  <SpecBar {...s} />
-                </div>
-              ))}
-            </div>
-
           </div>
         </div>
       </div>
@@ -158,27 +126,27 @@ export function Technology() {
   );
 }
 
-function SpecBar({ k, v, unit, display }: Spec) {
+function SpecStat({
+  spec,
+  align,
+  refCb,
+}: {
+  spec: Spec;
+  align: "left" | "right";
+  refCb: (el: HTMLDivElement | null) => void;
+}) {
   return (
-    <div>
-      <div className="flex items-baseline gap-1.5">
-        <span className="font-display text-2xl font-bold leading-none tracking-[-0.02em] text-fg">
-          {display}
-        </span>
-        {unit && (
-          <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-orange-500">
-            {unit}
+    <div ref={refCb} className={align === "right" ? "sm:text-right" : "sm:text-left"}>
+      <div className="font-display text-4xl font-bold leading-none tracking-[-0.02em] text-fg lg:text-5xl">
+        {spec.display}
+        {spec.unit && (
+          <span className="ml-1.5 font-mono text-sm font-bold uppercase tracking-[0.12em] text-orange-500">
+            {spec.unit}
           </span>
         )}
       </div>
-      <div className="mt-2 font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-fg/50">
-        {k}
-      </div>
-      <div className="relative mt-3 h-[2px] w-full rounded-full bg-fg/10">
-        <div
-          className="absolute bottom-0 left-0 h-[2px] rounded-full bg-orange-500"
-          style={{ width: `${v}%` }}
-        />
+      <div className="mt-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-fg/50">
+        {spec.k}
       </div>
     </div>
   );
