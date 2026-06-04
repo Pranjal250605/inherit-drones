@@ -204,7 +204,7 @@ export function Process() {
                 <h3 className="mt-3 font-display text-4xl font-bold leading-[1.05] tracking-[-0.02em] text-white md:text-5xl">
                   {s.title}
                 </h3>
-                <p className="mt-4 text-[17px] leading-relaxed text-white/85 md:text-lg">
+                <p className="mt-4 min-h-[5.5rem] text-[17px] leading-relaxed text-white/85 line-clamp-3 md:text-lg">
                   {s.body}
                 </p>
               </div>
