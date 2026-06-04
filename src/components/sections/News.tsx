@@ -24,10 +24,10 @@ const IMG: Record<string, string> = {
 /* Per-tile aspect ratios + fallbacks → varied heights make the masonry nest
    like Pinterest. The first tile is the tall "feature". */
 const TILES = [
-  { aspect: "aspect-[4/5]", feature: true, fallback: droneSpraying },
-  { aspect: "aspect-[5/4]", feature: false, fallback: hiroshimaAerial },
-  { aspect: "aspect-[4/5]", feature: false, fallback: teamNapa },
-  { aspect: "aspect-[16/11]", feature: false, fallback: bvlosCorridor },
+  { aspect: "aspect-[4/5]", feature: true, fallback: droneSpraying, color: "#F97316" },
+  { aspect: "aspect-[5/4]", feature: false, fallback: hiroshimaAerial, color: "#18120E" },
+  { aspect: "aspect-[4/5]", feature: false, fallback: teamNapa, color: "#EA580C" },
+  { aspect: "aspect-[16/11]", feature: false, fallback: bvlosCorridor, color: "#E08400" },
 ];
 
 /* Responsive column count. We build the masonry from REAL flex columns rather
@@ -119,6 +119,7 @@ export function News() {
                       aspect={tile.aspect}
                       feature={tile.feature}
                       fallback={tile.fallback}
+                      color={tile.color}
                     />
                   </div>
                 );
@@ -168,11 +169,13 @@ function NewsCard({
   aspect,
   feature,
   fallback,
+  color,
 }: {
   item: NewsItem;
   aspect: string;
   feature: boolean;
   fallback: string;
+  color: string;
 }) {
   const { t } = useT();
   const imgSrc = (item.img && IMG[item.img]) || fallback;
@@ -180,49 +183,34 @@ function NewsCard({
   return (
     <a
       href="#contact"
-      className={
-        "group relative flex w-full flex-col justify-end overflow-hidden rounded-2xl border border-fg/10 text-white shadow-sm transition-shadow duration-500 hover:shadow-2xl " +
-        aspect
-      }
+      className="group flex w-full flex-col overflow-hidden rounded-2xl text-white shadow-sm transition-shadow duration-500 hover:shadow-2xl"
     >
-      <ParallaxImage
-        src={imgSrc}
-        alt={item.title}
-        speed={feature ? 0.16 : 0.1}
-        overlay={false}
-        className="absolute inset-0 h-full w-full"
-      />
-      {/* brand orange legibility gradient (deep burnt-orange → orange wash →
-          clear) — keeps the cards on-brand instead of a grey/charcoal scrim */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to top, rgba(122,40,8,0.95) 0%, rgba(216,75,12,0.66) 30%, rgba(249,115,22,0.26) 55%, transparent 82%)",
-        }}
-      />
-      <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
+      {/* photo */}
+      <div className={"relative overflow-hidden " + aspect}>
+        <ParallaxImage
+          src={imgSrc}
+          alt={item.title}
+          speed={feature ? 0.16 : 0.1}
+          overlay={false}
+          className="absolute inset-0 h-full w-full"
+        />
+      </div>
 
-      {/* dispatch code (top-right corner detail) */}
-      <span className="absolute right-4 top-4 z-10 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-white/75">
-        {item.code}
-      </span>
-
-      {/* bottom — meta + headline + read (no excerpt) */}
-      <div className="relative z-10 p-5 md:p-6">
-        <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-white/75">
-          <span className="h-px w-6 bg-white/80" />
-          {item.date}
+      {/* solid punchy colour caption block (no gradient) */}
+      <div className="flex flex-col p-5 md:p-6" style={{ backgroundColor: color }}>
+        <div className="flex items-center gap-3 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-white/80">
+          <span>{item.date}</span>
+          <span className="ml-auto">{item.code}</span>
         </div>
         <h3
           className={
-            "mt-2.5 font-display font-bold leading-[1.1] tracking-[-0.015em] text-white " +
+            "mt-3 font-display font-bold leading-[1.1] tracking-[-0.015em] text-white " +
             (feature ? "text-3xl md:text-4xl" : "text-xl md:text-2xl")
           }
         >
           {item.title}
         </h3>
-        <span className="mt-4 inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-white">
+        <span className="mt-5 inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-white">
           {t.news.read_label}
           <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" />
         </span>
