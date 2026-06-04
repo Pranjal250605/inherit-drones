@@ -2,6 +2,9 @@ import { SectionFrame, SectionLabel, ParallaxImage } from "../primitives";
 import { useT } from "../../i18n";
 import teamNapa from "../../assets/team-napa.jpg";
 
+/* Punchy warm hues per pillar — orange → amber → yellow. */
+const PILLAR_COLORS = ["#F97316", "#F59E0B", "#EAB308"];
+
 export function Mission() {
   const { t } = useT();
 
@@ -55,24 +58,38 @@ export function Mission() {
           data-anim="stagger"
           className="mt-20 grid grid-cols-1 gap-x-12 gap-y-12 md:mt-28 md:grid-cols-3 md:items-start"
         >
-          {t.mission.pillars.map((p, i) => (
-            <div key={p.code} data-anim-item className="border-t-2 border-orange-500 pt-6">
-              <div className="flex items-baseline justify-between">
-                <span className="font-mono text-[13px] font-bold tracking-[0.18em] text-orange-500">
-                  0{i + 1}
-                </span>
-                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.24em] text-fg/40">
-                  {p.jp}
-                </span>
+          {t.mission.pillars.map((p, i) => {
+            const color = PILLAR_COLORS[i % PILLAR_COLORS.length];
+            return (
+              <div
+                key={p.code}
+                data-anim-item
+                className="border-t-2 pt-6"
+                style={{ borderColor: color }}
+              >
+                <div className="flex items-baseline justify-between">
+                  <span
+                    className="font-mono text-[13px] font-bold tracking-[0.18em]"
+                    style={{ color }}
+                  >
+                    0{i + 1}
+                  </span>
+                  <span className="font-mono text-[10px] font-bold uppercase tracking-[0.24em] text-fg/40">
+                    {p.jp}
+                  </span>
+                </div>
+                <h3
+                  className="mt-6 font-display text-4xl font-bold leading-[1.02] tracking-[-0.02em] md:text-5xl"
+                  style={{ color }}
+                >
+                  {p.title}
+                </h3>
+                <p className="mt-4 text-pretty text-[16px] leading-relaxed text-muted">
+                  {p.body}
+                </p>
               </div>
-              <h3 className="mt-6 font-display text-3xl font-bold leading-[1.05] tracking-[-0.02em] text-fg md:text-4xl">
-                {p.title}
-              </h3>
-              <p className="mt-4 text-pretty text-[16px] leading-relaxed text-muted">
-                {p.body}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </SectionFrame>
