@@ -91,10 +91,21 @@ export function Hero() {
           <div data-hero="ctas" className="mt-10 flex flex-col gap-4 sm:flex-row">
             <a
               href="#solutions"
-              className="group inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-full bg-orange-500 px-7 py-3.5 text-[13px] font-bold tracking-[0.03em] text-white transition hover:bg-orange-400"
+              className="group relative inline-flex items-center justify-center gap-2.5 overflow-hidden whitespace-nowrap rounded-full border border-white/30 px-7 py-3.5 text-[13px] font-bold tracking-[0.03em] text-white backdrop-blur-md transition duration-300 hover:border-white/45 hover:brightness-110"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(249,115,22,0.82) 0%, rgba(234,88,12,0.68) 100%)",
+                boxShadow:
+                  "inset 0 1px 0 rgba(255,255,255,0.45), inset 0 -10px 24px -12px rgba(0,0,0,0.35), 0 12px 34px -10px rgba(249,115,22,0.55)",
+              }}
             >
-              {t.hero.cta_primary}
-              <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+              {/* glassy top sheen */}
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/35 to-transparent"
+              />
+              <span className="relative z-10">{t.hero.cta_primary}</span>
+              <ArrowRight className="relative z-10 h-3.5 w-3.5 transition group-hover:translate-x-1" />
             </a>
             <a
               href="#technology"
