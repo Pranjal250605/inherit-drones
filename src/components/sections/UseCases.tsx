@@ -51,22 +51,21 @@ export function UseCases() {
 
   return (
     <section id="field" ref={sectionRef} className="relative overflow-hidden bg-bg">
-      <div className="flex flex-col md:h-screen md:justify-center">
-        
-        {/* Header - Sticky in horizontal scroll */}
-        <div className="z-10 mx-auto w-full max-w-[1400px] px-6 pb-12 pt-24 lg:px-12 md:absolute md:left-0 md:right-0 md:top-12 md:pb-0 md:pt-0">
-          <header className="flex flex-col items-start gap-8 md:flex-row md:items-end md:justify-between">
+      <div className="flex flex-col md:h-screen">
+        {/* Header — sits below the fixed navbar */}
+        <div className="mx-auto w-full max-w-[1400px] shrink-0 px-6 pb-6 pt-28 lg:px-12">
+          <header className="flex flex-col items-start gap-5 md:flex-row md:items-end md:justify-between">
             <div className="max-w-3xl">
               <SectionLabel>{t.field.tag}</SectionLabel>
               <h2
                 data-anim="title-up"
-                className="mt-6 font-display text-5xl font-bold leading-[1.02] tracking-[-0.03em] text-fg md:text-7xl"
+                className="mt-5 font-display text-4xl font-bold leading-[1.02] tracking-[-0.03em] text-fg md:text-6xl"
               >
                 {t.field.h2_pre}
                 <span className="text-orange-500">{t.field.h2_emph}</span>
                 {t.field.h2_post}
               </h2>
-              <div className="mt-5 font-jp text-[12px] tracking-[0.08em] text-fg/50">
+              <div className="mt-4 font-jp text-[12px] tracking-[0.08em] text-fg/50">
                 {t.field.subtitle_jp}
               </div>
             </div>
@@ -82,19 +81,21 @@ export function UseCases() {
           </header>
         </div>
 
-        {/* Scroll Container */}
-        <div 
-          ref={scrollContainerRef} 
-          className="flex flex-col gap-16 px-6 pb-24 md:flex-row md:items-center md:px-12 md:pb-0 md:pt-32 lg:w-max lg:gap-24"
-        >
-          {cases.map((c, i) => (
-            <FieldCase
-              key={c.code}
-              c={c}
-              index={i}
-              imgSrc={IMAGES[i] ?? droneSpraying}
-            />
-          ))}
+        {/* Card row — fills the remaining height; cards centered in it */}
+        <div className="flex flex-1 items-center overflow-hidden pb-20 md:pb-0">
+          <div
+            ref={scrollContainerRef}
+            className="flex flex-col gap-14 px-6 md:flex-row md:items-center md:px-12 lg:w-max lg:gap-24"
+          >
+            {cases.map((c, i) => (
+              <FieldCase
+                key={c.code}
+                c={c}
+                index={i}
+                imgSrc={IMAGES[i] ?? droneSpraying}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
