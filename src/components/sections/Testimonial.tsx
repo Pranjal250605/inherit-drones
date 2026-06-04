@@ -24,18 +24,18 @@ export function Testimonial() {
 
         <blockquote
           data-anim="title-up"
-          className="mt-10 max-w-4xl text-balance font-display text-3xl font-semibold leading-snug tracking-[-0.02em] text-fg md:pr-16 md:text-5xl"
+          className="mt-10 max-w-5xl text-balance font-display text-4xl font-semibold leading-[1.25] tracking-[-0.02em] text-fg md:pr-12 md:text-6xl"
         >
           <span className="text-orange-500">“</span>
           {t.testimonial.quote}
           <span className="text-orange-500">”</span>
         </blockquote>
 
-        <div className="mt-12 md:ml-16">
-          <div className="font-display text-base font-bold text-fg">
+        <div className="mt-14 md:ml-16">
+          <div className="font-display text-xl font-bold text-fg md:text-2xl">
             {t.testimonial.author_name}
           </div>
-          <div className="mt-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-fg/55">
+          <div className="mt-2 font-mono text-[13px] font-semibold uppercase tracking-[0.18em] text-fg/55">
             {t.testimonial.author_role}
           </div>
         </div>
