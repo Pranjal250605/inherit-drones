@@ -1,7 +1,7 @@
 import { TickMark, ArrowRight } from "../primitives";
 import { useT } from "../../i18n";
 import businesswoman from "../../assets/businesswoman.jpg";
-import hiroshimaAerial from "../../assets/hiroshima-aerial.jpg";
+import hiroshimaTorii from "../../assets/hiroshima-torii.jpg";
 import officeTeam from "../../assets/office-team.jpg";
 import teamNapa from "../../assets/team-napa.jpg";
 
@@ -31,9 +31,9 @@ export function Hero() {
             <figure className="relative aspect-[4/3] overflow-hidden lg:aspect-auto lg:col-span-7 lg:row-span-2">
               <img src={teamNapa} alt="NAPA pilot academy team" className="h-full w-full object-cover object-top" loading="eager" />
             </figure>
-            {/* cityscape (kept) */}
+            {/* Itsukushima floating torii — Hiroshima's cultural icon */}
             <figure className="relative aspect-[16/8] overflow-hidden lg:aspect-auto lg:col-span-5">
-              <img src={hiroshimaAerial} alt="Setouchi inland sea" className="h-full w-full object-cover" loading="eager" />
+              <img src={hiroshimaTorii} alt="Itsukushima floating torii — Miyajima, Hiroshima" className="h-full w-full object-cover" loading="eager" />
             </figure>
             {/* two small people cells */}
             <div className="grid grid-cols-2 gap-4 lg:col-span-5">
