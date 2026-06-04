@@ -135,6 +135,15 @@
   opacity: 0.06;
 }
 
+/* Hero carousel — slow Ken Burns zoom on the active slide */
+.hero-kenburns {
+  animation: heroKenburns 7s ease-out forwards;
+}
+@keyframes heroKenburns {
+  from { transform: scale(1.03); }
+  to   { transform: scale(1.13); }
+}
+
 /* ============================================================
    LENIS smooth-scroll support (see src/hooks/useLenis.ts)
 ============================================================ */
