@@ -110,48 +110,51 @@ function FieldCase({
   index: number;
   imgSrc: string;
 }) {
+  const { t } = useT();
   return (
-    <article className="group relative flex w-full max-w-3xl shrink-0 flex-col gap-y-10 md:w-[800px] md:flex-row md:items-center md:gap-x-14">
-      {/* Index Number */}
-      <div className="absolute -left-12 -top-24 hidden font-display text-[12rem] font-bold leading-none text-fg/5 transition-colors group-hover:text-orange-500/10 md:block">
+    <article className="group relative flex w-full max-w-3xl shrink-0 flex-col gap-y-8 md:w-[860px] md:flex-row md:items-center md:gap-x-14">
+      {/* faint index numeral */}
+      <div className="pointer-events-none absolute -left-10 -top-20 hidden select-none font-display text-[11rem] font-bold leading-none text-fg/[0.05] md:block">
         {String(index + 1).padStart(2, "0")}
       </div>
 
       {/* IMAGE */}
-      <figure className="relative w-full md:w-3/5 shrink-0 overflow-hidden rounded-[2rem] shadow-xl">
+      <figure className="relative w-full shrink-0 overflow-hidden rounded-[2rem] shadow-xl md:w-[52%]">
         <ParallaxImage
           src={imgSrc}
           alt={c.title}
           speed={0.1}
-          className="aspect-[4/3] w-full transition-transform duration-700 group-hover:scale-105"
+          className="aspect-[4/3] w-full transition-transform duration-700 group-hover:scale-[1.04]"
         />
-        {/* Floating stat overlay */}
-        <div className="glass absolute bottom-5 left-5 rounded-xl px-5 py-4">
-          <div className="font-display text-2xl font-bold leading-none tracking-[-0.02em] text-fg md:text-3xl">
+        {/* floating stat */}
+        <div className="glass absolute bottom-5 left-5 rounded-2xl px-6 py-5">
+          <div className="font-display text-4xl font-bold leading-none tracking-[-0.03em] text-fg md:text-5xl">
             {c.stat_value}
           </div>
-          <div className="mt-1.5 font-mono text-[9px] font-semibold uppercase tracking-[0.2em] text-fg/70">
+          <div className="mt-2 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-fg/70">
             {c.stat_label}
           </div>
         </div>
       </figure>
 
       {/* TEXT */}
-      <div className="relative z-10 w-full md:w-2/5">
-        <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-orange-500">
+      <div className="relative z-10 w-full md:w-[48%]">
+        <div className="text-[13px] font-bold uppercase tracking-[0.22em] text-orange-500">
           {c.tag}
         </div>
-        <h3 className="mt-4 font-display text-2xl font-bold leading-[1.08] tracking-tight text-fg md:text-4xl">
+        <h3 className="mt-5 font-display text-4xl font-bold leading-[1.05] tracking-[-0.02em] text-fg md:text-5xl">
           {c.title}
         </h3>
-        <p className="mt-5 text-[15px] leading-relaxed text-muted">
+        <p className="mt-6 text-lg leading-relaxed text-muted md:text-xl">
           {c.body}
         </p>
-        <div className="mt-8 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-fg/40">
-          <span className="font-bold text-fg/80">{c.code}</span>
-          <span className="h-px w-6 bg-fg/20" />
-          {c.coords}
-        </div>
+        <a
+          href="#contact"
+          className="mt-9 inline-flex items-center gap-2 text-[13px] font-bold uppercase tracking-[0.18em] text-orange-500 transition-all group-hover:gap-3.5"
+        >
+          {t.field.open}
+          <ArrowRight className="h-4 w-4" />
+        </a>
       </div>
     </article>
   );
