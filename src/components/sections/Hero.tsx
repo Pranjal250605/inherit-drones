@@ -27,9 +27,9 @@ export function Hero() {
         {/* mosaic + wordmark */}
         <div className="relative">
           <div className="grid grid-cols-1 gap-4 lg:h-[58vh] lg:min-h-[480px] lg:grid-cols-12 lg:grid-rows-2">
-            {/* big people photo */}
+            {/* big NAPA team photo — the hero subject */}
             <figure className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] lg:aspect-auto lg:col-span-7 lg:row-span-2">
-              <img src={businesswoman} alt="Inherit team member" className="h-full w-full object-cover object-top" loading="eager" />
+              <img src={teamNapa} alt="NAPA pilot academy team" className="h-full w-full object-cover object-top" loading="eager" />
             </figure>
             {/* cityscape (kept) */}
             <figure className="relative aspect-[16/8] overflow-hidden rounded-[1.75rem] lg:aspect-auto lg:col-span-5">
@@ -38,10 +38,10 @@ export function Hero() {
             {/* two small people cells */}
             <div className="grid grid-cols-2 gap-4 lg:col-span-5">
               <figure className="relative aspect-square overflow-hidden rounded-[1.75rem] lg:aspect-auto">
-                <img src={officeTeam} alt="Operations team" className="h-full w-full object-cover" loading="lazy" />
+                <img src={businesswoman} alt="Inherit team member" className="h-full w-full object-cover object-top" loading="lazy" />
               </figure>
               <figure className="relative aspect-square overflow-hidden rounded-[1.75rem] lg:aspect-auto">
-                <img src={teamNapa} alt="NAPA pilot academy" className="h-full w-full object-cover" loading="lazy" />
+                <img src={officeTeam} alt="Operations team" className="h-full w-full object-cover" loading="lazy" />
               </figure>
             </div>
           </div>
