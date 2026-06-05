@@ -46,8 +46,8 @@ export function FluidAirflowBackground() {
     let raf = 0;
     let t = 0;
 
-    const SPEED = 0.95; // px advected per frame
-    const FADE = 0.035; // trail fade strength (higher = shorter trails)
+    const SPEED = 1.1; // px advected per frame
+    const FADE = 0.02; // trail fade strength (lower = longer, denser trails)
 
     /* Smooth, organic vector field built from layered trig — a cheap
        stand-in for curl/Perlin noise that still flows like air currents. */
@@ -68,12 +68,12 @@ export function FluidAirflowBackground() {
       p.px = p.x;
       p.py = p.y;
       p.life = 80 + Math.random() * 280;
-      p.orange = Math.random() < 0.12; // ~12% faint orange, rest silver
+      p.orange = Math.random() < 0.18; // faint orange minority, rest silver
       return p;
     };
 
     const initParticles = () => {
-      const target = Math.min(460, Math.max(120, Math.round((width * height) / 8500)));
+      const target = Math.min(700, Math.max(180, Math.round((width * height) / 5200)));
       particles = new Array(target);
       for (let i = 0; i < target; i++) particles[i] = spawn({} as Particle);
     };
@@ -91,8 +91,8 @@ export function FluidAirflowBackground() {
       initParticles();
     };
 
-    const GREY = "rgba(140,144,154,0.13)";
-    const ORANGE = "rgba(249,115,22,0.14)";
+    const GREY = "rgba(132,137,148,0.22)";
+    const ORANGE = "rgba(249,115,22,0.24)";
 
     const step = (fade: boolean) => {
       if (fade) {
@@ -103,7 +103,7 @@ export function FluidAirflowBackground() {
         ctx.globalCompositeOperation = "source-over";
       }
 
-      ctx.lineWidth = 1.1;
+      ctx.lineWidth = 1.5;
       // batch by colour to minimise state changes
       for (let pass = 0; pass < 2; pass++) {
         ctx.strokeStyle = pass === 0 ? GREY : ORANGE;
