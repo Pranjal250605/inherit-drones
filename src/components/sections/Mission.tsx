@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SectionFrame, SectionLabel, ParallaxImage } from "../primitives";
+import { SectionFrame, SectionLabel, ParallaxImage, Kanji } from "../primitives";
 import { useT } from "../../i18n";
 import teamNapa from "../../assets/team-napa.jpg";
 
@@ -86,7 +86,7 @@ export function Mission() {
             className="mt-6 font-display text-5xl font-bold leading-[1.02] tracking-[-0.03em] text-fg md:text-7xl"
           >
             {t.mission.h2_pre}
-            {t.mission.h2_emph}
+            <Kanji className="text-orange-500">{t.mission.h2_emph}</Kanji>
             {t.mission.h2_post}
           </h2>
           <div className="mt-5 font-jp text-[12px] tracking-[0.08em] text-fg/50">

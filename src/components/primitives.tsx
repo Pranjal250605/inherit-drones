@@ -1,10 +1,23 @@
 import type { ReactNode, SVGProps } from "react";
+import { useT } from "../i18n";
 
 /* ============================================================
    Shared UI atoms (Fujitaka redesign)
 ============================================================ */
 
 type WithChildren = { children: ReactNode; className?: string };
+
+/** Emphasised key word. In Japanese it renders in the Yuji Syuku brush
+    calligraphy face (font-brush) so select kanji read with extra impact; in
+    English it falls back to whatever type it's nested in (Satoshi/Manrope). The
+    brush face is weight 400 only, so we drop any inherited bold and add a touch
+    of tracking for the strokes to breathe. Inherited colour is preserved. */
+export function Kanji({ children, className = "" }: WithChildren) {
+  const { lang } = useT();
+  const brush = lang === "ja" ? "font-brush font-normal tracking-[0.04em] " : "";
+  if (!brush && !className) return <>{children}</>;
+  return <span className={(brush + className).trim()}>{children}</span>;
+}
 
 export function Mono({ children, className = "" }: WithChildren) {
   return (

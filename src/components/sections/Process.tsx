@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, SectionFrame, SectionLabel } from "../primitives";
+import { ArrowRight, SectionFrame, SectionLabel, Kanji } from "../primitives";
 import { useT } from "../../i18n";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -169,7 +169,7 @@ export function Process() {
               className="mt-6 font-display text-4xl font-bold leading-[1.04] tracking-[-0.03em] text-fg md:text-5xl lg:text-6xl"
             >
               {t.process.h2_line1}{" "}
-              <em className="not-italic text-orange-500">{t.process.h2_emph}</em>{" "}
+              <Kanji className="not-italic text-orange-500">{t.process.h2_emph}</Kanji>{" "}
               {t.process.h2_line2}
             </h2>
             <div className="mt-5 font-jp text-[12px] tracking-[0.08em] text-fg/50">

@@ -5,17 +5,22 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        /* Distinctive type system (2024 editorial-grotesk pairing):
-           - display: Bricolage Grotesque — characterful optical-size grotesk for
-             headlines; gives the page personality so it doesn't read "generic".
-           - sans: Hanken Grotesk — clean, warm humanist body text.
-           - mono: Space Mono — true instrumentation monospace for the technical
-             eyebrow/label motif (engineering character, not generic small-caps).
-           - jp: Zen Kaku Gothic New. */
-        sans: ['"Hanken Grotesk"', "system-ui", "sans-serif"],
-        display: ['"Bricolage Grotesque"', "system-ui", "sans-serif"],
+        /* Type system:
+           - display: Satoshi — geometric, premium grotesk for headlines.
+           - sans: Manrope — clean modern body text. (Satoshi + Manrope pairing.)
+           - mono: Space Mono — instrumentation monospace for the technical
+             eyebrow/label motif.
+           - jp: Zen Kaku Gothic New — Japanese body text.
+           - brush: Yuji Syuku — Japanese brush-calligraphy for emphasised key
+             words (font-brush), giving select kanji extra impact.
+           The JP body face is chained as a fallback on the Latin families so
+           Japanese glyphs inside display/body text render in Zen Kaku, not the
+           OS default. */
+        sans: ['"Manrope"', '"Zen Kaku Gothic New"', "system-ui", "sans-serif"],
+        display: ['"Satoshi"', '"Zen Kaku Gothic New"', "system-ui", "sans-serif"],
         mono: ['"Space Mono"', "ui-monospace", "monospace"],
         jp: ['"Zen Kaku Gothic New"', "system-ui", "sans-serif"],
+        brush: ['"Yuji Syuku"', '"Zen Kaku Gothic New"', "serif"],
       },
       colors: {
         /* Semantic theme tokens — backed by CSS variables in src/index.css.

@@ -1,4 +1,4 @@
-import { TickMark, ArrowRight } from "../primitives";
+import { TickMark, ArrowRight, Kanji } from "../primitives";
 import { useT } from "../../i18n";
 import businesswoman from "../../assets/businesswoman.jpg";
 import hiroshimaTorii from "../../assets/hiroshima-torii.jpg";
@@ -105,9 +105,9 @@ export function Hero() {
           <TickMark className="h-3.5" />
           <h1 className="mt-4 font-display text-3xl font-bold leading-[1.03] tracking-[-0.03em] text-fg md:text-4xl lg:text-5xl">
             {t.hero.h1_line1_pre}
-            <span className="text-orange-500">{t.hero.h1_line1_emph}</span>{" "}
+            <Kanji className="text-orange-500">{t.hero.h1_line1_emph}</Kanji>{" "}
             {t.hero.h1_line2_pre}
-            {t.hero.h1_line2_emph}
+            <Kanji>{t.hero.h1_line2_emph}</Kanji>
           </h1>
           <p className="mt-4 max-w-xl text-pretty text-[15px] leading-relaxed text-muted md:text-base">
             {t.hero.paragraph}
