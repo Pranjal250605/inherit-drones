@@ -68,7 +68,7 @@ export function Mission() {
     <SectionFrame id="mission" className="topo-bg relative overflow-hidden bg-bg py-24 md:py-32">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(249,115,22,.07),_transparent_55%)]" />
 
-      <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div className="relative mx-auto max-w-[87.5rem] px-6 lg:px-12">
         <div className="relative max-w-4xl">
           {/* oversized drifting index — depth + editorial asymmetry */}
           <span

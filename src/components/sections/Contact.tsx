@@ -27,7 +27,7 @@ export function Contact() {
 
   return (
     <SectionFrame id="contact" className="bg-bg-alt py-24 md:py-32">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-12">
         <div className="max-w-3xl">
           <SectionLabel>{t.contact.tag}</SectionLabel>
           <h2

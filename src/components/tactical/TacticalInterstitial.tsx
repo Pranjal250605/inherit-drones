@@ -20,7 +20,7 @@ export function TacticalInterstitial() {
 
       {/* off-center overlay: anchored bottom-left, never centered */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="mx-auto flex h-full max-w-[1240px] items-end px-6 pb-14 lg:px-16 lg:pb-20">
+        <div className="mx-auto flex h-full max-w-[77.5rem] items-end px-6 pb-14 lg:px-16 lg:pb-20">
           <div data-tac="up" className="max-w-2xl">
             <Mono className="text-orange-400">{t.mission.subtitle_jp}</Mono>
             <p className="mt-5 font-display text-[1.75rem] font-bold uppercase leading-[1.05] tracking-[-0.02em] text-white sm:text-4xl lg:text-5xl">

@@ -6,7 +6,7 @@ export function TrustStrip() {
 
   return (
     <section className="relative border-y border-fg/10 bg-bg">
-      <div className="mx-auto flex max-w-[1500px] items-center gap-8 px-6 py-6 lg:px-10">
+      <div className="mx-auto flex max-w-[93.75rem] items-center gap-8 px-6 py-6 lg:px-10">
         <span className="shrink-0 text-[11px] font-bold uppercase tracking-[0.2em] text-fg/70">
           {t.trust.label}
         </span>

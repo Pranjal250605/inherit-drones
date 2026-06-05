@@ -80,7 +80,7 @@ export function TSection({
         "relative scroll-mt-24 px-6 py-32 sm:py-40 lg:px-16 " + className
       }
     >
-      <div className="mx-auto w-full max-w-[1240px]">{children}</div>
+      <div className="mx-auto w-full max-w-[77.5rem]">{children}</div>
     </section>
   );
 }

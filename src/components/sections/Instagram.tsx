@@ -46,7 +46,7 @@ export function Instagram() {
 
   return (
     <SectionFrame id="instagram" className="bg-bg py-24 md:py-32">
-      <div className="mx-auto max-w-[1500px] px-6 lg:px-10">
+      <div className="mx-auto max-w-[93.75rem] px-6 lg:px-10">
         <header className="flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <SectionLabel>{t.instagram.tag}</SectionLabel>

@@ -18,7 +18,7 @@ export function FAQ() {
         08
       </span>
 
-      <div className="relative mx-auto grid max-w-[1400px] grid-cols-12 gap-x-16 gap-y-12 px-6 lg:px-12">
+      <div className="relative mx-auto grid max-w-[87.5rem] grid-cols-12 gap-x-16 gap-y-12 px-6 lg:px-12">
         <div className="col-span-12 lg:col-span-5">
           <div className="lg:sticky lg:top-32">
             <SectionLabel>{t.faq.tag}</SectionLabel>

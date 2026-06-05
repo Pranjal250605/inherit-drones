@@ -20,6 +20,8 @@ import { SettingsDock } from "./components/SettingsDock";
 import { useExperience } from "./experience";
 import { TacticalApp } from "./components/tactical/TacticalApp";
 
+import { GlobalBackground } from "./components/GlobalBackground";
+
 export default function App() {
   const { experience } = useExperience();
 
@@ -39,7 +41,8 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-bg text-fg">
+    <div className="min-h-screen bg-bg text-fg relative">
+      <GlobalBackground />
       {/* Film-grain texture over the whole page — felt, not seen. */}
       <div className="grain" aria-hidden="true" />
       {/* Top-of-viewport scroll progress bar — scales horizontally from 0 to 1

@@ -46,7 +46,7 @@ export function TacticalHero() {
         }}
       />
 
-      <div className="mx-auto w-full max-w-[1240px] px-6 lg:px-16">
+      <div className="mx-auto w-full max-w-[77.5rem] px-6 lg:px-16">
         <Mono className="text-white/55">
           {t.hero.tag_brand} · {t.hero.tag_country}
         </Mono>

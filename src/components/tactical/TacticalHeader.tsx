@@ -31,7 +31,7 @@ export function TacticalHeader() {
           : "border-b border-transparent bg-transparent")
       }
     >
-      <div className="mx-auto flex h-16 max-w-[1320px] items-center justify-between px-6 lg:h-20 lg:px-16">
+      <div className="mx-auto flex h-16 max-w-[82.5rem] items-center justify-between px-6 lg:h-20 lg:px-16">
         <a href="#top" className="flex items-center gap-2.5">
           <span className="grid h-7 w-7 place-items-center bg-orange-500">
             <span className="h-2 w-2 bg-black" />

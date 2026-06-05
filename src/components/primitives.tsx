@@ -51,7 +51,7 @@ export function RoundArrow({
   return (
     <span
       className={
-        "grid shrink-0 place-items-center rounded-full bg-orange-500 text-white transition group-hover:bg-orange-400 " +
+        "grid shrink-0 place-items-center rounded-full bg-orange-500 text-white transition-all duration-300 group-hover:scale-[1.3] group-hover:bg-orange-400 group-hover:shadow-[0_0_20px_rgba(249,115,22,0.5)] " +
         size +
         " " +
         className

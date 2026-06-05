@@ -48,7 +48,7 @@ export function Promo() {
 
   return (
     <SectionFrame id="promo" className="bg-bg-alt py-16 md:py-20">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-12">
         <div
           data-anim="stagger"
           className="grid grid-cols-1 gap-6 md:grid-cols-2"

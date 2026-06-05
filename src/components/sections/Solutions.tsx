@@ -53,7 +53,7 @@ export function Solutions() {
       id="solutions"
       className="diag-bottom relative overflow-hidden bg-gradient-to-br from-[#F2861A] via-[#E9810F] to-[#DB780C] py-24 text-white [--diag:3.5rem] md:py-32"
     >
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-12">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
           {/* LEFT — heading + numbered cards */}
           <div>
@@ -85,7 +85,7 @@ export function Solutions() {
           </div>
 
           {/* RIGHT — circular node diagram (nodes orbit slowly) */}
-          <div className="relative mx-auto aspect-square w-full max-w-[460px]">
+          <div className="relative mx-auto aspect-square w-full max-w-[28.75rem]">
             {/* ring */}
             <div className="absolute left-1/2 top-1/2 h-[74%] w-[74%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/45" />
             {/* centre label (static hub) */}

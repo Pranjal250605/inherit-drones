@@ -19,7 +19,7 @@ export function Testimonial() {
         ”
       </span>
 
-      <div className="relative mx-auto max-w-[1100px] px-6 lg:px-12">
+      <div className="relative mx-auto max-w-[68.75rem] px-6 lg:px-12">
         <SectionLabel>{t.testimonial.tag}</SectionLabel>
 
         <blockquote

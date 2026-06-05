@@ -14,7 +14,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden bg-bg-alt pt-[84px] pb-8 lg:pt-[96px] lg:pb-8"
+      className="relative overflow-hidden bg-bg-alt pt-[5.25rem] pb-8 lg:pt-[6rem] lg:pb-8"
     >
       {/* abstract background blobs */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
@@ -22,10 +22,10 @@ export function Hero() {
         <div className="absolute -right-44 bottom-0 h-[42rem] w-[42rem] rounded-[60%_40%_46%_54%/55%_46%_54%_45%] bg-orange-400/[0.10] blur-2xl" />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-[1440px] px-5 lg:px-8">
+      <div className="relative z-10 mx-auto w-full max-w-[90rem] px-5 lg:px-8">
         {/* mosaic + wordmark */}
         <div className="relative">
-          <div className="grid grid-cols-1 gap-3 lg:h-[44vh] lg:min-h-[340px] lg:grid-cols-12 lg:grid-rows-2">
+          <div className="grid grid-cols-1 gap-3 lg:h-[44vh] lg:min-h-[21.25rem] lg:grid-cols-12 lg:grid-rows-2">
             {/* big NAPA team photo */}
             <figure className="relative aspect-[4/3] overflow-hidden lg:col-span-7 lg:row-span-2 lg:aspect-auto">
               <img src={teamNapa} alt="NAPA pilot academy team" className="h-full w-full object-cover object-top" loading="eager" />

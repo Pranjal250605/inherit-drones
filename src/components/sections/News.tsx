@@ -65,7 +65,7 @@ export function News() {
       id="news"
       className="dot-grid-bg relative overflow-hidden bg-bg-alt py-20 md:py-24"
     >
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-12">
         <div className="flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between">
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-3">
@@ -95,7 +95,7 @@ export function News() {
             className="group inline-flex items-center gap-3 whitespace-nowrap text-[12px] font-bold uppercase tracking-[0.18em] text-fg/80 transition hover:text-orange-500"
           >
             {t.news.view_all}
-            <span className="grid h-8 w-8 place-items-center rounded-full bg-orange-500 text-white transition group-hover:translate-x-0.5 group-hover:bg-orange-400">
+            <span className="grid h-8 w-8 place-items-center rounded-full bg-orange-500 text-white transition-all duration-300 group-hover:scale-[1.3] group-hover:bg-orange-400 group-hover:shadow-[0_0_20px_rgba(249,115,22,0.5)]">
               <ArrowRight className="h-3.5 w-3.5" />
             </span>
           </a>

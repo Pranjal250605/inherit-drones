@@ -160,7 +160,7 @@ export function Process() {
         </svg>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1500px] px-6 lg:px-12">
+      <div className="relative z-10 mx-auto max-w-[93.75rem] px-6 lg:px-12">
         <header className="flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-3xl">
             <SectionLabel>{t.process.tag}</SectionLabel>
@@ -181,7 +181,7 @@ export function Process() {
             className="group inline-flex items-center gap-3 whitespace-nowrap text-[12px] font-bold uppercase tracking-[0.18em] text-fg/80 transition-colors hover:text-orange-500"
           >
             {t.process.cta}
-            <span className="grid h-8 w-8 place-items-center rounded-full bg-orange-500 text-white transition group-hover:bg-orange-400">
+            <span className="grid h-8 w-8 place-items-center rounded-full bg-orange-500 text-white transition-all duration-300 group-hover:scale-[1.3] group-hover:bg-orange-400 group-hover:shadow-[0_0_20px_rgba(249,115,22,0.5)]">
               <ArrowRight className="h-3.5 w-3.5" />
             </span>
           </a>

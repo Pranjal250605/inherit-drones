@@ -38,7 +38,7 @@ export function Stats() {
           filter: "blur(30px)",
         }}
       />
-      <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div className="relative mx-auto max-w-[87.5rem] px-6 lg:px-12">
         <div
           data-anim="stagger"
           className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:items-start"

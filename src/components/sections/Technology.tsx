@@ -70,7 +70,7 @@ export function Technology() {
       ref={sectionRef}
       className="topo-bg relative w-full overflow-hidden bg-bg-alt py-24 md:py-32"
     >
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div className="mx-auto max-w-[87.5rem] px-6 lg:px-12">
         <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-10">
           {/* LEFT — heading */}
           <div ref={leftRef} className="lg:col-span-5">
