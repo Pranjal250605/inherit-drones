@@ -197,7 +197,7 @@ export function Process() {
             <div
               key={s.n}
               data-card
-              className={`group relative flex min-h-[400px] flex-col justify-between overflow-hidden rounded-3xl p-8 text-fg border border-white/5 bg-black/20 backdrop-blur-md shadow-2xl transition-all duration-500 hover:-translate-y-2 md:min-h-[460px] md:p-9 ${CARD_TINTS[i % CARD_TINTS.length]}`}
+              className={`group relative flex min-h-[300px] flex-col justify-between overflow-hidden rounded-3xl p-7 text-fg border border-white/5 bg-black/20 backdrop-blur-md shadow-2xl transition-all duration-500 hover:-translate-y-2 sm:min-h-[400px] sm:p-8 md:min-h-[460px] md:p-9 ${CARD_TINTS[i % CARD_TINTS.length]}`}
             >
               {/* per-phase drone line art watermark */}
               <Art className="pointer-events-none absolute -right-8 -top-8 h-64 w-64 text-fg/5 transition-transform duration-700 group-hover:scale-110 group-hover:text-fg/10" />

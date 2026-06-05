@@ -51,7 +51,7 @@ export default function App() {
           across the page's full scroll range. Sits above the Header (z-[60]). */}
       <div
         data-anim="scroll-progress"
-        className="fixed inset-x-0 top-0 z-[60] h-[2px] origin-left bg-orange-500"
+        className="fixed inset-x-0 top-0 z-[70] h-[2px] origin-left bg-orange-500"
         style={{ transform: "scaleX(0)" }}
       />
       <Header />

@@ -87,10 +87,24 @@ export function Technology() {
             </p>
           </div>
 
-          {/* RIGHT — drone with 3 specs aligned on each flank */}
+          {/* RIGHT — drone with specs. On mobile: a centred drone above a tidy
+              2-column spec grid. On sm+: 3 specs aligned down each flank. */}
           <div className="lg:col-span-7">
-            <div className="grid grid-cols-1 items-center gap-y-10 sm:grid-cols-[1fr_auto_1fr] sm:gap-x-6 lg:gap-x-10">
-              <div className="order-2 flex flex-col gap-10 sm:order-1">
+            {/* MOBILE layout */}
+            <div className="sm:hidden">
+              <div className="mb-12 flex justify-center">
+                <DroneGlyph className="h-[200px] w-[200px] text-fg drop-shadow-[0_0_30px_rgba(249,115,22,0.2)]" />
+              </div>
+              <div className="grid grid-cols-2 gap-x-6 gap-y-9 border-t border-fg/10 pt-9">
+                {specs.map((s) => (
+                  <SpecStat key={s.k} spec={s} align="left" refCb={() => {}} />
+                ))}
+              </div>
+            </div>
+
+            {/* SM+ flank layout */}
+            <div className="hidden items-center gap-x-6 sm:grid sm:grid-cols-[1fr_auto_1fr] lg:gap-x-10">
+              <div className="flex flex-col gap-10">
                 {specs.slice(0, 3).map((s, i) => (
                   <SpecStat
                     key={s.k}
@@ -101,14 +115,11 @@ export function Technology() {
                 ))}
               </div>
 
-              <div
-                ref={droneRef}
-                className="order-1 flex justify-center sm:order-2"
-              >
+              <div ref={droneRef} className="flex justify-center">
                 <DroneGlyph className="h-[260px] w-[260px] text-fg drop-shadow-[0_0_30px_rgba(249,115,22,0.2)] md:h-[320px] md:w-[320px] lg:h-[360px] lg:w-[360px]" />
               </div>
 
-              <div className="order-3 flex flex-col gap-10">
+              <div className="flex flex-col gap-10">
                 {specs.slice(3, 6).map((s, i) => (
                   <SpecStat
                     key={s.k}
