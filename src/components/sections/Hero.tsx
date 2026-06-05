@@ -16,10 +16,57 @@ export function Hero() {
       id="top"
       className="relative overflow-hidden pt-[5.25rem] pb-8 lg:pt-[6rem] lg:pb-8"
     >
-      {/* abstract background blobs */}
+      {/* abstract background: soft mesh-gradient blobs + aerodynamic line shapes */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute -left-40 top-16 h-[34rem] w-[34rem] rounded-[42%_58%_60%_40%/45%_45%_55%_55%] bg-orange-500/[0.07]" />
-        <div className="absolute -right-44 bottom-0 h-[42rem] w-[42rem] rounded-[60%_40%_46%_54%/55%_46%_54%_45%] bg-orange-400/[0.10] blur-2xl" />
+        {/* mesh-gradient blobs (orange / amber / cool silver) */}
+        <div className="absolute -left-48 top-0 h-[42rem] w-[42rem] rounded-[42%_58%_60%_40%/45%_45%_55%_55%] bg-orange-500/[0.13] blur-[80px]" />
+        <div className="absolute -right-52 -top-16 h-[46rem] w-[46rem] rounded-[60%_40%_46%_54%/55%_46%_54%_45%] bg-amber-400/[0.16] blur-[90px]" />
+        <div className="absolute -bottom-44 left-1/4 h-[40rem] w-[40rem] rounded-full bg-[#7ea6d4]/[0.16] blur-[120px]" />
+        <div className="absolute right-[28%] top-1/3 h-80 w-80 rounded-full bg-orange-300/25 blur-[90px]" />
+
+        {/* technical concentric rings, slowly rotating */}
+        <svg
+          className="absolute -right-28 top-1/2 h-[42rem] w-[42rem] -translate-y-1/2 text-orange-500/[0.13] motion-safe:animate-[spin_120s_linear_infinite]"
+          viewBox="0 0 400 400"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1"
+        >
+          <circle cx="200" cy="200" r="192" strokeDasharray="2 11" />
+          <circle cx="200" cy="200" r="150" />
+          <circle cx="200" cy="200" r="108" strokeDasharray="22 16" strokeWidth="1.5" />
+          {Array.from({ length: 8 }).map((_, i) => (
+            <g key={i} transform={`rotate(${i * 45} 200 200)`}>
+              <line x1="200" y1="8" x2="200" y2="34" strokeWidth="1.5" />
+              <circle cx="200" cy="34" r="2.5" fill="currentColor" />
+            </g>
+          ))}
+        </svg>
+
+        {/* dotted flight arc */}
+        <svg
+          className="absolute -left-12 bottom-2 h-72 w-[40rem] text-orange-500/25"
+          viewBox="0 0 640 280"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
+          <path d="M-20 250 C160 40 380 40 660 210" strokeDasharray="1 13" strokeLinecap="round" />
+          <circle cx="320" cy="78" r="4" fill="currentColor" />
+        </svg>
+
+        {/* faint crosshair marks */}
+        {[
+          "left-[18%] top-[22%]",
+          "right-[14%] top-[16%]",
+          "left-[42%] bottom-[12%]",
+        ].map((pos) => (
+          <span key={pos} className={"absolute text-orange-500/30 " + pos}>
+            <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.2">
+              <path d="M8 1v14M1 8h14" />
+            </svg>
+          </span>
+        ))}
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-[90rem] px-5 lg:px-8">
