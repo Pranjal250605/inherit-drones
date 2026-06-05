@@ -14,7 +14,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden bg-bg-alt pt-[5.25rem] pb-8 lg:pt-[6rem] lg:pb-8"
+      className="relative overflow-hidden pt-[5.25rem] pb-8 lg:pt-[6rem] lg:pb-8"
     >
       {/* abstract background blobs */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">

@@ -21,6 +21,7 @@ import { useExperience } from "./experience";
 import { TacticalApp } from "./components/tactical/TacticalApp";
 
 import { GlobalBackground } from "./components/GlobalBackground";
+import { FluidAirflowBackground } from "./components/FluidAirflowBackground";
 
 export default function App() {
   const { experience } = useExperience();
@@ -42,6 +43,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-bg text-fg relative">
+      <FluidAirflowBackground />
       <GlobalBackground />
       {/* Film-grain texture over the whole page — felt, not seen. */}
       <div className="grain" aria-hidden="true" />
