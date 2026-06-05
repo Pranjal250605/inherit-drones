@@ -1,6 +1,7 @@
 import { LanguageSwitcher } from "../LanguageSwitcher";
 import { ThemeSwitcher } from "../ThemeSwitcher";
 import { useT } from "../../i18n";
+import logo from "../../assets/logo.png";
 
 export function Footer() {
   const { t } = useT();
@@ -11,8 +12,8 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-y-12 gap-x-8 border-t border-white/10 pt-16 md:grid-cols-6">
           <div className="col-span-2 md:col-span-2">
             <div className="flex items-center gap-2.5">
-              <span className="grid h-7 w-7 place-items-center rounded-md bg-orange-500">
-                <span className="h-2 w-2 rounded-[2px] bg-white" />
+              <span className="grid h-9 w-9 place-items-center overflow-hidden rounded-md bg-white">
+                <img src={logo} alt="" className="h-full w-full object-contain p-[3px]" />
               </span>
               <span className="font-display text-lg font-bold tracking-[0.02em] text-white">
                 INHERIT / CO.

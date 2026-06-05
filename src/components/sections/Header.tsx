@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useT } from "../../i18n";
+import logo from "../../assets/logo.png";
 
 export function Header() {
   const { t } = useT();
@@ -32,8 +33,8 @@ export function Header() {
     >
       <div className="mx-auto flex h-16 max-w-[87.5rem] items-center justify-between px-6 lg:h-20 lg:px-12">
         <a href="#top" className="flex items-center gap-2.5 whitespace-nowrap">
-          <span className="relative grid h-7 w-7 place-items-center rounded-md bg-orange-500">
-            <span className="h-2 w-2 rounded-[2px] bg-white" />
+          <span className="grid h-9 w-9 place-items-center overflow-hidden rounded-md bg-white shadow-sm ring-1 ring-black/5">
+            <img src={logo} alt="" className="h-full w-full object-contain p-[3px]" />
           </span>
           <span className="text-[16px] font-bold tracking-[0.02em]">
             INHERIT
