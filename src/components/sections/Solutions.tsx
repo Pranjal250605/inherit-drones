@@ -66,12 +66,12 @@ export function Solutions() {
 
             <h2
               data-anim="title-up"
-              className="mt-6 max-w-xl font-display text-5xl font-bold leading-[1.02] tracking-[-0.03em] md:text-7xl"
+              className="mt-6 max-w-xl font-display text-6xl font-bold leading-[1.02] tracking-[-0.03em] md:text-7xl"
             >
               {s.h2_line1} <Kanji>{s.h2_emph}</Kanji>
               {s.h2_line2_post} {s.h2_line3}
             </h2>
-            <p className="mt-6 max-w-md text-pretty text-[15px] leading-relaxed text-white/85">
+            <p className="mt-6 max-w-md text-pretty text-base leading-relaxed text-white/85 md:text-lg">
               {s.lead}
             </p>
 

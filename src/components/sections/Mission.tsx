@@ -83,13 +83,13 @@ export function Mission() {
           <SectionLabel>{t.mission.tag}</SectionLabel>
           <h2
             data-anim="title-up"
-            className="mt-6 font-display text-5xl font-bold leading-[1.02] tracking-[-0.03em] text-fg md:text-7xl"
+            className="mt-6 font-display text-6xl font-bold leading-[1.02] tracking-[-0.03em] text-fg md:text-7xl"
           >
             {t.mission.h2_pre}
             <Kanji className="text-orange-500">{t.mission.h2_emph}</Kanji>
             {t.mission.h2_post}
           </h2>
-          <div className="mt-5 font-jp text-[12px] tracking-[0.08em] text-fg/50">
+          <div className="mt-5 font-jp text-[13.5px] tracking-[0.08em] text-fg/50">
             {t.mission.subtitle_jp}
           </div>
         </div>

@@ -103,13 +103,13 @@ export function Hero() {
         {/* heading block — stays in frame */}
         <div className="mt-14 max-w-3xl lg:mt-12">
           <TickMark className="h-3.5" />
-          <h1 className="mt-4 font-display text-3xl font-bold leading-[1.03] tracking-[-0.03em] text-fg md:text-4xl lg:text-5xl">
+          <h1 className="mt-4 font-display text-4xl font-bold leading-[1.03] tracking-[-0.03em] text-fg md:text-5xl lg:text-6xl">
             {t.hero.h1_line1_pre}
             <Kanji className="text-orange-500">{t.hero.h1_line1_emph}</Kanji>{" "}
             {t.hero.h1_line2_pre}
             <Kanji>{t.hero.h1_line2_emph}</Kanji>
           </h1>
-          <p className="mt-4 max-w-xl text-pretty text-[15px] leading-relaxed text-muted md:text-base">
+          <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted md:text-lg">
             {t.hero.paragraph}
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">

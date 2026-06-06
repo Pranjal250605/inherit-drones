@@ -72,17 +72,27 @@ export function Technology() {
     >
       <div className="mx-auto max-w-[87.5rem] px-6 lg:px-12">
         <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-10">
-          {/* LEFT — heading */}
+          {/* LEFT — heading + brush 隼 (Hayabusa) accent */}
           <div ref={leftRef} className="lg:col-span-5">
             <SectionLabel>{t.tech.tag}</SectionLabel>
-            <h2 className="mt-6 font-display text-5xl font-bold leading-[1.02] tracking-[-0.02em] text-fg md:text-6xl lg:text-7xl">
-              {t.tech.h2_pre}
-              <span className="text-orange-500">{t.tech.h2_emph}</span>
-              {t.tech.h2_post}
-              <br />
-              {t.tech.h2_line2}
-            </h2>
-            <p className="mt-7 max-w-md text-pretty text-[17px] leading-relaxed text-muted md:text-lg">
+            <div className="mt-6 flex items-start gap-4 sm:gap-6">
+              <h2 className="min-w-0 flex-1 font-display text-[3.25rem] font-bold leading-[1.02] tracking-[-0.02em] text-fg md:text-6xl lg:text-7xl">
+                {t.tech.h2_pre}
+                <span className="text-orange-500">{t.tech.h2_emph}</span>
+                {t.tech.h2_post}
+                <br />
+                {t.tech.h2_line2}
+              </h2>
+              {/* 隼 = "Hayabusa" (peregrine falcon), the IH-04's namesake —
+                  brush calligraphy (Yuji Syuku), in ink black. */}
+              <span
+                aria-hidden="true"
+                className="shrink-0 select-none self-start font-brush text-[3.75rem] leading-[0.78] text-fg sm:text-[6rem] lg:text-[7.5rem]"
+              >
+                隼
+              </span>
+            </div>
+            <p className="mt-7 max-w-md text-pretty text-lg leading-relaxed text-muted md:text-xl">
               {t.tech.lead}
             </p>
           </div>

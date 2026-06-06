@@ -169,7 +169,7 @@ export function SectionLabel({
   return (
     <div className={"flex items-center gap-3 " + className}>
       <TickMark />
-      <span className="text-[12px] font-bold uppercase tracking-[0.2em] text-fg/80">
+      <span className="text-[13.5px] font-bold uppercase tracking-[0.2em] text-fg/80">
         {num && (
           <span className="mr-2 font-mono text-orange-500">{num}</span>
         )}

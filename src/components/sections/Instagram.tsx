@@ -52,7 +52,7 @@ export function Instagram() {
             <SectionLabel>{t.instagram.tag}</SectionLabel>
             <h2
               data-anim="title-up"
-              className="mt-6 font-display text-3xl font-bold leading-[1.1] tracking-[-0.015em] text-fg md:text-4xl"
+              className="mt-6 font-display text-4xl font-bold leading-[1.1] tracking-[-0.015em] text-fg md:text-5xl"
             >
               {t.instagram.h2_pre}
               {t.instagram.h2_emph}

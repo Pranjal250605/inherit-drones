@@ -59,13 +59,13 @@ export function UseCases() {
               <SectionLabel>{t.field.tag}</SectionLabel>
               <h2
                 data-anim="title-up"
-                className="mt-5 font-display text-4xl font-bold leading-[1.02] tracking-[-0.03em] text-fg md:text-6xl"
+                className="mt-5 font-display text-5xl font-bold leading-[1.02] tracking-[-0.03em] text-fg md:text-6xl"
               >
                 {t.field.h2_pre}
                 <span className="text-orange-500">{t.field.h2_emph}</span>
                 {t.field.h2_post}
               </h2>
-              <div className="mt-4 font-jp text-[12px] tracking-[0.08em] text-fg/50">
+              <div className="mt-4 font-jp text-[13.5px] tracking-[0.08em] text-fg/50">
                 {t.field.subtitle_jp}
               </div>
             </div>
