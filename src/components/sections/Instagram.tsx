@@ -45,7 +45,13 @@ export function Instagram() {
   }, [lang]);
 
   return (
-    <SectionFrame id="instagram" className="bg-bg py-24 md:py-32">
+    <SectionFrame
+      id="instagram"
+      /* Lift above the GlobalBackground mix-blend-multiply overlay (z-40): a
+         blend layer over cross-origin iframes renders unreliably (blank) on
+         the white light/blueprint backgrounds, hiding the embeds. */
+      className="relative z-[41] isolate bg-bg py-24 md:py-32"
+    >
       <div className="mx-auto max-w-[93.75rem] px-6 lg:px-10">
         <header className="flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between">
           <div>
