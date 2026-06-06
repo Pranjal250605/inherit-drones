@@ -1,73 +1,144 @@
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 import { SectionLabel } from "../primitives";
 import { DroneGlyph } from "../tactical/primitives";
 import { useT, type Dict } from "../../i18n";
 
+gsap.registerPlugin(ScrollTrigger);
+
 type Spec = Dict["tech"]["specs"][number];
 
-/* Technology — four-zone command row (matches the reference layout):
-   [ heading + lead ] · [ gold 隼 calligraphy ] · [ 3 key specs ] · [ drone panel ] */
 export function Technology() {
   const { t } = useT();
-  const specs = t.tech.specs.slice(0, 3);
+  const sectionRef = useRef<HTMLElement>(null);
+  const droneRef = useRef<HTMLDivElement>(null);
+  const leftRef = useRef<HTMLDivElement>(null);
+  const specsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Six key specs, three down each flank of the drone.
+  const specs = t.tech.specs.slice(0, 6);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        leftRef.current,
+        { autoAlpha: 0, y: 40 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: { trigger: section, start: "top 72%" },
+        }
+      );
+      gsap.fromTo(
+        droneRef.current,
+        { autoAlpha: 0, scale: 0.85 },
+        {
+          autoAlpha: 1,
+          scale: 1,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: { trigger: section, start: "top 68%" },
+        }
+      );
+      gsap.fromTo(
+        specsRef.current.filter(Boolean),
+        { autoAlpha: 0, x: (i) => (i < 3 ? -40 : 40) },
+        {
+          autoAlpha: 1,
+          x: 0,
+          duration: 0.6,
+          ease: "power3.out",
+          stagger: 0.08,
+          scrollTrigger: { trigger: section, start: "top 60%" },
+        }
+      );
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section
       id="technology"
+      ref={sectionRef}
       className="topo-bg relative w-full overflow-hidden bg-bg-alt py-24 md:py-32"
     >
       <div className="mx-auto max-w-[87.5rem] px-6 lg:px-12">
-        <div className="grid grid-cols-1 gap-y-14 lg:grid-cols-12 lg:items-center lg:gap-x-8">
-          {/* 1 — heading + lead */}
-          <div className="lg:col-span-4">
+        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-10">
+          {/* LEFT — heading + brush 隼 (Hayabusa) accent */}
+          <div ref={leftRef} className="lg:col-span-5">
             <SectionLabel>{t.tech.tag}</SectionLabel>
-            <h2
-              data-anim="title-up"
-              className="mt-6 font-display text-5xl font-bold leading-[1.04] tracking-[-0.02em] text-fg md:text-6xl lg:text-[4.5rem]"
-            >
-              {t.tech.h2_pre}
-              <span className="text-orange-500">{t.tech.h2_emph}</span>
-              {t.tech.h2_post}
-              <br />
-              {t.tech.h2_line2}
-            </h2>
+            <div className="mt-6 flex items-start gap-4 sm:gap-6">
+              <h2 className="min-w-0 flex-1 font-display text-[3.25rem] font-bold leading-[1.02] tracking-[-0.02em] text-fg md:text-6xl lg:text-7xl">
+                {t.tech.h2_pre}
+                <span className="text-orange-500">{t.tech.h2_emph}</span>
+                {t.tech.h2_post}
+                <br />
+                {t.tech.h2_line2}
+              </h2>
+              {/* 隼 = "Hayabusa" (peregrine falcon), the IH-04's namesake —
+                  brush calligraphy (Yuji Syuku) in metallic gold. */}
+              <span
+                aria-hidden="true"
+                className="shrink-0 select-none self-start bg-gradient-to-br from-[#dcb863] via-[#b8924a] to-[#856325] bg-clip-text font-brush text-[3.75rem] leading-[0.78] text-transparent sm:text-[6rem] lg:text-[7.5rem]"
+              >
+                隼
+              </span>
+            </div>
             <p className="mt-7 max-w-md text-pretty text-lg leading-relaxed text-muted md:text-xl">
               {t.tech.lead}
             </p>
           </div>
 
-          {/* 2 — 隼 = "Hayabusa", brush calligraphy (Yuji Syuku) in metallic gold */}
-          <div className="flex justify-center lg:col-span-2">
-            <span
-              aria-hidden="true"
-              className="select-none bg-gradient-to-br from-[#e7c879] via-[#b8924a] to-[#7c5d22] bg-clip-text font-brush text-[8rem] leading-[0.78] text-transparent sm:text-[10rem] lg:text-[11rem]"
-            >
-              隼
-            </span>
-          </div>
+          {/* RIGHT — drone with specs. On mobile: a centred drone above a tidy
+              2-column spec grid. On sm+: 3 specs aligned down each flank. */}
+          <div className="lg:col-span-7">
+            {/* MOBILE layout */}
+            <div className="sm:hidden">
+              <div className="mb-12 flex justify-center">
+                <DroneGlyph className="h-[200px] w-[200px] text-fg drop-shadow-[0_0_30px_rgba(249,115,22,0.2)]" />
+              </div>
+              <div className="grid grid-cols-2 gap-x-6 gap-y-9 border-t border-fg/10 pt-9">
+                {specs.map((s) => (
+                  <SpecStat key={s.k} spec={s} align="left" refCb={() => {}} />
+                ))}
+              </div>
+            </div>
 
-          {/* 3 — three key specs */}
-          <div
-            data-anim="stagger"
-            className="grid grid-cols-3 gap-5 lg:col-span-2 lg:flex lg:flex-col lg:gap-12"
-          >
-            {specs.map((s) => (
-              <SpecStat key={s.k} spec={s} />
-            ))}
-          </div>
+            {/* SM+ flank layout */}
+            <div className="hidden items-center gap-x-6 sm:grid sm:grid-cols-[1fr_auto_1fr] lg:gap-x-10">
+              <div className="flex flex-col gap-10">
+                {specs.slice(0, 3).map((s, i) => (
+                  <SpecStat
+                    key={s.k}
+                    spec={s}
+                    align="right"
+                    refCb={(el) => (specsRef.current[i] = el)}
+                  />
+                ))}
+              </div>
 
-          {/* 4 — drone in a light instrument panel */}
-          <div className="lg:col-span-4">
-            <div className="relative mx-auto flex aspect-square w-full max-w-md items-center justify-center overflow-hidden rounded-3xl border border-fg/[0.06] bg-gradient-to-br from-white to-[#f0e8de] shadow-[0_30px_70px_-40px_rgba(0,0,0,0.45)]">
-              {/* warm ambient glow behind the drone */}
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0"
-                style={{
-                  background:
-                    "radial-gradient(58% 58% at 50% 46%, rgba(249,115,22,0.20), transparent 70%)",
-                }}
-              />
-              <DroneGlyph className="relative h-[80%] w-[80%] text-[#0a0c11] drop-shadow-[0_12px_34px_rgba(249,115,22,0.28)]" />
+              <div ref={droneRef} className="flex justify-center">
+                <DroneGlyph className="h-[260px] w-[260px] text-fg drop-shadow-[0_0_30px_rgba(249,115,22,0.2)] md:h-[320px] md:w-[320px] lg:h-[360px] lg:w-[360px]" />
+              </div>
+
+              <div className="flex flex-col gap-10">
+                {specs.slice(3, 6).map((s, i) => (
+                  <SpecStat
+                    key={s.k}
+                    spec={s}
+                    align="left"
+                    refCb={(el) => (specsRef.current[i + 3] = el)}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -76,18 +147,26 @@ export function Technology() {
   );
 }
 
-function SpecStat({ spec }: { spec: Spec }) {
+function SpecStat({
+  spec,
+  align,
+  refCb,
+}: {
+  spec: Spec;
+  align: "left" | "right";
+  refCb: (el: HTMLDivElement | null) => void;
+}) {
   return (
-    <div data-anim-item className="text-center lg:text-left">
-      <div className="font-display text-3xl font-bold leading-none tracking-[-0.02em] text-fg sm:text-4xl lg:text-5xl">
+    <div ref={refCb} className={align === "right" ? "sm:text-right" : "sm:text-left"}>
+      <div className="font-display text-4xl font-bold leading-none tracking-[-0.02em] text-fg lg:text-5xl">
         {spec.display}
         {spec.unit && (
-          <span className="ml-1.5 font-mono text-xs font-bold uppercase tracking-[0.12em] text-orange-500 sm:text-sm">
+          <span className="ml-1.5 font-mono text-sm font-bold uppercase tracking-[0.12em] text-orange-500">
             {spec.unit}
           </span>
         )}
       </div>
-      <div className="mt-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-fg/50 sm:text-[11px] sm:tracking-[0.18em]">
+      <div className="mt-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-fg/50">
         {spec.k}
       </div>
     </div>
