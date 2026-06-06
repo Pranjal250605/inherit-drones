@@ -4,7 +4,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { SectionLabel } from "../primitives";
 import { DroneGlyph } from "../tactical/primitives";
 import { useT, type Dict } from "../../i18n";
-import hayabusaKanji from "../../assets/hayabusa_calligraphy_transparent.png";
+import hayabusaKanji from "../../assets/hayabusa_calligraphy_v2.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -95,7 +95,7 @@ export function Technology() {
               src={hayabusaKanji}
               alt=""
               aria-hidden="true"
-              className="pointer-events-none w-[13rem] max-w-none select-none object-contain sm:w-[18rem] lg:w-[20rem]"
+              className="pointer-events-none w-[9.5rem] select-none object-contain sm:w-[12rem] lg:w-[15rem]"
             />
           </div>
 
