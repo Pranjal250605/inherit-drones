@@ -98,7 +98,7 @@ export function Technology() {
               className="pointer-events-none w-[9.5rem] select-none object-contain sm:w-[12rem] lg:w-[15rem]"
               style={{
                 filter:
-                  "drop-shadow(0.75px 0 0 #000) drop-shadow(-0.75px 0 0 #000) drop-shadow(0 0.75px 0 #000) drop-shadow(0 -0.75px 0 #000) drop-shadow(0.55px 0.55px 0 #000) drop-shadow(-0.55px 0.55px 0 #000) drop-shadow(0.55px -0.55px 0 #000) drop-shadow(-0.55px -0.55px 0 #000)",
+                  "drop-shadow(1.25px 0 0 #000) drop-shadow(-1.25px 0 0 #000) drop-shadow(0 1.25px 0 #000) drop-shadow(0 -1.25px 0 #000) drop-shadow(0.9px 0.9px 0 #000) drop-shadow(-0.9px 0.9px 0 #000) drop-shadow(0.9px -0.9px 0 #000) drop-shadow(-0.9px -0.9px 0 #000)",
               }}
             />
           </div>
