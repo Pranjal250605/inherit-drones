@@ -1,5 +1,24 @@
 import { TickMark } from "../primitives";
 import { useT, type Dict } from "../../i18n";
+import { useTheme } from "../../theme";
+
+/* Banner colour ramps — orange by default, navy in the blueprint theme. */
+const RAMP = {
+  orange: {
+    panel:
+      "radial-gradient(135% 120% at 82% 20%, rgba(255,170,82,0.62), rgba(255,140,40,0) 52%)," +
+      "radial-gradient(95% 130% at 6% 56%, rgba(7,5,3,0.94), rgba(7,5,3,0) 58%)," +
+      "linear-gradient(102deg, #1b0d06 0%, #4d1a06 19%, #9c3309 37%, #d9500c 57%, #f1681a 78%, #fb8a2e 100%)",
+    dots: "rgba(255,210,170,0.55)",
+  },
+  navy: {
+    panel:
+      "radial-gradient(135% 120% at 82% 20%, rgba(120,160,255,0.55), rgba(90,130,240,0) 52%)," +
+      "radial-gradient(95% 130% at 6% 56%, rgba(3,7,18,0.95), rgba(3,7,18,0) 58%)," +
+      "linear-gradient(102deg, #060f20 0%, #0c1f44 19%, #11306e 37%, #1a47a0 57%, #2257c4 78%, #3f78e6 100%)",
+    dots: "rgba(190,210,255,0.55)",
+  },
+};
 
 /* ============================================================
    Stats — "Command Deck" banner
@@ -99,6 +118,8 @@ function WireDrone({ className = "" }: { className?: string }) {
 
 export function Stats() {
   const { t, lang } = useT();
+  const { theme } = useTheme();
+  const ramp = theme === "blueprint" ? RAMP.navy : RAMP.orange;
   const stats = t.stats.slice(0, 4);
 
   return (
@@ -108,12 +129,7 @@ export function Stats() {
         <div
           aria-hidden="true"
           className="diag-band absolute inset-0 [--diag:1.25rem] md:[--diag:4.5rem]"
-          style={{
-            background:
-              "radial-gradient(135% 120% at 82% 20%, rgba(255,170,82,0.62), rgba(255,140,40,0) 52%)," +
-              "radial-gradient(95% 130% at 6% 56%, rgba(7,5,3,0.94), rgba(7,5,3,0) 58%)," +
-              "linear-gradient(102deg, #1b0d06 0%, #4d1a06 19%, #9c3309 37%, #d9500c 57%, #f1681a 78%, #fb8a2e 100%)",
-          }}
+          style={{ background: ramp.panel }}
         />
 
         {/* ===== HUD / instrumentation chrome ===== */}
@@ -161,7 +177,7 @@ export function Stats() {
           <div
             className="absolute bottom-0 right-0 h-56 w-72 opacity-50"
             style={{
-              backgroundImage: "radial-gradient(rgba(255,210,170,0.55) 1px, transparent 1.4px)",
+              backgroundImage: `radial-gradient(${ramp.dots} 1px, transparent 1.4px)`,
               backgroundSize: "12px 12px",
               maskImage: "radial-gradient(120% 120% at 100% 100%, #000 20%, transparent 70%)",
               WebkitMaskImage: "radial-gradient(120% 120% at 100% 100%, #000 20%, transparent 70%)",
@@ -179,7 +195,7 @@ export function Stats() {
               <div
                 key={it.code}
                 data-anim-item
-                className="group relative overflow-hidden rounded-2xl bg-[rgb(10_8_8/0.42)] p-5 ring-1 ring-white/12 backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:ring-orange-400/50 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.6),0_0_40px_-12px_rgba(249,115,22,0.5)] lg:p-6"
+                className="group relative overflow-hidden rounded-2xl bg-[rgb(10_8_8/0.42)] p-5 ring-1 ring-white/12 backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:ring-orange-400/50 hover:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.6),0_0_40px_-12px_rgb(var(--brand-500)/0.5)] lg:p-6"
                 style={{
                   boxShadow:
                     "inset 0 1px 0 rgba(255,255,255,0.14), 0 24px 60px -30px rgba(0,0,0,0.7)",
@@ -218,7 +234,7 @@ export function Stats() {
                   <div
                     data-bar={String(BAR[i] ?? 60)}
                     style={{ width: `${BAR[i] ?? 60}%` }}
-                    className="h-full rounded-full bg-orange-400 shadow-[0_0_12px_rgba(249,115,22,0.7)]"
+                    className="h-full rounded-full bg-orange-400 shadow-[0_0_12px_rgb(var(--brand-500)/0.7)]"
                   />
                 </div>
               </div>

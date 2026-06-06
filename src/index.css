@@ -37,7 +37,7 @@ html {
   --page-bg: 252 252 252;
 }
 :root[data-theme="blueprint"] {
-  --page-bg: 18 32 64;
+  --page-bg: 252 252 252;
 }
 
 :root,
@@ -52,35 +52,44 @@ html {
   --grid-line-alpha: 0.025;
   --selection-bg: #67e8f9;
   --selection-fg: #05070b;
+
+  /* Brand accent scale (Inherit orange). Remapped to navy in blueprint.
+     Drives both the `orange-XXX` Tailwind utilities and inline brand colors. */
+  --brand-100: 255 237 213;
+  --brand-200: 254 215 170;
+  --brand-300: 253 186 116;
+  --brand-400: 251 146 60;
+  --brand-500: 249 115 22;
+  --brand-600: 234 88 12;
+  --brand-700: 194 65 12;
 }
 
 [data-theme="blueprint"] {
-  color-scheme: dark;
+  color-scheme: light;
   /* ============================================================
-     BLUEPRINT VARIANT — third theme, named for the cyanotype
-     engineering medium (Prussian-blue paper + white annotations
-     used for technical drawings since 1842).
-
-     Palette is built on color-theory complementarity: deep navy
-     (~210° hue) pairs with the brand orange (~25° hue), which
-     are roughly opposite on the color wheel — maximum visual
-     interest while keeping the orange accent identical to the
-     other two themes (brand never shifts between variants).
-
-     Accessibility: fg/bg contrast ≈14:1 (AAA), muted/bg ≈6:1
-     (AA for body), accent/bg ≈4.5:1 (AA for UI / large text).
-     Grid alpha bumped slightly vs dark — blueprint paper should
-     have visible technical lines as part of the aesthetic.
+     BLUEPRINT VARIANT — identical to the light theme (white card
+     plane, warm-paper page plane, charcoal text) but with the
+     brand accent remapped from Inherit orange to navy blue. So it
+     reads as the same site, just navy instead of orange.
   ============================================================ */
-  --bg:       18  32  64;  /* #122040 — deep blueprint navy */
-  --bg-alt:   26  42  78;  /* #1a2a4e — alt sections, one step up */
-  --fg:       234 240 252; /* #eaf0fc — cool light blue-white */
-  --muted:    142 165 207; /* #8ea5cf — medium blue-gray, denser than slate */
-  --accent:   249 115 22;  /* orange-500 — same as dark / light */
-  --grid-line: 200 220 255;/* faint blue-white grid */
-  --grid-line-alpha: 0.05;
-  --selection-bg: #67e8f9;
-  --selection-fg: #05070b;
+  --bg:       255 255 255; /* #ffffff — card / raised plane */
+  --bg-alt:   247 244 239; /* #f7f4ef — warm paper, page plane */
+  --fg:       23  23  23;  /* #171717 — dense charcoal body text */
+  --muted:    92  88  82;  /* #5c5852 — warm muted gray */
+  --accent:   30  58  138; /* navy-blue accent */
+  --grid-line: 26 26 26;   /* charcoal — subtle ink grid */
+  --grid-line-alpha: 0.04;
+  --selection-bg: #1e3a8a;
+  --selection-fg: #ffffff;
+
+  /* Brand accent scale → navy blue (replaces orange everywhere). */
+  --brand-100: 219 227 245;
+  --brand-200: 191 205 235;
+  --brand-300: 147 173 219;
+  --brand-400: 59  99  175;
+  --brand-500: 30  58  138;
+  --brand-600: 23  45  110;
+  --brand-700: 17  34  84;
 }
 
 [data-theme="light"] {

@@ -108,7 +108,7 @@ export function Technology() {
             {/* MOBILE layout */}
             <div className="sm:hidden">
               <div className="mb-12 flex justify-center">
-                <DroneGlyph className="h-[200px] w-[200px] text-fg drop-shadow-[0_0_30px_rgba(249,115,22,0.2)]" />
+                <DroneGlyph className="h-[200px] w-[200px] text-fg drop-shadow-[0_0_30px_rgb(var(--brand-500)/0.2)]" />
               </div>
               <div className="grid grid-cols-2 gap-x-6 gap-y-9 border-t border-fg/10 pt-9">
                 {specs.map((s) => (
@@ -131,7 +131,7 @@ export function Technology() {
               </div>
 
               <div ref={droneRef} className="flex justify-center">
-                <DroneGlyph className="h-[260px] w-[260px] text-fg drop-shadow-[0_0_30px_rgba(249,115,22,0.2)] md:h-[320px] md:w-[320px] lg:h-[360px] lg:w-[360px]" />
+                <DroneGlyph className="h-[260px] w-[260px] text-fg drop-shadow-[0_0_30px_rgb(var(--brand-500)/0.2)] md:h-[320px] md:w-[320px] lg:h-[360px] lg:w-[360px]" />
               </div>
 
               <div className="flex flex-col gap-10">

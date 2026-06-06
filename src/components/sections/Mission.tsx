@@ -3,15 +3,21 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SectionFrame, SectionLabel, ParallaxImage, Kanji } from "../primitives";
 import { useT } from "../../i18n";
+import { useTheme } from "../../theme";
 import teamNapa from "../../assets/team-napa.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* Punchy warm hues per pillar — orange → amber → yellow. */
-const PILLAR_COLORS = ["#F97316", "#F59E0B", "#EAB308"];
+/* Punchy hues per pillar — warm (orange→amber→yellow) by default, a cool
+   navy→blue trio in the blueprint theme. */
+const PILLAR_COLORS_WARM = ["#F97316", "#F59E0B", "#EAB308"];
+const PILLAR_COLORS_NAVY = ["#1e3a8a", "#2557c4", "#4f86ea"];
 
 export function Mission() {
   const { t } = useT();
+  const { theme } = useTheme();
+  const PILLAR_COLORS =
+    theme === "blueprint" ? PILLAR_COLORS_NAVY : PILLAR_COLORS_WARM;
   const gridRef = useRef<HTMLDivElement>(null);
 
   /* Glitch-in reveal: each pillar stutters in with a chromatic (RGB-split)
@@ -66,7 +72,7 @@ export function Mission() {
 
   return (
     <SectionFrame id="mission" className="topo-bg relative overflow-hidden bg-bg py-24 md:py-32">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(249,115,22,.07),_transparent_55%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgb(var(--brand-500)/.07),_transparent_55%)]" />
 
       <div className="relative mx-auto max-w-[87.5rem] px-6 lg:px-12">
         <div className="relative max-w-4xl">

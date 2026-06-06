@@ -38,8 +38,16 @@ type Tone = { base: string; flood: string; arrow: string };
 /* Fujitaka product-card palette: a bright base that floods to a deeper shade
    on hover, with the corner arrow flipping to white + base-colored glyph. */
 const TONES: Tone[] = [
-  { base: "bg-[#FF6133]", flood: "bg-[#FF3717]", arrow: "group-hover:text-[#FF3717]" },
-  { base: "bg-[#DE8500]", flood: "bg-[#D36F00]", arrow: "group-hover:text-[#D36F00]" },
+  {
+    base: "bg-[rgb(var(--brand-400))]",
+    flood: "bg-[rgb(var(--brand-500))]",
+    arrow: "group-hover:text-[rgb(var(--brand-500))]",
+  },
+  {
+    base: "bg-[rgb(var(--brand-500))]",
+    flood: "bg-[rgb(var(--brand-600))]",
+    arrow: "group-hover:text-[rgb(var(--brand-600))]",
+  },
 ];
 
 export function Promo() {

@@ -92,7 +92,12 @@ export function FluidAirflowBackground() {
     };
 
     const GREY = "rgba(132,137,148,0.22)";
-    const ORANGE = "rgba(249,115,22,0.24)";
+    // Brand accent — follows the active theme (orange, or navy in blueprint).
+    const brand =
+      getComputedStyle(document.documentElement)
+        .getPropertyValue("--brand-500")
+        .trim() || "249 115 22";
+    const ORANGE = `rgb(${brand} / 0.24)`;
 
     const step = (fade: boolean) => {
       if (fade) {

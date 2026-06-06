@@ -282,12 +282,12 @@ export function DroneGlyph({
         [78, 78],
       ].map(([cx, cy], i) => (
         <g key={i} style={{ transformBox: "fill-box", transformOrigin: "center" }} className={rotorClass}>
-          <circle cx={cx} cy={cy} r="16" fill="rgb(249 115 22 / 0.08)" />
+          <circle cx={cx} cy={cy} r="16" fill="rgb(var(--brand-500) / 0.08)" />
           <circle
             cx={cx}
             cy={cy}
             r="16"
-            stroke="rgb(249 115 22 / 0.55)"
+            stroke="rgb(var(--brand-500) / 0.55)"
             strokeWidth="1.5"
           />
           {/* two blades */}
@@ -322,7 +322,7 @@ export function DroneGlyph({
         stroke="currentColor"
         strokeWidth="3"
       />
-      <circle cx="50" cy="50" r="3.4" fill="rgb(249 115 22)" />
+      <circle cx="50" cy="50" r="3.4" fill="rgb(var(--brand-500))" />
     </svg>
   );
 }

@@ -24,10 +24,10 @@ const IMG: Record<string, string> = {
 /* Per-tile photo aspect (varied → Pinterest nesting, kept shortish so columns
    don't run long), a punchy solid caption colour, and a fallback image. */
 const TILES = [
-  { aspect: "aspect-[4/3]", feature: true, fallback: droneSpraying, color: "#F97316" },
+  { aspect: "aspect-[4/3]", feature: true, fallback: droneSpraying, color: "rgb(var(--brand-500))" },
   { aspect: "aspect-[1/1]", feature: false, fallback: hiroshimaAerial, color: "#18120E" },
-  { aspect: "aspect-[5/4]", feature: false, fallback: teamNapa, color: "#F97316" },
-  { aspect: "aspect-[16/10]", feature: false, fallback: bvlosCorridor, color: "#F97316" },
+  { aspect: "aspect-[5/4]", feature: false, fallback: teamNapa, color: "rgb(var(--brand-500))" },
+  { aspect: "aspect-[16/10]", feature: false, fallback: bvlosCorridor, color: "rgb(var(--brand-500))" },
 ];
 
 /* Responsive column count for the flex-column masonry (avoids the CSS multicol
@@ -95,7 +95,7 @@ export function News() {
             className="group inline-flex items-center gap-3 whitespace-nowrap text-[12px] font-bold uppercase tracking-[0.18em] text-fg/80 transition hover:text-orange-500"
           >
             {t.news.view_all}
-            <span className="grid h-8 w-8 place-items-center rounded-full bg-orange-500 text-white transition-all duration-300 group-hover:scale-[1.3] group-hover:bg-orange-400 group-hover:shadow-[0_0_20px_rgba(249,115,22,0.5)]">
+            <span className="grid h-8 w-8 place-items-center rounded-full bg-orange-500 text-white transition-all duration-300 group-hover:scale-[1.3] group-hover:bg-orange-400 group-hover:shadow-[0_0_20px_rgb(var(--brand-500)/0.5)]">
               <ArrowRight className="h-3.5 w-3.5" />
             </span>
           </a>

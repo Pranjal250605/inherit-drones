@@ -7,7 +7,7 @@ import { useT } from "../../i18n";
 gsap.registerPlugin(ScrollTrigger);
 
 const CARD_TINTS = [
-  "hover:border-orange-500/40 hover:shadow-[0_0_40px_rgba(249,115,22,0.15)]",
+  "hover:border-orange-500/40 hover:shadow-[0_0_40px_rgb(var(--brand-500)/0.15)]",
   "hover:border-blue-500/40 hover:shadow-[0_0_40px_rgba(59,130,246,0.15)]",
   "hover:border-purple-500/40 hover:shadow-[0_0_40px_rgba(168,85,247,0.15)]",
   "hover:border-emerald-500/40 hover:shadow-[0_0_40px_rgba(16,185,129,0.15)]"
@@ -181,7 +181,7 @@ export function Process() {
             className="group inline-flex items-center gap-3 whitespace-nowrap text-[12px] font-bold uppercase tracking-[0.18em] text-fg/80 transition-colors hover:text-orange-500"
           >
             {t.process.cta}
-            <span className="grid h-8 w-8 place-items-center rounded-full bg-orange-500 text-white transition-all duration-300 group-hover:scale-[1.3] group-hover:bg-orange-400 group-hover:shadow-[0_0_20px_rgba(249,115,22,0.5)]">
+            <span className="grid h-8 w-8 place-items-center rounded-full bg-orange-500 text-white transition-all duration-300 group-hover:scale-[1.3] group-hover:bg-orange-400 group-hover:shadow-[0_0_20px_rgb(var(--brand-500)/0.5)]">
               <ArrowRight className="h-3.5 w-3.5" />
             </span>
           </a>
