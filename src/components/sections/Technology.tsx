@@ -84,10 +84,10 @@ export function Technology() {
                 {t.tech.h2_line2}
               </h2>
               {/* 隼 = "Hayabusa" (peregrine falcon), the IH-04's namesake —
-                  brush calligraphy (Yuji Syuku), in ink black. */}
+                  brush calligraphy (Yuji Syuku) in metallic gold. */}
               <span
                 aria-hidden="true"
-                className="shrink-0 select-none self-start font-brush text-[3.75rem] leading-[0.78] text-fg sm:text-[6rem] lg:text-[7.5rem]"
+                className="shrink-0 select-none self-start bg-gradient-to-br from-[#dcb863] via-[#b8924a] to-[#856325] bg-clip-text font-brush text-[3.75rem] leading-[0.78] text-transparent sm:text-[6rem] lg:text-[7.5rem]"
               >
                 隼
               </span>
