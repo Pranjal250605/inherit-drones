@@ -10,7 +10,6 @@ import { Solutions } from "./components/sections/Solutions";
 import { Process } from "./components/sections/Process";
 import { Technology } from "./components/sections/Technology";
 import { UseCases } from "./components/sections/UseCases";
-import { Stats } from "./components/sections/Stats";
 import { Testimonial } from "./components/sections/Testimonial";
 import { Instagram } from "./components/sections/Instagram";
 import { FAQ } from "./components/sections/FAQ";
@@ -65,7 +64,6 @@ export default function App() {
         <Process />
         <Technology />
         <UseCases />
-        <Stats />
         <Testimonial />
         <Instagram />
         <FAQ />
