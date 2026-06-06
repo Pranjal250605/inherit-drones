@@ -95,7 +95,7 @@ export function Technology() {
               src={hayabusaKanji}
               alt=""
               aria-hidden="true"
-              className="pointer-events-none w-[9.5rem] select-none object-contain sm:w-[12rem] lg:w-[15rem]"
+              className="pointer-events-none w-[11rem] -translate-x-4 -translate-y-5 select-none object-contain sm:w-[13.5rem] lg:w-[17rem]"
               style={{
                 filter:
                   "drop-shadow(1.25px 0 0 #000) drop-shadow(-1.25px 0 0 #000) drop-shadow(0 1.25px 0 #000) drop-shadow(0 -1.25px 0 #000) drop-shadow(0.9px 0.9px 0 #000) drop-shadow(-0.9px 0.9px 0 #000) drop-shadow(0.9px -0.9px 0 #000) drop-shadow(-0.9px -0.9px 0 #000)",
