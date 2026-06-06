@@ -4,6 +4,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { SectionLabel } from "../primitives";
 import { DroneGlyph } from "../tactical/primitives";
 import { useT, type Dict } from "../../i18n";
+import hayabusaKanji from "../../assets/hayabusa_calligraphy_transparent.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -72,7 +73,7 @@ export function Technology() {
     >
       <div className="mx-auto max-w-[87.5rem] px-6 lg:px-12">
         <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-10">
-          {/* LEFT — heading + brush 隼 (Hayabusa) accent */}
+          {/* LEFT — heading + 隼 (Hayabusa) calligraphy accent */}
           <div ref={leftRef} className="lg:col-span-5">
             <SectionLabel>{t.tech.tag}</SectionLabel>
             <div className="mt-6 flex items-start gap-4 sm:gap-6">
@@ -83,22 +84,21 @@ export function Technology() {
                 <br />
                 {t.tech.h2_line2}
               </h2>
-              {/* 隼 = "Hayabusa" (peregrine falcon), the IH-04's namesake —
-                  brush calligraphy (Yuji Syuku) in metallic gold. */}
-              <span
+              {/* 隼 = "Hayabusa" — gold brush calligraphy, placed beside the
+                  heading (in its own space) so it never overlaps the text. */}
+              <img
+                src={hayabusaKanji}
+                alt=""
                 aria-hidden="true"
-                className="shrink-0 select-none self-start bg-gradient-to-br from-[#dcb863] via-[#b8924a] to-[#856325] bg-clip-text font-brush text-[3.75rem] leading-[0.78] text-transparent sm:text-[6rem] lg:text-[7.5rem]"
-              >
-                隼
-              </span>
+                className="pointer-events-none w-[4.5rem] shrink-0 select-none self-start object-contain sm:w-[7rem] lg:w-[9rem]"
+              />
             </div>
             <p className="mt-7 max-w-md text-pretty text-lg leading-relaxed text-muted md:text-xl">
               {t.tech.lead}
             </p>
           </div>
 
-          {/* RIGHT — drone with specs. On mobile: a centred drone above a tidy
-              2-column spec grid. On sm+: 3 specs aligned down each flank. */}
+          {/* RIGHT — drone with specs. */}
           <div className="lg:col-span-7">
             {/* MOBILE layout */}
             <div className="sm:hidden">
