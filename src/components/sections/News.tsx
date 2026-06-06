@@ -26,8 +26,8 @@ const IMG: Record<string, string> = {
 const TILES = [
   { aspect: "aspect-[4/3]", feature: true, fallback: droneSpraying, color: "#F97316" },
   { aspect: "aspect-[1/1]", feature: false, fallback: hiroshimaAerial, color: "#18120E" },
-  { aspect: "aspect-[5/4]", feature: false, fallback: teamNapa, color: "#EA580C" },
-  { aspect: "aspect-[16/10]", feature: false, fallback: bvlosCorridor, color: "#E08400" },
+  { aspect: "aspect-[5/4]", feature: false, fallback: teamNapa, color: "#F97316" },
+  { aspect: "aspect-[16/10]", feature: false, fallback: bvlosCorridor, color: "#F97316" },
 ];
 
 /* Responsive column count for the flex-column masonry (avoids the CSS multicol
