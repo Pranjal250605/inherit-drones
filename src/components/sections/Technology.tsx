@@ -77,9 +77,9 @@ export function Technology() {
           <div ref={leftRef} className="lg:col-span-5">
             <SectionLabel>{t.tech.tag}</SectionLabel>
             <div className="mt-6 flex items-start gap-4 sm:gap-6">
-              <h2 className="min-w-0 flex-1 font-display text-[3.25rem] font-bold leading-[1.02] tracking-[-0.02em] text-fg md:text-6xl lg:text-7xl">
+              <h2 className="min-w-0 flex-1 font-display text-[3.25rem] font-bold leading-[1.02] tracking-[-0.02em] text-fg md:text-6xl lg:text-[4.25rem]">
                 {t.tech.h2_pre}
-                <span className="text-orange-500">{t.tech.h2_emph}</span>
+                <span className="whitespace-nowrap text-orange-500">{t.tech.h2_emph}</span>
                 {t.tech.h2_post}
                 <br />
                 {t.tech.h2_line2}
@@ -90,7 +90,7 @@ export function Technology() {
                 src={hayabusaKanji}
                 alt=""
                 aria-hidden="true"
-                className="pointer-events-none w-[4.5rem] shrink-0 select-none self-start object-contain sm:w-[7rem] lg:w-[9rem]"
+                className="pointer-events-none w-[5.5rem] shrink-0 select-none self-start object-contain sm:w-[8rem] lg:w-[10.5rem]"
               />
             </div>
             <p className="mt-7 max-w-md text-pretty text-lg leading-relaxed text-muted md:text-xl">
