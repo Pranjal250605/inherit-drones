@@ -72,34 +72,35 @@ export function Technology() {
       className="topo-bg relative w-full overflow-hidden bg-bg-alt py-24 md:py-32"
     >
       <div className="mx-auto max-w-[87.5rem] px-6 lg:px-12">
-        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-10">
-          {/* LEFT — heading + 隼 (Hayabusa) calligraphy accent */}
-          <div ref={leftRef} className="lg:col-span-5">
+        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-8">
+          {/* HEADING */}
+          <div ref={leftRef} className="lg:col-span-3">
             <SectionLabel>{t.tech.tag}</SectionLabel>
-            <div className="mt-6 flex items-start gap-4 sm:gap-6">
-              <h2 className="min-w-0 flex-1 font-display text-[3.25rem] font-bold leading-[1.02] tracking-[-0.02em] text-fg md:text-6xl lg:text-[4.25rem]">
-                {t.tech.h2_pre}
-                <span className="whitespace-nowrap text-orange-500">{t.tech.h2_emph}</span>
-                {t.tech.h2_post}
-                <br />
-                {t.tech.h2_line2}
-              </h2>
-              {/* 隼 = "Hayabusa" — gold brush calligraphy, placed beside the
-                  heading (in its own space) so it never overlaps the text. */}
-              <img
-                src={hayabusaKanji}
-                alt=""
-                aria-hidden="true"
-                className="pointer-events-none w-[5.5rem] shrink-0 select-none self-start object-contain sm:w-[8rem] lg:w-[10.5rem]"
-              />
-            </div>
+            <h2 className="mt-6 font-display text-[3.25rem] font-bold leading-[1.03] tracking-[-0.02em] text-fg md:text-6xl lg:text-6xl">
+              {t.tech.h2_pre}
+              <span className="whitespace-nowrap text-orange-500">{t.tech.h2_emph}</span>
+              {t.tech.h2_post}
+              <br />
+              {t.tech.h2_line2}
+            </h2>
             <p className="mt-7 max-w-md text-pretty text-lg leading-relaxed text-muted md:text-xl">
               {t.tech.lead}
             </p>
           </div>
 
-          {/* RIGHT — drone with specs. */}
-          <div className="lg:col-span-7">
+          {/* 隼 = "Hayabusa" — gold brush calligraphy, its own column so it can
+              be large without ever overlapping the heading or the specs. */}
+          <div className="flex justify-center lg:col-span-3">
+            <img
+              src={hayabusaKanji}
+              alt=""
+              aria-hidden="true"
+              className="pointer-events-none w-[13rem] max-w-none select-none object-contain sm:w-[18rem] lg:w-[20rem]"
+            />
+          </div>
+
+          {/* RIGHT — drone with specs (unchanged). */}
+          <div className="lg:col-span-6">
             {/* MOBILE layout */}
             <div className="sm:hidden">
               <div className="mb-12 flex justify-center">
