@@ -108,7 +108,7 @@ export function Technology() {
             {/* MOBILE layout */}
             <div className="sm:hidden">
               <div className="mb-12 flex justify-center">
-                <img src={droneImg} alt="IH-04 Hayabusa drone" className="h-[210px] w-[210px] object-contain mix-blend-multiply" />
+                <DroneImage className="w-[230px]" />
               </div>
               <div className="grid grid-cols-2 gap-x-6 gap-y-9 border-t border-fg/10 pt-9">
                 {specs.map((s) => (
@@ -131,7 +131,7 @@ export function Technology() {
               </div>
 
               <div ref={droneRef} className="flex justify-center">
-                <img src={droneImg} alt="IH-04 Hayabusa drone" className="h-[280px] w-[280px] object-contain mix-blend-multiply md:h-[340px] md:w-[340px] lg:h-[380px] lg:w-[380px]" />
+                <DroneImage className="w-[300px] md:w-[360px] lg:w-[400px]" />
               </div>
 
               <div className="flex flex-col gap-10">
@@ -149,6 +149,45 @@ export function Technology() {
         </div>
       </div>
     </section>
+  );
+}
+
+/* Rendered drone image with four spinning propeller overlays sitting on top of
+   the (static) props in the photo — so the fins appear to rotate. The image
+   background is blended into the section via mix-blend-multiply. */
+const ROTOR_POS = [
+  "left-[24.5%] top-[23%]",
+  "left-[75.5%] top-[23%]",
+  "left-[24.5%] top-[77%]",
+  "left-[75.5%] top-[77%]",
+];
+
+function DroneImage({ className = "" }: { className?: string }) {
+  return (
+    <div className={"relative aspect-[574/502] mix-blend-multiply " + className}>
+      <img
+        src={droneImg}
+        alt="IH-04 Hayabusa drone"
+        className="absolute inset-0 h-full w-full object-contain"
+      />
+      {ROTOR_POS.map((pos, i) => (
+        <span
+          key={i}
+          aria-hidden="true"
+          className={"absolute h-[33%] w-[33%] -translate-x-1/2 -translate-y-1/2 " + pos}
+        >
+          <svg
+            viewBox="0 0 100 100"
+            className="h-full w-full motion-safe:animate-[spin_0.4s_linear_infinite]"
+          >
+            <ellipse cx="50" cy="50" rx="48" ry="9.5" fill="#0b0b0d" />
+            <ellipse cx="50" cy="50" rx="9.5" ry="48" fill="#0b0b0d" />
+            <circle cx="50" cy="50" r="9" fill="#19191c" />
+            <circle cx="50" cy="50" r="3.6" fill="#f97316" />
+          </svg>
+        </span>
+      ))}
+    </div>
   );
 }
 
