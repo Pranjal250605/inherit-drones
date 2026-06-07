@@ -2,9 +2,9 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { SectionLabel } from "../primitives";
-import { DroneGlyph } from "../tactical/primitives";
 import { useT, type Dict } from "../../i18n";
 import hayabusaKanji from "../../assets/hayabusa_calligraphy_v2.png";
+import droneImg from "../../assets/hayabusa_drone.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -108,7 +108,7 @@ export function Technology() {
             {/* MOBILE layout */}
             <div className="sm:hidden">
               <div className="mb-12 flex justify-center">
-                <DroneGlyph className="h-[200px] w-[200px] text-fg drop-shadow-[0_0_30px_rgb(var(--brand-500)/0.2)]" />
+                <img src={droneImg} alt="IH-04 Hayabusa drone" className="h-[210px] w-[210px] object-contain mix-blend-multiply" />
               </div>
               <div className="grid grid-cols-2 gap-x-6 gap-y-9 border-t border-fg/10 pt-9">
                 {specs.map((s) => (
@@ -131,7 +131,7 @@ export function Technology() {
               </div>
 
               <div ref={droneRef} className="flex justify-center">
-                <DroneGlyph className="h-[260px] w-[260px] text-fg drop-shadow-[0_0_30px_rgb(var(--brand-500)/0.2)] md:h-[320px] md:w-[320px] lg:h-[360px] lg:w-[360px]" />
+                <img src={droneImg} alt="IH-04 Hayabusa drone" className="h-[280px] w-[280px] object-contain mix-blend-multiply md:h-[340px] md:w-[340px] lg:h-[380px] lg:w-[380px]" />
               </div>
 
               <div className="flex flex-col gap-10">
