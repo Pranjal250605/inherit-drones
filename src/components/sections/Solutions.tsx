@@ -59,19 +59,19 @@ export function Solutions() {
           <div>
             <div className="flex items-center gap-3">
               <TickMark colorClass="text-white" />
-              <span className="text-[12px] font-bold uppercase tracking-[0.22em] text-white/90">
+              <span className="text-[15px] font-bold uppercase tracking-[0.22em] text-white/90">
                 {s.tag.includes(" / ") ? s.tag.split(" / ")[1] : s.tag}
               </span>
             </div>
 
             <h2
               data-anim="title-up"
-              className="mt-6 max-w-xl font-display text-6xl font-bold leading-[1.02] tracking-[-0.03em] md:text-7xl"
+              className="mt-6 max-w-xl font-display text-[4.7rem] font-bold leading-[1.02] tracking-[-0.03em] md:text-[5.6rem]"
             >
               {s.h2_line1} <Kanji>{s.h2_emph}</Kanji>
               {s.h2_line2_post} {s.h2_line3}
             </h2>
-            <p className="mt-6 max-w-md text-pretty text-base leading-relaxed text-white/85 md:text-lg">
+            <p className="mt-6 max-w-md text-pretty text-xl leading-relaxed text-white/85 md:text-[1.4rem]">
               {s.lead}
             </p>
 
@@ -90,10 +90,10 @@ export function Solutions() {
             <div className="absolute left-1/2 top-1/2 h-[74%] w-[74%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/45" />
             {/* centre label (static hub) */}
             <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-center leading-none">
-              <div className="font-display text-2xl font-bold tracking-[0.02em] md:text-3xl">
+              <div className="font-display text-[1.875rem] font-bold tracking-[0.02em] md:text-[2.34rem]">
                 {s.center_a}
               </div>
-              <div className="mt-1.5 font-display text-3xl font-bold tracking-[-0.01em] md:text-4xl">
+              <div className="mt-1.5 font-display text-[2.34rem] font-bold tracking-[-0.01em] md:text-[2.8rem]">
                 {s.center_b}
               </div>
             </div>
@@ -108,7 +108,7 @@ export function Solutions() {
                 >
                   <div className="motion-safe:animate-[spin_50s_linear_infinite_reverse]">
                     <div className="grid h-32 w-32 place-items-center rounded-full bg-white text-center shadow-xl shadow-black/15 transition-transform duration-300 hover:scale-105 md:h-36 md:w-36">
-                      <span className="px-3 font-display text-xl font-bold leading-tight text-orange-600 md:text-2xl">
+                      <span className="px-3 font-display text-[1.56rem] font-bold leading-tight text-orange-600 md:text-[1.875rem]">
                         {c.short}
                       </span>
                     </div>
@@ -135,7 +135,7 @@ export function Solutions() {
               <span className="h-9 w-9 text-white/90 transition-transform duration-300 group-hover:scale-110">
                 {LINK_ICONS[i]}
               </span>
-              <span className="inline-flex items-center gap-1.5 text-[13px] font-bold tracking-[0.04em]">
+              <span className="inline-flex items-center gap-1.5 text-[16px] font-bold tracking-[0.04em]">
                 {l.label}
                 <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
               </span>
@@ -162,17 +162,17 @@ function SolutionCard({
       className="card-lift group block rounded-2xl bg-white p-7 shadow-lg shadow-black/10 md:p-9"
     >
       <div className="flex items-baseline gap-3.5">
-        <span className="font-mono text-lg font-bold text-orange-500">
+        <span className="font-mono text-[1.4rem] font-bold text-orange-500">
           {String(index + 1).padStart(2, "0")}
         </span>
-        <h3 className="font-display text-2xl font-bold leading-tight tracking-[-0.01em] text-orange-600 md:text-3xl">
+        <h3 className="font-display text-[1.875rem] font-bold leading-tight tracking-[-0.01em] text-orange-600 md:text-[2.34rem]">
           {card.title}
         </h3>
       </div>
-      <p className="mt-4 text-[17px] leading-relaxed text-fg/75 md:text-lg">
+      <p className="mt-4 text-[21px] leading-relaxed text-fg/75 md:text-[1.4rem]">
         {card.desc}
       </p>
-      <span className="mt-6 inline-flex items-center gap-1.5 text-[12px] font-bold uppercase tracking-[0.16em] text-orange-500 transition-all group-hover:gap-3">
+      <span className="mt-6 inline-flex items-center gap-1.5 text-[15px] font-bold uppercase tracking-[0.16em] text-orange-500 transition-all group-hover:gap-3">
         {cta}
         <ArrowRight className="h-3.5 w-3.5" />
       </span>
