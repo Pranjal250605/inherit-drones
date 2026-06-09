@@ -1,4 +1,4 @@
-import { TickMark, ArrowRight, Kanji } from "../primitives";
+import { TickMark, ArrowRight } from "../primitives";
 import { useT } from "../../i18n";
 import businesswoman from "../../assets/businesswoman.jpg";
 import hiroshimaTorii from "../../assets/hiroshima-torii.jpg";
@@ -84,7 +84,7 @@ export function Hero() {
             {/* two small people cells */}
             <div className="grid grid-cols-2 gap-3 lg:col-span-5">
               <figure className="relative aspect-square overflow-hidden lg:aspect-auto">
-                <img src={businesswoman} alt="Inherit team member" className="h-full w-full object-cover object-top" loading="lazy" />
+                <img src={businesswoman} alt="Inherit team member" className="h-full w-full object-cover object-[50%_30%]" loading="lazy" />
               </figure>
               <figure className="relative aspect-square overflow-hidden lg:aspect-auto">
                 <img src={officeTeam} alt="Operations team" className="h-full w-full object-cover" loading="lazy" />
@@ -103,29 +103,30 @@ export function Hero() {
         {/* heading block — stays in frame */}
         <div className="mt-14 max-w-3xl lg:mt-12">
           <TickMark className="h-3.5" />
-          <h1 className="mt-4 font-display text-4xl font-bold leading-[1.03] tracking-[-0.03em] text-fg md:text-5xl lg:text-6xl">
+          <h1 className="mt-4 font-display text-[2.8rem] font-bold leading-[1.05] tracking-[-0.03em] text-fg md:text-[3.75rem] lg:text-[4.7rem]">
             {t.hero.h1_line1_pre}
-            <Kanji className="text-orange-500">{t.hero.h1_line1_emph}</Kanji>{" "}
+            <span className="text-orange-500">{t.hero.h1_line1_emph}</span>
+            <br />
             {t.hero.h1_line2_pre}
-            <Kanji>{t.hero.h1_line2_emph}</Kanji>
+            {t.hero.h1_line2_emph}
           </h1>
-          <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted md:text-lg">
+          <p className="mt-5 max-w-xl text-pretty text-xl leading-relaxed text-muted md:text-[1.4rem]">
             {t.hero.paragraph}
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <a
               href="#solutions"
-              className="group inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-full bg-orange-500 px-6 py-3 text-[13px] font-bold tracking-[0.03em] text-white transition hover:bg-orange-400"
+              className="group inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-full bg-orange-500 px-7 py-3.5 text-[16px] font-bold tracking-[0.03em] text-white transition hover:bg-orange-400"
             >
               {t.hero.cta_primary}
-              <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+              <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
             </a>
             <a
               href="#technology"
-              className="group inline-flex items-center gap-2.5 whitespace-nowrap rounded-full border border-fg/20 px-6 py-3 text-[13px] font-semibold tracking-[0.03em] text-fg transition hover:border-orange-500 hover:text-orange-500"
+              className="group inline-flex items-center gap-2.5 whitespace-nowrap rounded-full border border-fg/20 px-7 py-3.5 text-[16px] font-semibold tracking-[0.03em] text-fg transition hover:border-orange-500 hover:text-orange-500"
             >
               {t.hero.cta_secondary}
-              <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+              <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
             </a>
           </div>
         </div>
