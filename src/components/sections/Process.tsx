@@ -162,7 +162,7 @@ export function Process() {
 
       <div className="relative z-10 mx-auto max-w-[93.75rem] px-6 lg:px-12">
         <header className="flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-3xl">
+          <div className="max-w-4xl">
             <SectionLabel>{t.process.tag}</SectionLabel>
             <h2
               data-anim="title-up"
