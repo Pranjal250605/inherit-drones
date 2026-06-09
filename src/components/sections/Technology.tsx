@@ -76,14 +76,14 @@ export function Technology() {
           {/* HEADING */}
           <div ref={leftRef} className="lg:col-span-3">
             <SectionLabel>{t.tech.tag}</SectionLabel>
-            <h2 className="mt-6 font-display text-[3.25rem] font-bold leading-[1.03] tracking-[-0.02em] text-fg md:text-6xl lg:text-6xl">
+            <h2 className="mt-6 font-display text-[4.06rem] font-bold leading-[1.03] tracking-[-0.02em] text-fg md:text-[4.7rem] lg:text-[4.7rem]">
               {t.tech.h2_pre}
               <span className="whitespace-nowrap text-orange-500">{t.tech.h2_emph}</span>
               {t.tech.h2_post}
               <br />
               {t.tech.h2_line2}
             </h2>
-            <p className="mt-7 max-w-md text-pretty text-lg leading-relaxed text-muted md:text-xl">
+            <p className="mt-7 max-w-md text-pretty text-[1.4rem] leading-relaxed text-muted md:text-[1.56rem]">
               {t.tech.lead}
             </p>
           </div>
@@ -202,15 +202,15 @@ function SpecStat({
 }) {
   return (
     <div ref={refCb} className={align === "right" ? "sm:text-right" : "sm:text-left"}>
-      <div className="font-display text-4xl font-bold leading-none tracking-[-0.02em] text-fg lg:text-5xl">
+      <div className="font-display text-[2.8rem] font-bold leading-none tracking-[-0.02em] text-fg lg:text-[3.75rem]">
         {spec.display}
         {spec.unit && (
-          <span className="ml-1.5 font-mono text-sm font-bold uppercase tracking-[0.12em] text-orange-500">
+          <span className="ml-1.5 font-mono text-[1.1rem] font-bold uppercase tracking-[0.12em] text-orange-500">
             {spec.unit}
           </span>
         )}
       </div>
-      <div className="mt-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-fg/50">
+      <div className="mt-2 font-mono text-[14px] font-semibold uppercase tracking-[0.18em] text-fg/50">
         {spec.k}
       </div>
     </div>
