@@ -25,7 +25,7 @@ const IMG: Record<string, string> = {
    don't run long), a punchy solid caption colour, and a fallback image. */
 const TILES = [
   { aspect: "aspect-[4/3]", feature: true, fallback: droneSpraying, color: "rgb(var(--brand-500))" },
-  { aspect: "aspect-[1/1]", feature: false, fallback: hiroshimaAerial, color: "#18120E" },
+  { aspect: "aspect-[1/1]", feature: false, fallback: hiroshimaAerial, color: "rgb(var(--brand-500))" },
   { aspect: "aspect-[5/4]", feature: false, fallback: teamNapa, color: "rgb(var(--brand-500))" },
   { aspect: "aspect-[16/10]", feature: false, fallback: bvlosCorridor, color: "rgb(var(--brand-500))" },
 ];
@@ -70,7 +70,7 @@ export function News() {
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-3">
               <SectionLabel>{t.news.tag}</SectionLabel>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-orange-500">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 px-2.5 py-1 text-[12.5px] font-bold uppercase tracking-[0.18em] text-orange-500">
                 <span className="relative flex h-1.5 w-1.5">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-500 opacity-75" />
                   <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-orange-500" />
@@ -80,19 +80,19 @@ export function News() {
             </div>
             <h2
               data-anim="title-up"
-              className="mt-5 font-display text-5xl font-bold leading-[1.05] tracking-[-0.03em] text-fg md:text-6xl lg:whitespace-nowrap lg:text-6xl"
+              className="mt-5 font-display text-[3.75rem] font-bold leading-[1.05] tracking-[-0.03em] text-fg md:text-[4.7rem] lg:text-[4.7rem]"
             >
               {t.news.h2_pre}
               {t.news.h2_emph}
               {t.news.h2_post}
             </h2>
-            <div className="mt-4 font-jp text-[13.5px] tracking-[0.08em] text-fg/50">
+            <div className="mt-4 font-jp text-[17px] tracking-[0.08em] text-fg/50">
               {t.news.subtitle_jp}
             </div>
           </div>
           <a
             href="#contact"
-            className="group inline-flex items-center gap-3 whitespace-nowrap text-[12px] font-bold uppercase tracking-[0.18em] text-fg/80 transition hover:text-orange-500"
+            className="group inline-flex items-center gap-3 whitespace-nowrap text-[15px] font-bold uppercase tracking-[0.18em] text-fg/80 transition hover:text-orange-500"
           >
             {t.news.view_all}
             <span className="grid h-8 w-8 place-items-center rounded-full bg-orange-500 text-white transition-all duration-300 group-hover:scale-[1.3] group-hover:bg-orange-400 group-hover:shadow-[0_0_20px_rgb(var(--brand-500)/0.5)]">
@@ -137,7 +137,7 @@ function QueuedTile() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <TickMark />
-          <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-fg/45">
+          <span className="font-mono text-[12.5px] font-bold uppercase tracking-[0.2em] text-fg/45">
             Queued
           </span>
         </div>
@@ -188,19 +188,19 @@ function NewsCard({
 
       {/* solid punchy colour caption block */}
       <div className="flex flex-col p-5" style={{ backgroundColor: color }}>
-        <div className="flex items-center gap-3 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-white/80">
+        <div className="flex items-center gap-3 font-mono text-[12.5px] font-bold uppercase tracking-[0.18em] text-white/80">
           <span>{item.date}</span>
           <span className="ml-auto">{item.code}</span>
         </div>
         <h3
           className={
             "mt-2.5 font-display font-bold leading-[1.15] tracking-[-0.015em] text-white " +
-            (feature ? "text-2xl md:text-3xl" : "text-lg md:text-xl")
+            (feature ? "text-[1.875rem] md:text-[2.34rem]" : "text-[1.4rem] md:text-[1.56rem]")
           }
         >
           {item.title}
         </h3>
-        <span className="mt-4 inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-white">
+        <span className="mt-4 inline-flex items-center gap-1.5 text-[14px] font-bold uppercase tracking-[0.16em] text-white">
           {t.news.read_label}
           <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" />
         </span>
