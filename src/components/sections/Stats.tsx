@@ -245,8 +245,8 @@ export function Stats() {
           <div className="mt-10 flex items-center gap-3 lg:mt-14">
             <TickMark className="h-3" />
             <span className="font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-white/70">
-              <span className="text-orange-300">07</span>{" "}
-              {lang === "ja" ? "次章" : "Overview"}
+              <span className="text-orange-300">06</span>{" "}
+              {lang === "ja" ? "指標" : "Metrics"}
             </span>
           </div>
         </div>
