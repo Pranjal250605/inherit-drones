@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, SectionFrame, SectionLabel, Kanji } from "../primitives";
+import { ArrowRight, SectionFrame, SectionLabel } from "../primitives";
 import { useT } from "../../i18n";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -166,19 +166,19 @@ export function Process() {
             <SectionLabel>{t.process.tag}</SectionLabel>
             <h2
               data-anim="title-up"
-              className="mt-6 font-display text-5xl font-bold leading-[1.04] tracking-[-0.03em] text-fg md:text-6xl lg:text-6xl"
+              className="mt-6 font-display text-[3.75rem] font-bold leading-[1.04] tracking-[-0.03em] text-fg md:text-[4.7rem] lg:text-[4.7rem]"
             >
-              {t.process.h2_line1}{" "}
-              <Kanji className="not-italic text-orange-500">{t.process.h2_emph}</Kanji>{" "}
+              {t.process.h2_line1}
+              <span className="not-italic text-orange-500">{t.process.h2_emph}</span>
               {t.process.h2_line2}
             </h2>
-            <div className="mt-5 font-jp text-[13.5px] tracking-[0.08em] text-fg/50">
+            <div className="mt-5 font-jp text-[17px] tracking-[0.08em] text-fg/50">
               {t.process.subtitle_jp}
             </div>
           </div>
           <a
             href="#contact"
-            className="group inline-flex items-center gap-3 whitespace-nowrap text-[12px] font-bold uppercase tracking-[0.18em] text-fg/80 transition-colors hover:text-orange-500"
+            className="group inline-flex items-center gap-3 whitespace-nowrap text-[15px] font-bold uppercase tracking-[0.18em] text-fg/80 transition-colors hover:text-orange-500"
           >
             {t.process.cta}
             <span className="grid h-8 w-8 place-items-center rounded-full bg-orange-500 text-white transition-all duration-300 group-hover:scale-[1.3] group-hover:bg-orange-400 group-hover:shadow-[0_0_20px_rgb(var(--brand-500)/0.5)]">
@@ -202,18 +202,18 @@ export function Process() {
               {/* per-phase drone line art watermark */}
               <Art className="pointer-events-none absolute -right-8 -top-8 h-64 w-64 text-fg/5 transition-transform duration-700 group-hover:scale-110 group-hover:text-fg/10" />
 
-              <span className="relative z-10 font-mono text-[12px] font-bold uppercase tracking-[0.24em] text-fg/40 group-hover:text-fg/80 transition-colors duration-500">
+              <span className="relative z-10 font-mono text-[15px] font-bold uppercase tracking-[0.24em] text-fg/40 group-hover:text-fg/80 transition-colors duration-500">
                 Phase 0{i + 1}
               </span>
 
               <div className="relative z-10">
-                <p className="font-jp text-[11px] font-bold tracking-[0.1em] text-fg/40">
+                <p className="font-jp text-[14px] font-bold tracking-[0.1em] text-fg/40">
                   {s.jp}
                 </p>
-                <h3 className="mt-4 font-display text-4xl font-bold leading-[1.05] tracking-tight text-fg md:text-5xl">
+                <h3 className="mt-4 font-display text-[2.8rem] font-bold leading-[1.05] tracking-tight text-fg md:text-[3.75rem]">
                   {s.title}
                 </h3>
-                <p className="mt-5 min-h-[5.5rem] text-[15px] leading-relaxed text-muted line-clamp-3 md:text-base">
+                <p className="mt-5 min-h-[5.5rem] text-[19px] leading-relaxed text-muted line-clamp-3 md:text-[1.25rem]">
                   {s.body}
                 </p>
               </div>

@@ -2,7 +2,6 @@
   "code": "ja",
   "label_en": "EN",
   "label_ja": "JP",
-
   "header": {
     "status": "SYS.ONLINE",
     "nav": {
@@ -18,7 +17,6 @@
     "menu_close": "メニューを閉じる",
     "menu_toggle": "ナビゲーション切替"
   },
-
   "hero": {
     "tag_brand": "株式会社 INHERIT",
     "tag_country": "日本",
@@ -31,10 +29,22 @@
     "cta_primary": "ソリューションを見る",
     "cta_secondary": "技術概要",
     "ticker": [
-      { "k": "ISO 9001", "v": "認証取得" },
-      { "k": "JUIDA", "v": "国交省認可" },
-      { "k": "BVLOS", "v": "レベル4" },
-      { "k": "設立", "v": "広島" }
+      {
+        "k": "ISO 9001",
+        "v": "認証取得"
+      },
+      {
+        "k": "JUIDA",
+        "v": "国交省認可"
+      },
+      {
+        "k": "BVLOS",
+        "v": "レベル4"
+      },
+      {
+        "k": "設立",
+        "v": "広島"
+      }
     ],
     "hud_left_label": "ライブテレメトリ",
     "hud_left_coords": "N 34.3853° · E 132.4553°",
@@ -44,7 +54,6 @@
     "hud_right_status": "システム正常",
     "scroll": "スクロール"
   },
-
   "promo": {
     "items": [
       {
@@ -67,16 +76,21 @@
       }
     ]
   },
-
   "trust": {
     "label": "/ 認可運航者",
     "partners": [
-      "国土交通省", "JAXA · パートナー", "広島県", "三井物産",
-      "NTTロジスティクス", "TÜV Rheinland", "ENEOS Marine", "中国電力",
-      "日本郵政HD", "伊藤忠航空宇宙"
+      "国土交通省",
+      "JAXA · パートナー",
+      "広島県",
+      "三井物産",
+      "NTTロジスティクス",
+      "TÜV Rheinland",
+      "ENEOS Marine",
+      "中国電力",
+      "日本郵政HD",
+      "伊藤忠航空宇宙"
     ]
   },
-
   "news": {
     "tag": "速報 / 最新",
     "h2_pre": "",
@@ -125,7 +139,6 @@
       }
     ]
   },
-
   "mission": {
     "tag": "01 / ミッション",
     "h2_pre": "空のインフラを、",
@@ -153,7 +166,6 @@
       }
     ]
   },
-
   "solutions": {
     "tag": "02 / ソリューション",
     "h2_line1": "三つの",
@@ -176,7 +188,20 @@
         "title": "物流・配送",
         "short": "物流",
         "desc": "瀬戸内の島々をまたぐ、目視外（BVLOS）貨物配送。",
-        "metrics": [["積載量","8.0 KG"],["航続","60 KM"],["所要","≤15 分"]],
+        "metrics": [
+          [
+            "積載量",
+            "8.0 KG"
+          ],
+          [
+            "航続",
+            "60 KM"
+          ],
+          [
+            "所要",
+            "≤15 分"
+          ]
+        ],
         "hidden": "ROUTE.SETOUCHI-04 · 28 拠点 · 4200 飛行"
       },
       {
@@ -186,7 +211,16 @@
         "title": "インフラ点検",
         "short": "点検",
         "desc": "ミリ単位の異常検知 — 高所に人を上げません。",
-        "metrics": [["解像度","0.4 MM"],["センサー","RGB+IR+LIDAR"]],
+        "metrics": [
+          [
+            "解像度",
+            "0.4 MM"
+          ],
+          [
+            "センサー",
+            "RGB+IR+LIDAR"
+          ]
+        ],
         "hidden": "AUDIT.CHUGOKU-T · 1180 KM · 312 検出"
       },
       {
@@ -196,27 +230,54 @@
         "title": "空撮・測量",
         "short": "測量",
         "desc": "写真測量と3D点群を、24時間以内に。",
-        "metrics": [["精度","± 2 CM"],["納期","24 時間"]],
+        "metrics": [
+          [
+            "精度",
+            "± 2 CM"
+          ],
+          [
+            "納期",
+            "24 時間"
+          ]
+        ],
         "hidden": "SURVEY.COASTLINE-H · 64 KM · Q4 2026"
       }
     ]
   },
-
   "process": {
     "tag": "03 / 運用",
-    "h2_line1": "ブリーフから",
+    "h2_line1": "発想から、",
     "h2_emph": "飛行記録まで、",
     "h2_line2": "四つの段階で。",
     "subtitle_jp": "四段階の運用フロー",
     "cta": "資料を請求",
     "steps": [
-      { "n": "03.01", "title": "発見", "jp": "Discover", "body": "現地調査と空域監査。" },
-      { "n": "03.02", "title": "設計", "jp": "Engineer", "body": "飛行プロファイル、センサー、BVLOSルーティング — まずシミュレーションで検証。" },
-      { "n": "03.03", "title": "運用", "jp": "Operate", "body": "認定パイロットが広島運用センターから運航。" },
-      { "n": "03.04", "title": "提供", "jp": "Deliver", "body": "地理タグ付きデータとレポートを24時間以内に。" }
+      {
+        "n": "03.01",
+        "title": "発見",
+        "jp": "Discover",
+        "body": "現地調査と空域監査。"
+      },
+      {
+        "n": "03.02",
+        "title": "設計",
+        "jp": "Engineer",
+        "body": "飛行プロファイル、センサー、BVLOSルーティング — まずシミュレーションで検証。"
+      },
+      {
+        "n": "03.03",
+        "title": "運用",
+        "jp": "Operate",
+        "body": "認定パイロットが広島運用センターから運航。"
+      },
+      {
+        "n": "03.04",
+        "title": "提供",
+        "jp": "Deliver",
+        "body": "地理タグ付きデータとレポートを24時間以内に。"
+      }
     ]
   },
-
   "tech": {
     "tag": "04 / 技術",
     "h2_pre": "",
@@ -226,17 +287,69 @@
     "subtitle_jp": "隼 / 第四世代 機体",
     "lead": "第四世代の機体。カーボンモノコック、冗長コンピュート、16チャンネルのセンサーバス。",
     "specs": [
-      { "k": "最大積載量",  "v": 88, "unit": "KG",    "display": "8.8" },
-      { "k": "飛行時間",    "v": 78, "unit": "分",    "display": "62" },
-      { "k": "耐風性能",    "v": 70, "unit": "M/S",   "display": "15" },
-      { "k": "運用高度",    "v": 60, "unit": "M AGL", "display": "150" },
-      { "k": "巡航速度",    "v": 82, "unit": "M/S",   "display": "22" },
-      { "k": "IP等級",     "v": 92, "unit": "",      "display": "IP55" },
-      { "k": "最大離陸重量", "v": 75, "unit": "KG",    "display": "25" },
-      { "k": "ローター径",  "v": 65, "unit": "M",     "display": "1.8" },
-      { "k": "航続距離",    "v": 85, "unit": "KM",    "display": "60" }
+      {
+        "k": "最大積載量",
+        "v": 88,
+        "unit": "KG",
+        "display": "8.8"
+      },
+      {
+        "k": "飛行時間",
+        "v": 78,
+        "unit": "分",
+        "display": "62"
+      },
+      {
+        "k": "耐風性能",
+        "v": 70,
+        "unit": "M/S",
+        "display": "15"
+      },
+      {
+        "k": "運用高度",
+        "v": 60,
+        "unit": "M AGL",
+        "display": "150"
+      },
+      {
+        "k": "巡航速度",
+        "v": 82,
+        "unit": "M/S",
+        "display": "22"
+      },
+      {
+        "k": "IP等級",
+        "v": 92,
+        "unit": "",
+        "display": "IP55"
+      },
+      {
+        "k": "最大離陸重量",
+        "v": 75,
+        "unit": "KG",
+        "display": "25"
+      },
+      {
+        "k": "ローター径",
+        "v": 65,
+        "unit": "M",
+        "display": "1.8"
+      },
+      {
+        "k": "航続距離",
+        "v": 85,
+        "unit": "KM",
+        "display": "60"
+      }
     ],
-    "chips": ["カーボンモノコック", "デュアル IMU", "RTK GNSS", "メッシュ無線", "エッジAI", "ホットスワップ電池"],
+    "chips": [
+      "カーボンモノコック",
+      "デュアル IMU",
+      "RTK GNSS",
+      "メッシュ無線",
+      "エッジAI",
+      "ホットスワップ電池"
+    ],
     "hud_name_top": "IH-04 · 隼",
     "hud_name_sn": "S/N HX-1042",
     "hud_hover": "ホバー · 1.02 M",
@@ -245,12 +358,20 @@
     "hud_status": "システム正常",
     "hud_rx": "RX -62 DB",
     "sub_specs": [
-      ["機体", "Carbon X12"],
-      ["演算", "Dual NVIDIA"],
-      ["無線", "MESH-LR 6 GHz"]
+      [
+        "機体",
+        "Carbon X12"
+      ],
+      [
+        "演算",
+        "Dual NVIDIA"
+      ],
+      [
+        "無線",
+        "MESH-LR 6 GHz"
+      ]
     ]
   },
-
   "field": {
     "tag": "05 / 実地記録",
     "h2_pre": "",
@@ -263,33 +384,68 @@
     "img_label": "IMG",
     "cases": [
       {
-        "tag": "物流", "code": "F.01", "coords": "34.42° N · 132.71° E",
+        "tag": "物流",
+        "code": "F.01",
+        "coords": "34.42° N · 132.71° E",
         "title": "瀬戸内 島間貨物ネットワーク",
         "body": "瀬戸内海を横断する28拠点の配送網。",
-        "stat_value": "4,200", "stat_label": "飛行 / 99.4% 定時運航"
+        "stat_value": "4,200",
+        "stat_label": "飛行 / 99.4% 定時運航"
       },
       {
-        "tag": "点検", "code": "F.02", "coords": "34.61° N · 133.94° E",
+        "tag": "点検",
+        "code": "F.02",
+        "coords": "34.61° N · 133.94° E",
         "title": "中国電力 送電塔監査",
         "body": "1,180 kmの送電線をAI熱画像＋可視光で点検。",
-        "stat_value": "1,180 KM", "stat_label": "監査済 · 312 検出"
+        "stat_value": "1,180 KM",
+        "stat_label": "監査済 · 312 検出"
       },
       {
-        "tag": "測量", "code": "F.03", "coords": "34.39° N · 132.45° E",
+        "tag": "測量",
+        "code": "F.03",
+        "coords": "34.39° N · 132.45° E",
         "title": "広島 海岸侵食マッピング",
         "body": "海岸線64 kmを2 cm精度でマッピング。",
-        "stat_value": "2 CM", "stat_label": "解像度 · 四半期サイクル"
+        "stat_value": "2 CM",
+        "stat_label": "解像度 · 四半期サイクル"
       }
     ]
   },
-
   "stats": [
-    { "n": "12400", "suf": "+", "label": "自律飛行回数",    "code": "06.A", "decimal": false, "thousands": true },
-    { "n": "99.4",  "suf": "%", "label": "ミッション完遂率", "code": "06.B", "decimal": true,  "thousands": false },
-    { "n": "0",     "suf": "",  "label": "重大事故",         "code": "06.C", "decimal": false, "thousands": false },
-    { "n": "27",    "suf": "",  "label": "対応都道府県",     "code": "06.D", "decimal": false, "thousands": false }
+    {
+      "n": "12400",
+      "suf": "+",
+      "label": "自律飛行回数",
+      "code": "06.A",
+      "decimal": false,
+      "thousands": true
+    },
+    {
+      "n": "99.4",
+      "suf": "%",
+      "label": "ミッション完遂率",
+      "code": "06.B",
+      "decimal": true,
+      "thousands": false
+    },
+    {
+      "n": "0",
+      "suf": "",
+      "label": "重大事故",
+      "code": "06.C",
+      "decimal": false,
+      "thousands": false
+    },
+    {
+      "n": "27",
+      "suf": "",
+      "label": "対応都道府県",
+      "code": "06.D",
+      "decimal": false,
+      "thousands": false
+    }
   ],
-
   "testimonial": {
     "tag": "07 / 声",
     "transmission_label": "通信",
@@ -299,7 +455,6 @@
     "author_role": "物流部長 · 瀬戸内医療ネットワーク",
     "signed": "署名 · 2026.03.18"
   },
-
   "instagram": {
     "tag": "フィード / ソーシャル",
     "h2_pre": "",
@@ -311,7 +466,6 @@
     "placeholder_title": "フィード同期待ち",
     "placeholder_body": "src/data/instagram.ts に投稿のショートコードを追加すると、このスロットに表示されます。"
   },
-
   "faq": {
     "tag": "08 / ブリーフィング",
     "h2_line1": "よくある",
@@ -320,14 +474,28 @@
     "subtitle_jp": "よくあるご質問",
     "lead": "技術・規制・商務 — 営業日1日以内にご返信します。",
     "items": [
-      { "q": "現在どの地域で運航していますか？", "a": "広島・岡山・愛媛・山口を中心に、ご要望に応じて日本各地へ。" },
-      { "q": "BVLOS運航は国交省の認可を取得していますか？", "a": "はい — BVLOSレベル4認可、第二種機体登録、認定リモートパイロット。" },
-      { "q": "データ主権はどう扱われますか？", "a": "すべてのデータは暗号化された日本国内インフラで保管・処理し、顧客が所有します。" },
-      { "q": "IH-04機体は販売していますか？", "a": "いいえ。機体・パイロット・地上局・データを含むフライト・アズ・ア・サービスです。" },
-      { "q": "エンゲージメントの流れは？", "a": "スコープ通話、有償パイロット、年次契約。30日以内に運航開始。" }
+      {
+        "q": "現在どの地域で運航していますか？",
+        "a": "広島・岡山・愛媛・山口を中心に、ご要望に応じて日本各地へ。"
+      },
+      {
+        "q": "BVLOS運航は国交省の認可を取得していますか？",
+        "a": "はい — BVLOSレベル4認可、第二種機体登録、認定リモートパイロット。"
+      },
+      {
+        "q": "データ主権はどう扱われますか？",
+        "a": "すべてのデータは暗号化された日本国内インフラで保管・処理し、顧客が所有します。"
+      },
+      {
+        "q": "IH-04機体は販売していますか？",
+        "a": "いいえ。機体・パイロット・地上局・データを含むフライト・アズ・ア・サービスです。"
+      },
+      {
+        "q": "エンゲージメントの流れは？",
+        "a": "スコープ通話、有償パイロット、年次契約。30日以内に運航開始。"
+      }
     ]
   },
-
   "contact": {
     "tag": "09 / オープンチャンネル",
     "h2_line1": "ミッションは？",
@@ -350,10 +518,22 @@
       "title_jp": "Downloads",
       "body": "仕様・プレイブック・コンプライアンス — 2026年Q2時点。",
       "items": [
-        { "title": "IH-04 隼 · 技術概要",        "format": "PDF · 4.2 MB" },
-        { "title": "BVLOS 運用ドシエ",          "format": "PDF · 8.1 MB" },
-        { "title": "コンプライアンス・データ主権", "format": "PDF · 1.8 MB" },
-        { "title": "2025 現場記録",              "format": "PDF · 6.4 MB" }
+        {
+          "title": "IH-04 隼 · 技術概要",
+          "format": "PDF · 4.2 MB"
+        },
+        {
+          "title": "BVLOS 運用ドシエ",
+          "format": "PDF · 8.1 MB"
+        },
+        {
+          "title": "コンプライアンス・データ主権",
+          "format": "PDF · 1.8 MB"
+        },
+        {
+          "title": "2025 現場記録",
+          "format": "PDF · 6.4 MB"
+        }
       ]
     },
     "brief_col": {
@@ -373,9 +553,18 @@
     "field_loc_placeholder": "国・都道府県",
     "field_brief_label": "05 / 概要",
     "pillars": [
-      { "id": "Logistics", "label": "物流" },
-      { "id": "Inspection", "label": "点検" },
-      { "id": "Survey", "label": "測量" }
+      {
+        "id": "Logistics",
+        "label": "物流"
+      },
+      {
+        "id": "Inspection",
+        "label": "点検"
+      },
+      {
+        "id": "Survey",
+        "label": "測量"
+      }
     ],
     "form_reply": "JST 24時間以内に返信",
     "submit": "送信",
@@ -393,12 +582,20 @@
     "success_ref_prefix": "REF · IH-",
     "success_again": "別の送信",
     "info": [
-      ["メール", "ops@inherit.co.jp"],
-      ["電話", "+81 82 555 0140"],
-      ["本社", "広島市大手町 2-7"]
+      [
+        "メール",
+        "ops@inherit.co.jp"
+      ],
+      [
+        "電話",
+        "+81 82 555 0140"
+      ],
+      [
+        "本社",
+        "広島市大手町 2-7"
+      ]
     ]
   },
-
   "footer": {
     "status": "全システム正常",
     "uptime": "稼働率 99.98 %",
@@ -406,10 +603,42 @@
     "wordmark_sub": "株式会社 インヘリット · 広島で設計 · 空のために",
     "description": "株式会社 Inherit Co. — 広島で設計するドローンシステム。2023年よりMLIT BVLOSレベル4。",
     "cols": [
-      { "h": "ソリューション", "links": ["物流・配送", "インフラ点検", "空撮・測量", "カスタムミッション"] },
-      { "h": "技術",         "links": ["IH-04 隼", "メッシュ無線", "エッジAIスタック", "地上局"] },
-      { "h": "会社",         "links": ["会社概要", "プレス", "採用", "コンプライアンス"] },
-      { "h": "連絡先",       "links": ["広島本社", "東京リエゾン", "シンガポール支社", "パートナープログラム"] }
+      {
+        "h": "ソリューション",
+        "links": [
+          "物流・配送",
+          "インフラ点検",
+          "空撮・測量",
+          "カスタムミッション"
+        ]
+      },
+      {
+        "h": "技術",
+        "links": [
+          "IH-04 隼",
+          "メッシュ無線",
+          "エッジAIスタック",
+          "地上局"
+        ]
+      },
+      {
+        "h": "会社",
+        "links": [
+          "会社概要",
+          "プレス",
+          "採用",
+          "コンプライアンス"
+        ]
+      },
+      {
+        "h": "連絡先",
+        "links": [
+          "広島本社",
+          "東京リエゾン",
+          "シンガポール支社",
+          "パートナープログラム"
+        ]
+      }
     ],
     "sns": {
       "h": "ソーシャル",
@@ -419,21 +648,37 @@
           "name": "NAPAドローンスクール本部",
           "subtitle": "NAPA Drone Academy · 本部",
           "links": [
-            { "label": "ホームページ", "href": "https://www.napa-drone-academy.com/" },
-            { "label": "公式LINE",    "href": "https://line.me/R/ti/p/@589uzpzl?oat__id=6353620" }
+            {
+              "label": "ホームページ",
+              "href": "https://www.napa-drone-academy.com/"
+            },
+            {
+              "label": "公式LINE",
+              "href": "https://line.me/R/ti/p/@589uzpzl?oat__id=6353620"
+            }
           ]
         },
         {
           "name": "NAPAドローンスクール広島校",
           "subtitle": "NAPA Drone Academy · 広島校",
           "links": [
-            { "label": "Instagram",   "href": "https://www.instagram.com/napa_droneacademy_hiroshima?igsh=c3ZzYmY5eGR4ZzQ=" },
-            { "label": "ホームページ", "href": "https://lp.napa-drone-academy.com/lp/hiroshima/" }
+            {
+              "label": "Instagram",
+              "href": "https://www.instagram.com/napa_droneacademy_hiroshima?igsh=c3ZzYmY5eGR4ZzQ="
+            },
+            {
+              "label": "ホームページ",
+              "href": "https://lp.napa-drone-academy.com/lp/hiroshima/"
+            }
           ]
         }
       ]
     },
     "copyright_suffix": "INHERIT CO. K.K. · 株式会社インヘリット · 広島県広島市",
-    "legal": ["プライバシー", "利用規約", "安全レポート"]
+    "legal": [
+      "プライバシー",
+      "利用規約",
+      "安全レポート"
+    ]
   }
 }

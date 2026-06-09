@@ -2,7 +2,6 @@
   "code": "en",
   "label_en": "EN",
   "label_ja": "JP",
-
   "header": {
     "status": "SYS.ONLINE",
     "nav": {
@@ -18,7 +17,6 @@
     "menu_close": "Close menu",
     "menu_toggle": "Toggle navigation"
   },
-
   "hero": {
     "tag_brand": "株式会社 INHERIT",
     "tag_country": "JAPAN",
@@ -31,10 +29,22 @@
     "cta_primary": "Explore Solutions",
     "cta_secondary": "Technology Brief",
     "ticker": [
-      { "k": "ISO 9001", "v": "Certified" },
-      { "k": "JUIDA", "v": "MLIT auth" },
-      { "k": "BVLOS", "v": "Level 4" },
-      { "k": "EST.", "v": "Hiroshima" }
+      {
+        "k": "ISO 9001",
+        "v": "Certified"
+      },
+      {
+        "k": "JUIDA",
+        "v": "MLIT auth"
+      },
+      {
+        "k": "BVLOS",
+        "v": "Level 4"
+      },
+      {
+        "k": "EST.",
+        "v": "Hiroshima"
+      }
     ],
     "hud_left_label": "LIVE TELEMETRY",
     "hud_left_coords": "N 34.3853° · E 132.4553°",
@@ -44,7 +54,6 @@
     "hud_right_status": "SYSTEM NOMINAL",
     "scroll": "Scroll"
   },
-
   "promo": {
     "items": [
       {
@@ -67,16 +76,21 @@
       }
     ]
   },
-
   "trust": {
     "label": "/ Authorised Operators",
     "partners": [
-      "国土交通省", "JAXA · PARTNER", "Hiroshima Pref.", "Mitsui & Co.",
-      "NTT Logistics", "TÜV Rheinland", "ENEOS Marine", "Chugoku Electric",
-      "Japan Post HD", "Itochu Aerospace"
+      "国土交通省",
+      "JAXA · PARTNER",
+      "Hiroshima Pref.",
+      "Mitsui & Co.",
+      "NTT Logistics",
+      "TÜV Rheinland",
+      "ENEOS Marine",
+      "Chugoku Electric",
+      "Japan Post HD",
+      "Itochu Aerospace"
     ]
   },
-
   "news": {
     "tag": "BULLETIN / Latest",
     "h2_pre": "From the ",
@@ -125,7 +139,6 @@
       }
     ]
   },
-
   "mission": {
     "tag": "01 / Mission",
     "h2_pre": "Aerial infrastructure, from ",
@@ -153,7 +166,6 @@
       }
     ]
   },
-
   "solutions": {
     "tag": "02 / Solutions",
     "h2_line1": "Three vertical",
@@ -176,7 +188,20 @@
         "title": "Logistics & Delivery",
         "short": "Logistics",
         "desc": "BVLOS cargo delivery across the Setouchi islands.",
-        "metrics": [["PAYLOAD","8.0 KG"],["RANGE","60 KM"],["WINDOW","≤15 MIN"]],
+        "metrics": [
+          [
+            "PAYLOAD",
+            "8.0 KG"
+          ],
+          [
+            "RANGE",
+            "60 KM"
+          ],
+          [
+            "WINDOW",
+            "≤15 MIN"
+          ]
+        ],
         "hidden": "ROUTE.SETOUCHI-04 · 28 NODES · 4200 SORTIES"
       },
       {
@@ -186,7 +211,16 @@
         "title": "Infrastructure Inspection",
         "short": "Inspection",
         "desc": "Millimetre-grade fault detection — no human at altitude.",
-        "metrics": [["RESOLUTION","0.4 MM"],["SENSORS","RGB+IR+LIDAR"]],
+        "metrics": [
+          [
+            "RESOLUTION",
+            "0.4 MM"
+          ],
+          [
+            "SENSORS",
+            "RGB+IR+LIDAR"
+          ]
+        ],
         "hidden": "AUDIT.CHUGOKU-T · 1180 KM · 312 FLAGS"
       },
       {
@@ -196,27 +230,54 @@
         "title": "Aerial Survey & Data",
         "short": "Survey",
         "desc": "Photogrammetry and 3D point clouds within 24 hours.",
-        "metrics": [["ACCURACY","± 2 CM"],["DELIVERY","24 H"]],
+        "metrics": [
+          [
+            "ACCURACY",
+            "± 2 CM"
+          ],
+          [
+            "DELIVERY",
+            "24 H"
+          ]
+        ],
         "hidden": "SURVEY.COASTLINE-H · 64 KM · Q4 2026"
       }
     ]
   },
-
   "process": {
     "tag": "03 / Operations",
-    "h2_line1": "From brief to",
+    "h2_line1": "From concept to ",
     "h2_emph": "flight log,",
-    "h2_line2": "in four phases.",
+    "h2_line2": " in four phases.",
     "subtitle_jp": "四段階の運用フロー",
     "cta": "Request a dossier",
     "steps": [
-      { "n": "03.01", "title": "Discover", "jp": "発見", "body": "Site survey and airspace audit." },
-      { "n": "03.02", "title": "Engineer", "jp": "設計", "body": "Flight profile, sensors, and BVLOS routing — simulated first." },
-      { "n": "03.03", "title": "Operate", "jp": "運用", "body": "Certified pilots fly from the Hiroshima ops centre." },
-      { "n": "03.04", "title": "Deliver", "jp": "提供", "body": "Geo-tagged data and reports within 24 hours." }
+      {
+        "n": "03.01",
+        "title": "Discover",
+        "jp": "発見",
+        "body": "Site survey and airspace audit."
+      },
+      {
+        "n": "03.02",
+        "title": "Engineer",
+        "jp": "設計",
+        "body": "Flight profile, sensors, and BVLOS routing — simulated first."
+      },
+      {
+        "n": "03.03",
+        "title": "Operate",
+        "jp": "運用",
+        "body": "Certified pilots fly from the Hiroshima ops centre."
+      },
+      {
+        "n": "03.04",
+        "title": "Deliver",
+        "jp": "提供",
+        "body": "Geo-tagged data and reports within 24 hours."
+      }
     ]
   },
-
   "tech": {
     "tag": "04 / Technology",
     "h2_pre": "The ",
@@ -226,17 +287,69 @@
     "subtitle_jp": "隼 / 第四世代 機体",
     "lead": "Fourth-generation airframe. Carbon monocoque, redundant compute, 16-channel sensor bus.",
     "specs": [
-      { "k": "Max payload", "v": 88, "unit": "KG", "display": "8.8" },
-      { "k": "Flight time", "v": 78, "unit": "MIN", "display": "62" },
-      { "k": "Wind tolerance", "v": 70, "unit": "M/S", "display": "15" },
-      { "k": "Operating ceiling", "v": 60, "unit": "M AGL", "display": "150" },
-      { "k": "Cruise velocity", "v": 82, "unit": "M/S", "display": "22" },
-      { "k": "IP rating", "v": 92, "unit": "", "display": "IP55" },
-      { "k": "Max takeoff weight", "v": 75, "unit": "KG", "display": "25" },
-      { "k": "Rotor span", "v": 65, "unit": "M", "display": "1.8" },
-      { "k": "Range (BVLOS)", "v": 85, "unit": "KM", "display": "60" }
+      {
+        "k": "Max payload",
+        "v": 88,
+        "unit": "KG",
+        "display": "8.8"
+      },
+      {
+        "k": "Flight time",
+        "v": 78,
+        "unit": "MIN",
+        "display": "62"
+      },
+      {
+        "k": "Wind tolerance",
+        "v": 70,
+        "unit": "M/S",
+        "display": "15"
+      },
+      {
+        "k": "Operating ceiling",
+        "v": 60,
+        "unit": "M AGL",
+        "display": "150"
+      },
+      {
+        "k": "Cruise velocity",
+        "v": 82,
+        "unit": "M/S",
+        "display": "22"
+      },
+      {
+        "k": "IP rating",
+        "v": 92,
+        "unit": "",
+        "display": "IP55"
+      },
+      {
+        "k": "Max takeoff weight",
+        "v": 75,
+        "unit": "KG",
+        "display": "25"
+      },
+      {
+        "k": "Rotor span",
+        "v": 65,
+        "unit": "M",
+        "display": "1.8"
+      },
+      {
+        "k": "Range (BVLOS)",
+        "v": 85,
+        "unit": "KM",
+        "display": "60"
+      }
     ],
-    "chips": ["Carbon Monocoque", "Dual-IMU", "RTK GNSS", "Mesh Radio", "Edge AI", "Hot-swap battery"],
+    "chips": [
+      "Carbon Monocoque",
+      "Dual-IMU",
+      "RTK GNSS",
+      "Mesh Radio",
+      "Edge AI",
+      "Hot-swap battery"
+    ],
     "hud_name_top": "IH-04 · HAYABUSA",
     "hud_name_sn": "S/N HX-1042",
     "hud_hover": "HOVER · 1.02 M",
@@ -245,12 +358,20 @@
     "hud_status": "SYSTEM NOMINAL",
     "hud_rx": "RX -62 DB",
     "sub_specs": [
-      ["AIRFRAME", "Carbon X12"],
-      ["COMPUTE", "Dual NVIDIA"],
-      ["RADIO", "MESH-LR 6 GHz"]
+      [
+        "AIRFRAME",
+        "Carbon X12"
+      ],
+      [
+        "COMPUTE",
+        "Dual NVIDIA"
+      ],
+      [
+        "RADIO",
+        "MESH-LR 6 GHz"
+      ]
     ]
   },
-
   "field": {
     "tag": "05 / Field Record",
     "h2_pre": "Selected ",
@@ -263,33 +384,68 @@
     "img_label": "IMG",
     "cases": [
       {
-        "tag": "Logistics", "code": "F.01", "coords": "34.42° N · 132.71° E",
+        "tag": "Logistics",
+        "code": "F.01",
+        "coords": "34.42° N · 132.71° E",
         "title": "Setouchi Inter-Island Cargo Network",
         "body": "A 28-station delivery mesh across the Inland Sea.",
-        "stat_value": "4,200", "stat_label": "Sorties / 99.4% OTD"
+        "stat_value": "4,200",
+        "stat_label": "Sorties / 99.4% OTD"
       },
       {
-        "tag": "Inspection", "code": "F.02", "coords": "34.61° N · 133.94° E",
+        "tag": "Inspection",
+        "code": "F.02",
+        "coords": "34.61° N · 133.94° E",
         "title": "Chugoku Transmission Tower Audit",
         "body": "AI thermal + visual inspection across 1,180 km of line.",
-        "stat_value": "1,180 KM", "stat_label": "Audited · 312 Flags"
+        "stat_value": "1,180 KM",
+        "stat_label": "Audited · 312 Flags"
       },
       {
-        "tag": "Survey", "code": "F.03", "coords": "34.39° N · 132.45° E",
+        "tag": "Survey",
+        "code": "F.03",
+        "coords": "34.39° N · 132.45° E",
         "title": "Hiroshima Coastal Erosion Mapping",
         "body": "64 km of shoreline mapped at 2 cm accuracy.",
-        "stat_value": "2 CM", "stat_label": "Resolution · Q4 cadence"
+        "stat_value": "2 CM",
+        "stat_label": "Resolution · Q4 cadence"
       }
     ]
   },
-
   "stats": [
-    { "n": "12400", "suf": "+", "label": "Autonomous sorties", "code": "06.A", "decimal": false, "thousands": true },
-    { "n": "99.4",  "suf": "%", "label": "Mission completion", "code": "06.B", "decimal": true,  "thousands": false },
-    { "n": "0",     "suf": "",  "label": "Critical incidents", "code": "06.C", "decimal": false, "thousands": false },
-    { "n": "27",    "suf": "",  "label": "Prefectures served", "code": "06.D", "decimal": false, "thousands": false }
+    {
+      "n": "12400",
+      "suf": "+",
+      "label": "Autonomous sorties",
+      "code": "06.A",
+      "decimal": false,
+      "thousands": true
+    },
+    {
+      "n": "99.4",
+      "suf": "%",
+      "label": "Mission completion",
+      "code": "06.B",
+      "decimal": true,
+      "thousands": false
+    },
+    {
+      "n": "0",
+      "suf": "",
+      "label": "Critical incidents",
+      "code": "06.C",
+      "decimal": false,
+      "thousands": false
+    },
+    {
+      "n": "27",
+      "suf": "",
+      "label": "Prefectures served",
+      "code": "06.D",
+      "decimal": false,
+      "thousands": false
+    }
   ],
-
   "testimonial": {
     "tag": "07 / Voice",
     "transmission_label": "TRANSMISSION",
@@ -299,7 +455,6 @@
     "author_role": "Dir. Logistics · Setouchi Medical Network",
     "signed": "SIGNED · 2026.03.18"
   },
-
   "instagram": {
     "tag": "FEED / Social",
     "h2_pre": "From the ",
@@ -311,7 +466,6 @@
     "placeholder_title": "Awaiting feed sync",
     "placeholder_body": "Add a post shortcode to src/data/instagram.ts to embed this slot."
   },
-
   "faq": {
     "tag": "08 / Briefing",
     "h2_line1": "Frequently",
@@ -320,14 +474,28 @@
     "subtitle_jp": "よくあるご質問",
     "lead": "Technical, regulatory, and commercial — replies within one business day.",
     "items": [
-      { "q": "Where do you currently operate?", "a": "Hiroshima, Okayama, Ehime, and Yamaguchi — and the rest of Japan by request." },
-      { "q": "Are your BVLOS operations approved by MLIT?", "a": "Yes — Level 4 BVLOS authorisation, Type-2 airframe, certified remote pilots." },
-      { "q": "How do you handle data sovereignty?", "a": "All data stored and processed on encrypted, Japan-resident infrastructure, owned by you." },
-      { "q": "Do you sell the IH-04 platform?", "a": "No. We deliver flight-as-a-service — platform, pilots, ground stations, and data." },
-      { "q": "What does engagement look like?", "a": "A scoping call, a paid pilot mission, then an annual contract. Flying within 30 days." }
+      {
+        "q": "Where do you currently operate?",
+        "a": "Hiroshima, Okayama, Ehime, and Yamaguchi — and the rest of Japan by request."
+      },
+      {
+        "q": "Are your BVLOS operations approved by MLIT?",
+        "a": "Yes — Level 4 BVLOS authorisation, Type-2 airframe, certified remote pilots."
+      },
+      {
+        "q": "How do you handle data sovereignty?",
+        "a": "All data stored and processed on encrypted, Japan-resident infrastructure, owned by you."
+      },
+      {
+        "q": "Do you sell the IH-04 platform?",
+        "a": "No. We deliver flight-as-a-service — platform, pilots, ground stations, and data."
+      },
+      {
+        "q": "What does engagement look like?",
+        "a": "A scoping call, a paid pilot mission, then an annual contract. Flying within 30 days."
+      }
     ]
   },
-
   "contact": {
     "tag": "09 / Open Channel",
     "h2_line1": "Have a mission?",
@@ -350,10 +518,22 @@
       "title_jp": "資料ダウンロード",
       "body": "Specs, playbooks, and compliance — current as of Q2 2026.",
       "items": [
-        { "title": "IH-04 Hayabusa · Technical brief", "format": "PDF · 4.2 MB" },
-        { "title": "BVLOS operations dossier",         "format": "PDF · 8.1 MB" },
-        { "title": "Compliance & data sovereignty",    "format": "PDF · 1.8 MB" },
-        { "title": "2025 field record",                "format": "PDF · 6.4 MB" }
+        {
+          "title": "IH-04 Hayabusa · Technical brief",
+          "format": "PDF · 4.2 MB"
+        },
+        {
+          "title": "BVLOS operations dossier",
+          "format": "PDF · 8.1 MB"
+        },
+        {
+          "title": "Compliance & data sovereignty",
+          "format": "PDF · 1.8 MB"
+        },
+        {
+          "title": "2025 field record",
+          "format": "PDF · 6.4 MB"
+        }
       ]
     },
     "brief_col": {
@@ -373,9 +553,18 @@
     "field_loc_placeholder": "Country / Prefecture",
     "field_brief_label": "05 / Brief",
     "pillars": [
-      { "id": "Logistics", "label": "Logistics" },
-      { "id": "Inspection", "label": "Inspection" },
-      { "id": "Survey", "label": "Survey" }
+      {
+        "id": "Logistics",
+        "label": "Logistics"
+      },
+      {
+        "id": "Inspection",
+        "label": "Inspection"
+      },
+      {
+        "id": "Survey",
+        "label": "Survey"
+      }
     ],
     "form_reply": "Reply within 24 h JST",
     "submit": "Send brief",
@@ -393,12 +582,20 @@
     "success_ref_prefix": "REF · IH-",
     "success_again": "Send another",
     "info": [
-      ["EMAIL", "ops@inherit.co.jp"],
-      ["TEL", "+81 82 555 0140"],
-      ["HQ", "2-7 Otemachi, Hiroshima"]
+      [
+        "EMAIL",
+        "ops@inherit.co.jp"
+      ],
+      [
+        "TEL",
+        "+81 82 555 0140"
+      ],
+      [
+        "HQ",
+        "2-7 Otemachi, Hiroshima"
+      ]
     ]
   },
-
   "footer": {
     "status": "ALL SYSTEMS NOMINAL",
     "uptime": "UPTIME 99.98 %",
@@ -406,10 +603,42 @@
     "wordmark_sub": "株式会社 インヘリット · ENGINEERED IN HIROSHIMA · BUILT FOR THE SKIES",
     "description": "株式会社 Inherit Co. — drone systems engineered in Hiroshima. MLIT Level-4 BVLOS since 2023.",
     "cols": [
-      { "h": "Solutions",  "links": ["Logistics & Delivery", "Infrastructure Inspection", "Aerial Survey", "Custom Missions"] },
-      { "h": "Technology", "links": ["IH-04 Hayabusa", "Mesh Radio", "Edge AI Stack", "Ground Station"] },
-      { "h": "Company",    "links": ["About", "Press", "Careers", "Compliance"] },
-      { "h": "Contact",    "links": ["Hiroshima HQ", "Tokyo Liaison", "Singapore Office", "Partner Programme"] }
+      {
+        "h": "Solutions",
+        "links": [
+          "Logistics & Delivery",
+          "Infrastructure Inspection",
+          "Aerial Survey",
+          "Custom Missions"
+        ]
+      },
+      {
+        "h": "Technology",
+        "links": [
+          "IH-04 Hayabusa",
+          "Mesh Radio",
+          "Edge AI Stack",
+          "Ground Station"
+        ]
+      },
+      {
+        "h": "Company",
+        "links": [
+          "About",
+          "Press",
+          "Careers",
+          "Compliance"
+        ]
+      },
+      {
+        "h": "Contact",
+        "links": [
+          "Hiroshima HQ",
+          "Tokyo Liaison",
+          "Singapore Office",
+          "Partner Programme"
+        ]
+      }
     ],
     "sns": {
       "h": "Social",
@@ -419,21 +648,37 @@
           "name": "NAPAドローンスクール本部",
           "subtitle": "NAPA Drone Academy · HQ",
           "links": [
-            { "label": "Homepage",      "href": "https://www.napa-drone-academy.com/" },
-            { "label": "Official LINE", "href": "https://line.me/R/ti/p/@589uzpzl?oat__id=6353620" }
+            {
+              "label": "Homepage",
+              "href": "https://www.napa-drone-academy.com/"
+            },
+            {
+              "label": "Official LINE",
+              "href": "https://line.me/R/ti/p/@589uzpzl?oat__id=6353620"
+            }
           ]
         },
         {
           "name": "NAPAドローンスクール広島校",
           "subtitle": "NAPA Drone Academy · Hiroshima",
           "links": [
-            { "label": "Instagram", "href": "https://www.instagram.com/napa_droneacademy_hiroshima?igsh=c3ZzYmY5eGR4ZzQ=" },
-            { "label": "Homepage",  "href": "https://lp.napa-drone-academy.com/lp/hiroshima/" }
+            {
+              "label": "Instagram",
+              "href": "https://www.instagram.com/napa_droneacademy_hiroshima?igsh=c3ZzYmY5eGR4ZzQ="
+            },
+            {
+              "label": "Homepage",
+              "href": "https://lp.napa-drone-academy.com/lp/hiroshima/"
+            }
           ]
         }
       ]
     },
     "copyright_suffix": "INHERIT CO. K.K. · 株式会社インヘリット · 広島県広島市",
-    "legal": ["Privacy", "Terms", "Safety Report"]
+    "legal": [
+      "Privacy",
+      "Terms",
+      "Safety Report"
+    ]
   }
 }
