@@ -1,23 +1,31 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SectionFrame, SectionLabel, ParallaxImage, Kanji } from "../primitives";
+import { SectionFrame, SectionLabel, ParallaxImage } from "../primitives";
 import { useT } from "../../i18n";
 import { useTheme } from "../../theme";
 import teamNapa from "../../assets/team-napa.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* Punchy hues per pillar — warm (orange→amber→yellow) by default, a cool
-   navy→blue trio in the blueprint theme. */
+/* Punchy hues per pillar.
+   - dark:  bright orange→amber→yellow (pops on the dark surface)
+   - light: a darker, higher-contrast orange ramp so the three read clearly
+            and stay distinct from one another on white
+   - blueprint: navy→blue trio. */
 const PILLAR_COLORS_WARM = ["#F97316", "#F59E0B", "#EAB308"];
+const PILLAR_COLORS_LIGHT = ["#F97316", "#C2410C", "#7C2D12"];
 const PILLAR_COLORS_NAVY = ["#1e3a8a", "#2557c4", "#4f86ea"];
 
 export function Mission() {
   const { t } = useT();
   const { theme } = useTheme();
   const PILLAR_COLORS =
-    theme === "blueprint" ? PILLAR_COLORS_NAVY : PILLAR_COLORS_WARM;
+    theme === "blueprint"
+      ? PILLAR_COLORS_NAVY
+      : theme === "light"
+      ? PILLAR_COLORS_LIGHT
+      : PILLAR_COLORS_WARM;
   const gridRef = useRef<HTMLDivElement>(null);
 
   /* Glitch-in reveal: each pillar stutters in with a chromatic (RGB-split)
@@ -89,13 +97,14 @@ export function Mission() {
           <SectionLabel>{t.mission.tag}</SectionLabel>
           <h2
             data-anim="title-up"
-            className="mt-6 font-display text-6xl font-bold leading-[1.02] tracking-[-0.03em] text-fg md:text-7xl"
+            className="mt-6 font-display text-[4.7rem] font-bold leading-[1.04] tracking-[-0.03em] text-fg md:text-[5.6rem]"
           >
             {t.mission.h2_pre}
-            <Kanji className="text-orange-500">{t.mission.h2_emph}</Kanji>
+            <br />
+            <span className="text-orange-500">{t.mission.h2_emph}</span>
             {t.mission.h2_post}
           </h2>
-          <div className="mt-5 font-jp text-[13.5px] tracking-[0.08em] text-fg/50">
+          <div className="mt-5 font-jp text-[17px] tracking-[0.08em] text-fg/50">
             {t.mission.subtitle_jp}
           </div>
         </div>
@@ -110,7 +119,7 @@ export function Mission() {
             speed={0.2}
             className="absolute inset-0 h-full w-full"
           />
-          <figcaption className="absolute inset-x-5 bottom-5 z-10 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.22em] text-white/80">
+          <figcaption className="absolute inset-x-5 bottom-5 z-10 flex items-center justify-between font-mono text-[12.5px] uppercase tracking-[0.22em] text-white/80">
             <span>NAPA Drone Academy</span>
             <span className="text-orange-400">Hiroshima</span>
           </figcaption>
@@ -131,23 +140,23 @@ export function Mission() {
               >
                 <div className="flex items-baseline justify-between">
                   <span
-                    className="font-mono text-[13px] font-bold tracking-[0.18em]"
+                    className="font-mono text-[16px] font-bold tracking-[0.18em]"
                     style={{ color }}
                   >
                     0{i + 1}
                   </span>
-                  <span className="font-mono text-[10px] font-bold uppercase tracking-[0.24em] text-fg/40">
+                  <span className="font-mono text-[12.5px] font-bold uppercase tracking-[0.24em] text-fg/40">
                     {p.jp}
                   </span>
                 </div>
                 <h3
                   data-glitch-title
-                  className="mt-6 font-display text-4xl font-bold leading-[1.02] tracking-[-0.02em] md:text-5xl"
+                  className="mt-6 font-display text-[2.8rem] font-bold leading-[1.02] tracking-[-0.02em] md:text-[3.75rem]"
                   style={{ color }}
                 >
                   {p.title}
                 </h3>
-                <p className="mt-4 text-pretty text-[16px] leading-relaxed text-muted">
+                <p className="mt-4 text-pretty text-[20px] leading-relaxed text-muted">
                   {p.body}
                 </p>
               </div>
