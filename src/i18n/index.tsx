@@ -16,7 +16,7 @@ const DICTIONARIES: Record<Lang, Dict> = {
   ja: jaRaw as unknown as Dict,
 };
 
-const STORAGE_KEY = "inherit.lang";
+const STORAGE_KEY = "inherit.lang.v2";
 
 type I18nContextValue = {
   lang: Lang;
@@ -27,15 +27,15 @@ type I18nContextValue = {
 const I18nContext = createContext<I18nContextValue | null>(null);
 
 function detectInitialLang(): Lang {
-  if (typeof window === "undefined") return "en";
+  if (typeof window === "undefined") return "ja";
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY);
     if (stored === "en" || stored === "ja") return stored;
   } catch {
     // localStorage may be unavailable (e.g. SSR, private mode)
   }
-  const nav = window.navigator?.language?.toLowerCase() ?? "";
-  return nav.startsWith("ja") ? "ja" : "en";
+  // Japanese is the default for everyone (visitors can switch to EN).
+  return "ja";
 }
 
 export function I18nProvider({ children }: { children: ReactNode }) {
