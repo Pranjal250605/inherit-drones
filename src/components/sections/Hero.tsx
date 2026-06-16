@@ -101,7 +101,7 @@ export function Hero() {
         </div>
 
         {/* heading block — stays in frame */}
-        <div className="mt-14 max-w-3xl lg:mt-12">
+        <div className="mt-20 max-w-3xl lg:mt-28">
           <h1 className="font-display text-[2.8rem] font-bold leading-[1.05] tracking-[-0.03em] text-fg md:text-[3.75rem] lg:text-[4.7rem]">
             {t.hero.h1_line1_pre}
             <span className="text-orange-500">{t.hero.h1_line1_emph}</span>
