@@ -14,7 +14,7 @@ export function FAQ() {
             <SectionLabel>{t.faq.tag}</SectionLabel>
             <h2
               data-anim="title-up"
-              className="mt-6 font-display text-6xl font-bold leading-[1.02] tracking-[-0.03em] text-fg md:text-7xl"
+              className="mt-6 font-display text-7xl font-bold leading-[1.0] tracking-[-0.03em] text-fg md:text-[7.5rem]"
             >
               {t.faq.h2_line1} {t.faq.h2_line2} {t.faq.h2_emph}
             </h2>

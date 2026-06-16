@@ -32,9 +32,11 @@ export function Contact() {
           <SectionLabel>{t.contact.tag}</SectionLabel>
           <h2
             data-anim="title-up"
-            className="mt-6 font-display text-6xl font-bold leading-[1.02] tracking-[-0.03em] text-fg md:text-7xl"
+            className="mt-6 font-display text-5xl font-bold leading-[1.08] tracking-[-0.03em] text-fg md:text-6xl"
           >
-            {t.contact.h2_line1} {t.contact.h2_emph}
+            {t.contact.h2_line1}
+            <br />
+            {t.contact.h2_emph}
           </h2>
           <div className="mt-5 font-jp text-[13.5px] tracking-[0.08em] text-fg/50">
             {t.contact.subtitle_jp}
