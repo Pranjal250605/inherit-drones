@@ -86,7 +86,7 @@ export function Solutions() {
           </div>
 
           {/* RIGHT — circular node diagram (nodes orbit slowly) */}
-          <div className="relative mx-auto aspect-square w-full max-w-[28.75rem]">
+          <div className="relative mx-auto aspect-square w-full max-w-[34rem]">
             {/* ring */}
             <div className="absolute left-1/2 top-1/2 h-[74%] w-[74%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/45" />
             {/* centre label (static hub) */}
