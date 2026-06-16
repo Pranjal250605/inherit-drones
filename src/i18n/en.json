@@ -21,9 +21,9 @@
     "tag_brand": "株式会社 INHERIT",
     "tag_country": "JAPAN",
     "h1_line1_pre": "Engineered for the ",
-    "h1_line1_emph": "Skies.",
+    "h1_line1_emph": "Skies",
     "h1_line2_pre": "Built from ",
-    "h1_line2_emph": "Japan.",
+    "h1_line2_emph": "Japan",
     "rule_jp": "未来を支えるドローン",
     "paragraph": "Autonomous drone systems for logistics, inspection, and survey — engineered in Hiroshima.",
     "cta_primary": "Explore Solutions",
@@ -106,7 +106,7 @@
         "date": "2026.05.21",
         "category": "Press Release",
         "category_jp": "プレスリリース",
-        "title": "Setouchi inter-island cargo network reaches 4,200 sorties",
+        "title": "Cargo network linking the Seto Inland Sea islands — 4,200 sorties",
         "excerpt": "The network now spans 28 automated stations across the Hiroshima–Ehime corridor, achieving a 99.4% on-time delivery rate. Cargo volumes have grown 340% year-on-year, validating the viability of persistent autonomous logistics in maritime archipelagos.",
         "img": "drone-spraying"
       },
@@ -154,13 +154,13 @@
       },
       {
         "code": "02.B",
-        "title": "Mandate",
+        "title": "Mission",
         "jp": "使命",
         "body": "Move goods, inspect infrastructure, map the unreachable."
       },
       {
         "code": "02.C",
-        "title": "Horizon",
+        "title": "Vision",
         "jp": "展望",
         "body": "A continuous aerial network across Setouchi by 2030."
       }
@@ -168,14 +168,14 @@
   },
   "solutions": {
     "tag": "02 / Solutions",
-    "h2_line1": "Three vertical",
-    "h2_emph": "pillars,",
-    "h2_line2_post": " one",
-    "h2_line3": "autonomous stack.",
+    "h2_line1": "Three pillars,",
+    "h2_emph": "",
+    "h2_line2_post": "",
+    "h2_line3": "one mission.",
     "subtitle_jp": "提供サービス · 自律飛行スタック",
-    "lead": "One airframe, one ground station. Three services — together or alone.",
+    "lead": "One aircraft, one ground station — three services working in concert to carry out the mission.",
     "center_a": "INHERIT",
-    "center_b": "Stack",
+    "center_b": "Three Pillars",
     "stat_pillars": "Pillars",
     "stat_active": "Active",
     "card_status": "ACTIVE · NOMINAL",
@@ -187,7 +187,7 @@
         "jp": "物流・配送",
         "title": "Logistics & Delivery",
         "short": "Logistics",
-        "desc": "BVLOS cargo delivery across the Setouchi islands.",
+        "desc": "Drone logistics linking the islands of the Seto Inland Sea via BVLOS (beyond visual line of sight).",
         "metrics": [
           [
             "PAYLOAD",
@@ -210,7 +210,7 @@
         "jp": "インフラ点検",
         "title": "Infrastructure Inspection",
         "short": "Inspection",
-        "desc": "Millimetre-grade fault detection — no human at altitude.",
+        "desc": "Millimetre-level anomaly detection — no more dangerous work at height.",
         "metrics": [
           [
             "RESOLUTION",
@@ -229,7 +229,7 @@
         "jp": "空撮・測量",
         "title": "Aerial Survey & Data",
         "short": "Survey",
-        "desc": "Photogrammetry and 3D point clouds within 24 hours.",
+        "desc": "Photogrammetry and high-precision 3D mapping, delivered within 24 hours.",
         "metrics": [
           [
             "ACCURACY",
@@ -285,7 +285,7 @@
     "h2_post": " Hayabusa",
     "h2_line2": "flight platform.",
     "subtitle_jp": "隼 / 第四世代 機体",
-    "lead": "Fourth-generation airframe. Carbon monocoque, redundant compute, 16-channel sensor bus.",
+    "lead": "Fourth-generation airframe — carbon monocoque structure, redundant computing, 16 sensor inputs.",
     "specs": [
       {
         "k": "Max payload",
@@ -374,9 +374,9 @@
   },
   "field": {
     "tag": "05 / Field Record",
-    "h2_pre": "Selected ",
-    "h2_emph": "field",
-    "h2_post": " deployments.",
+    "h2_pre": "",
+    "h2_emph": "Case",
+    "h2_post": " studies",
     "subtitle_jp": "実地配備の記録",
     "cta": "All case studies",
     "open": "View",
@@ -387,7 +387,7 @@
         "tag": "Logistics",
         "code": "F.01",
         "coords": "34.42° N · 132.71° E",
-        "title": "Setouchi Inter-Island Cargo Network",
+        "title": "A next-gen logistics network linking the Seto Inland Sea islands",
         "body": "A 28-station delivery mesh across the Inland Sea.",
         "stat_value": "4,200",
         "stat_label": "Sorties / 99.4% OTD"
@@ -450,15 +450,15 @@
     "tag": "07 / Voice",
     "transmission_label": "TRANSMISSION",
     "transmission_date": "2026.03.18 / 14:22 JST",
-    "quote": "The drones arrive before our ferries leave the dock. We don't think about the airspace anymore — it just works.",
+    "quote": "The drone delivery arrives before the ferry leaves the dock. No more worrying about late deliveries.",
     "author_name": "Yuki Tanabe",
     "author_role": "Dir. Logistics · Setouchi Medical Network",
     "signed": "SIGNED · 2026.03.18"
   },
   "instagram": {
     "tag": "FEED / Social",
-    "h2_pre": "From the ",
-    "h2_emph": "lens.",
+    "h2_pre": "",
+    "h2_emph": "Focus",
     "subtitle_jp": "現場からの写真",
     "lead": "Hangar, runway, altitude — from our pilots and the NAPA academy.",
     "handle": "@napa_droneacademy_hiroshima",
@@ -498,8 +498,8 @@
   },
   "contact": {
     "tag": "09 / Open Channel",
-    "h2_line1": "Have a mission?",
-    "h2_emph": "We can fly it.",
+    "h2_line1": "We look forward to",
+    "h2_emph": "your mission.",
     "subtitle_jp": "オープンチャンネル · 24時間以内に返信",
     "lead": "From a single survey flight to a permanent BVLOS corridor.",
     "newsletter": {

@@ -84,7 +84,7 @@ export function Hero() {
             {/* two small people cells */}
             <div className="grid grid-cols-2 gap-3 lg:col-span-5">
               <figure className="relative aspect-square overflow-hidden lg:aspect-auto">
-                <img src={businesswoman} alt="Inherit team member" className="h-full w-full object-cover object-[50%_30%]" loading="lazy" />
+                <img src={businesswoman} alt="Inherit team member" className="h-full w-full object-cover object-[50%_20%]" loading="lazy" />
               </figure>
               <figure className="relative aspect-square overflow-hidden lg:aspect-auto">
                 <img src={officeTeam} alt="Operations team" className="h-full w-full object-cover" loading="lazy" />
@@ -94,7 +94,7 @@ export function Hero() {
 
           {/* single oversized wordmark, straddling the mosaic's bottom edge */}
           <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 translate-y-1/2 overflow-hidden">
-            <span className="block whitespace-nowrap font-display text-[16vw] font-extrabold uppercase leading-[0.8] tracking-[-0.06em] text-orange-500 lg:text-[7.5rem]">
+            <span className="block whitespace-nowrap font-display text-[19vw] font-extrabold uppercase leading-[0.8] tracking-[-0.06em] text-orange-500 lg:text-[9.75rem]">
               INHERIT
             </span>
           </div>

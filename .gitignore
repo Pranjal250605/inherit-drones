@@ -12,3 +12,6 @@ dist-ssr
 .vscode/*
 !.vscode/extensions.json
 .claude/
+
+# client revision deck (large, not part of the build)
+INHERIT-WEBSITE_Revision Points.pdf

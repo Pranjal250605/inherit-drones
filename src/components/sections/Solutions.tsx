@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { ArrowRight, SectionFrame, TickMark, Kanji } from "../primitives";
+import { ArrowRight, SectionFrame, TickMark } from "../primitives";
 import { useT, type Dict } from "../../i18n";
 
 type SolutionCardData = Dict["solutions"]["cards"][number];
@@ -68,8 +68,9 @@ export function Solutions() {
               data-anim="title-up"
               className="mt-6 max-w-xl font-display text-[4.7rem] font-bold leading-[1.02] tracking-[-0.03em] md:text-[5.6rem]"
             >
-              {s.h2_line1} <Kanji>{s.h2_emph}</Kanji>
-              {s.h2_line2_post} {s.h2_line3}
+              {s.h2_line1}
+              <br />
+              {s.h2_line3}
             </h2>
             <p className="mt-6 max-w-md text-pretty text-xl leading-relaxed text-white/85 md:text-[1.4rem]">
               {s.lead}

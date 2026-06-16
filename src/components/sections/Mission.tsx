@@ -145,7 +145,7 @@ export function Mission() {
                   >
                     0{i + 1}
                   </span>
-                  <span className="font-mono text-[12.5px] font-bold uppercase tracking-[0.24em] text-fg/40">
+                  <span className="font-mono text-[15px] font-bold uppercase tracking-[0.24em] text-fg/40">
                     {p.jp}
                   </span>
                 </div>

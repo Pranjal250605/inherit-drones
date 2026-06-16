@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
 import {
   ArrowRight,
   SectionFrame,
   SectionLabel,
   ParallaxImage,
-  TickMark,
 } from "../primitives";
 import { useT, type Dict } from "../../i18n";
 import droneSpraying from "../../assets/drone-spraying.jpg";
@@ -21,44 +19,12 @@ const IMG: Record<string, string> = {
   "bvlos-corridor": bvlosCorridor,
 };
 
-/* Per-tile photo aspect (varied → Pinterest nesting, kept shortish so columns
-   don't run long), a punchy solid caption colour, and a fallback image. */
-const TILES = [
-  { aspect: "aspect-[4/3]", feature: true, fallback: droneSpraying, color: "rgb(var(--brand-500))" },
-  { aspect: "aspect-[1/1]", feature: false, fallback: hiroshimaAerial, color: "rgb(var(--brand-500))" },
-  { aspect: "aspect-[5/4]", feature: false, fallback: teamNapa, color: "rgb(var(--brand-500))" },
-  { aspect: "aspect-[16/10]", feature: false, fallback: bvlosCorridor, color: "rgb(var(--brand-500))" },
-];
-
-/* Responsive column count for the flex-column masonry (avoids the CSS multicol
-   hover-vanish bug). */
-function useColumnCount(): number {
-  const read = () =>
-    typeof window === "undefined"
-      ? 3
-      : window.innerWidth < 640
-      ? 1
-      : window.innerWidth < 1024
-      ? 2
-      : 3;
-  const [cols, setCols] = useState(read);
-  useEffect(() => {
-    const onResize = () => setCols(read());
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
-  return cols;
-}
+/* Fallback photo per card index. */
+const FALLBACKS = [droneSpraying, hiroshimaAerial, teamNapa, bvlosCorridor];
 
 export function News() {
   const { t } = useT();
   const items = t.news.items;
-  const cols = useColumnCount();
-
-  const columns: Array<Array<{ item: NewsItem; i: number }>> = Array.from(
-    { length: cols },
-    (_, c) => items.map((item, i) => ({ item, i })).filter(({ i }) => i % cols === c)
-  );
 
   return (
     <SectionFrame
@@ -101,26 +67,14 @@ export function News() {
           </a>
         </div>
 
-        {/* Pinterest-style masonry via flex columns. Columns stretch to equal
-            height and the queued slot grows to fill each column's leftover space
-            (bounded by the tallest column, so it fills without adding length). */}
-        <div className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-stretch md:mt-12">
-          {columns.map((col, ci) => (
-            <div key={ci} className="flex flex-1 flex-col gap-5">
-              {col.map(({ item, i }) => {
-                const tile = TILES[i] ?? TILES[0];
-                return (
-                  <NewsCard
-                    key={item.code}
-                    item={item}
-                    aspect={tile.aspect}
-                    feature={tile.feature}
-                    fallback={tile.fallback}
-                    color={tile.color}
-                  />
-                );
-              })}
-              <QueuedTile />
+        {/* Uniform grid — every card the same shape/size. */}
+        <div
+          data-anim="stagger"
+          className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 md:mt-12"
+        >
+          {items.map((item, i) => (
+            <div key={item.code} data-anim-item className="h-full">
+              <NewsCard item={item} fallback={FALLBACKS[i] ?? droneSpraying} />
             </div>
           ))}
         </div>
@@ -129,75 +83,36 @@ export function News() {
   );
 }
 
-/* Compact on-brand "awaiting dispatch" slot (fixed height — does NOT grow, so
-   it never balloons into a giant empty box). */
-function QueuedTile() {
-  return (
-    <div className="dot-grid-bg relative hidden min-h-[150px] flex-1 flex-col justify-between overflow-hidden rounded-2xl border border-fg/10 bg-bg p-5 shadow-sm sm:flex">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <TickMark />
-          <span className="font-mono text-[12.5px] font-bold uppercase tracking-[0.2em] text-fg/45">
-            Queued
-          </span>
-        </div>
-        <span className="relative flex h-2.5 w-2.5">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-500/60" />
-          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-orange-500" />
-        </span>
-      </div>
-      <div className="space-y-2">
-        <div className="h-2.5 w-3/4 rounded-full bg-fg/[0.07]" />
-        <div className="h-2.5 w-1/2 rounded-full bg-fg/[0.07]" />
-      </div>
-    </div>
-  );
-}
-
-function NewsCard({
-  item,
-  aspect,
-  feature,
-  fallback,
-  color,
-}: {
-  item: NewsItem;
-  aspect: string;
-  feature: boolean;
-  fallback: string;
-  color: string;
-}) {
+function NewsCard({ item, fallback }: { item: NewsItem; fallback: string }) {
   const { t } = useT();
   const imgSrc = (item.img && IMG[item.img]) || fallback;
 
   return (
     <a
       href="#contact"
-      className="group flex w-full flex-col overflow-hidden rounded-2xl text-white shadow-sm transition-shadow duration-500 hover:shadow-xl"
+      className="group flex h-full w-full flex-col overflow-hidden rounded-2xl text-white shadow-sm transition-shadow duration-500 hover:shadow-xl"
     >
-      {/* photo */}
-      <div className={"relative overflow-hidden " + aspect}>
+      {/* photo — uniform aspect across all cards */}
+      <div className="relative aspect-[4/3] overflow-hidden">
         <ParallaxImage
           src={imgSrc}
           alt={item.title}
-          speed={feature ? 0.16 : 0.1}
+          speed={0.1}
           overlay={false}
           className="absolute inset-0 h-full w-full"
         />
       </div>
 
-      {/* solid punchy colour caption block */}
-      <div className="flex flex-col p-5" style={{ backgroundColor: color }}>
+      {/* solid brand-colour caption block (flex-1 → equal card heights) */}
+      <div
+        className="flex flex-1 flex-col p-5"
+        style={{ backgroundColor: "rgb(var(--brand-500))" }}
+      >
         <div className="flex items-center gap-3 font-mono text-[12.5px] font-bold uppercase tracking-[0.18em] text-white/80">
           <span>{item.date}</span>
           <span className="ml-auto">{item.code}</span>
         </div>
-        <h3
-          className={
-            "mt-2.5 font-display font-bold leading-[1.15] tracking-[-0.015em] text-white " +
-            (feature ? "text-[1.875rem] md:text-[2.34rem]" : "text-[1.4rem] md:text-[1.56rem]")
-          }
-        >
+        <h3 className="mt-2.5 font-display text-[1.4rem] font-bold leading-[1.2] tracking-[-0.015em] text-white md:text-[1.5rem]">
           {item.title}
         </h3>
         <span className="mt-4 inline-flex items-center gap-1.5 text-[14px] font-bold uppercase tracking-[0.16em] text-white">
