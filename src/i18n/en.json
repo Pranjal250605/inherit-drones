@@ -95,7 +95,7 @@
     "tag": "BULLETIN / Latest",
     "h2_pre": "From the ",
     "h2_emph": "field",
-    "h2_post": " and the ops centre.",
+    "h2_post": " and the ops centre",
     "subtitle_jp": "最新情報 · ニュース",
     "view_all": "All news",
     "img_label": "IMG",
@@ -143,7 +143,7 @@
     "tag": "01 / Mission",
     "h2_pre": "Aerial infrastructure, from ",
     "h2_emph": "Hiroshima",
-    "h2_post": ".",
+    "h2_post": "",
     "subtitle_jp": "次世代の空のインフラを、広島から。",
     "pillars": [
       {
@@ -283,7 +283,7 @@
     "h2_pre": "The ",
     "h2_emph": "IH-04",
     "h2_post": " Hayabusa",
-    "h2_line2": "flight platform.",
+    "h2_line2": "flight platform",
     "subtitle_jp": "隼 / 第四世代 機体",
     "lead": "Fourth-generation airframe — carbon monocoque structure, redundant computing, 16 sensor inputs.",
     "specs": [
